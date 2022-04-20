@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:39:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/20 11:11:20 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:51:15 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@
 # include <stdlib.h>
 
 /*PRINT TUPLE*/
-void	print_tuple(float *tpl); 	//BORRAR
+void	print_tuple(double *tpl); 	//BORRAR
 
 /*CREAR UN PUNTO O VECTOR*/
-float	*create_tuple(float x, float y, float z, float w);
+double	*create_tuple(double x, double y, double z, double w);
 
 /*OPERACIONES ENTRE VECTORES Y PUNTOS*/
-float	*add_tuple(float *tpl1, float* tpl2);
-float	*sub_tuple(float *tpl1, float* tpl2);
+double	*add_tuple(double *tpl1, double* tpl2);
+double	*sub_tuple(double *tpl1, double* tpl2);
 
 /*OPERACIONES ENTRE VECTORES*/
 //vector_operation1
-float	*scalar_mul_vec(float *tpl, float scalar);
-float	*scalar_div_vec(float *tpl, float scalar);
-float	dot_product_vec(float *tpl1, float *tpl2);
-float	*cross_product_vec(float *a, float *b);
+double	*scalar_mul_vec(double *tpl, double scalar);
+double	*scalar_div_vec(double *tpl, double scalar);
+double	dot_product_vec(double *tpl1, double *tpl2);
+double	*cross_product_vec(double *a, double *b);
 //vector_operation2
-float	*normalization_vec(float *tpl, float magnitude);
-float	magnitude_vec(float *tpl);
-float	*neg_vec(float *tpl);
+double	*normalization_vec(double *tpl, double magnitude);
+double	magnitude_vec(double *tpl);
+double	*neg_vec(double *tpl);
 
 #endif

@@ -6,18 +6,18 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:09:48 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/20 11:04:30 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:51:14 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-float *scalar_mul_vec(float *tpl, float scalar)
+double *scalar_mul_vec(double *tpl, double scalar)
 {
-	float *result;
+	double *result;
 	int i;
 
-	result = (float *)malloc(sizeof(float) * 4);
+	result = (double *)malloc(sizeof(double) * 4);
 	if (!result)
 		return (NULL);
 	i = -1;
@@ -27,12 +27,12 @@ float *scalar_mul_vec(float *tpl, float scalar)
 	return (result);
 }
 
-float *scalar_div_vec(float *tpl, float scalar)
+double *scalar_div_vec(double *tpl, double scalar)
 {
-	float *result;
+	double *result;
 	int i;
 
-	result = (float *)malloc(sizeof(float) * 4);
+	result = (double *)malloc(sizeof(double) * 4);
 	if (!result)
 		return (NULL);
 	i = -1;
@@ -42,9 +42,9 @@ float *scalar_div_vec(float *tpl, float scalar)
 	return (result);
 }
 
-float dot_product_vec(float *tpl1, float *tpl2)
+double dot_product_vec(double *tpl1, double *tpl2)
 {
-	float result;
+	double result;
 	int i;
 	
 	result = 0;
@@ -55,12 +55,12 @@ float dot_product_vec(float *tpl1, float *tpl2)
 }
 
 
-float *cross_product_vec(float *a, float *b)
+double *cross_product_vec(double *a, double *b)
 {
-	float *result;
+	double *result;
 	int i;
 	
-	result = (float *)malloc(sizeof(float) * 4);
+	result = (double *)malloc(sizeof(double) * 4);
 	if (!result)
 		return (NULL);
 	result[0] = a[1] * b[2] - a[2] * b[1];
