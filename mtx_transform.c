@@ -6,15 +6,15 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:17:44 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/20 12:13:04 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:48:55 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mtx_tranform.h"
 
-float   **translation_mtx(float x, float y, float z)
+double   **translation_mtx(double x, double y, double z)
 {
-	float **mtx;
+	double **mtx;
 
 	mtx = identity_mtx; //Añadir la matriz identity
 	if (!mtx)
@@ -25,9 +25,9 @@ float   **translation_mtx(float x, float y, float z)
 	return (mtx);
 }
 
-float   **scaling_mtx(float x, float y, float z)
+double   **scaling_mtx(double x, double y, double z)
 {
-	float **mtx;
+	double **mtx;
 
 	mtx = identity_mtx; //Añadir la matriz identity
 	if (!mtx)
@@ -38,9 +38,9 @@ float   **scaling_mtx(float x, float y, float z)
 	return (mtx);
 }
 
-float   **shearing_mtx(float shear_arr[6])
+double   **shearing_mtx(double shear_arr[6])
 {
-	float **mtx;
+	double **mtx;
 
 	mtx = identity_mtx; //Añadir la matriz identity
 	if (!mtx)

@@ -6,16 +6,16 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:35:59 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/20 12:13:05 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:48:57 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "mtx_tranform.h"
 
-float	**rotatation_x_mtx(double grade)
+double	**rotatation_x_mtx(double grade)
 {
-	float **mtx;
+	double **mtx;
 
 	mtx = identity_mtx; //Añadir la matriz identity
 	if (!mtx)
@@ -27,9 +27,9 @@ float	**rotatation_x_mtx(double grade)
 	return (mtx);
 }
 
-float	**rotatation_y_mtx(double grade)
+double	**rotatation_y_mtx(double grade)
 {
-	float **mtx;
+	double **mtx;
 
 	mtx = identity_mtx; //Añadir la matriz identity
 	if (!mtx)
@@ -41,9 +41,9 @@ float	**rotatation_y_mtx(double grade)
 	return (mtx);
 }
 
-float	**rotatation_z_mtx(double grade)
+double	**rotatation_z_mtx(double grade)
 {
-	float **mtx;
+	double **mtx;
 
 	mtx = identity_mtx; //Añadir la matriz identity
 	if (!mtx)
