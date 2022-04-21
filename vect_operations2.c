@@ -1,53 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_operations2.c                               :+:      :+:    :+:   */
+/*   vect_operations2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:37:55 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/20 13:51:15 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/21 13:51:09 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "point_vector.h"
 #include "math.h"
 
-double *neg_vec(double *tpl)
+t_vect  neg_vect(t_vect v1)
 {
-	double *result;
-	int i;
-
-	result = (double *)malloc(sizeof(double) * 4);
-	i = -1;
-	while (++i < 3)
-		result[i] = tpl[i] * -1;
-	result[3] = 1;
-	return (result);
+	t_vect	v;
+	
+	v.x = (-1) * v1.x;
+	v.y = (-1) * v1.y;
+	v.z = (-1) * v1.z;
+	return (v);
 }
 
-double magnitude_vec(double *tpl)
+double  magnitude_vect(t_vect v1)
 {
-	int i;
-	double result;
+	double mag;
 
-	i = -1;
-	result = 0;
-	while (++i < 3)
-		result += tpl[i]  * tpl[i];
-	return (sqrt(result));
-
+	mag = 0;
+	mag += v1.x * v1.x;
+	mag += v1.y * v1.y;
+	mag += v1.z * v1.z;
+	return (sqrt(mag));
 }
 
-double *normalization_vec(double *tpl, double magnitude)
+t_vect  normalization_vect(t_vect v1)
 {
-	double *result;
-	int i;
+	t_vect	v;
+	double	mag;
 
-	result = (double *)malloc(sizeof(double) * 4);
-	i = -1;
-	while (++i < 3)
-		result[i] = tpl[i] / magnitude;
-	result[3] = 1;
-	return (result);
+	mag = magnitude_vect(v1);
+	v.x = v1.x / mag;
+	v.y = v1.y / mag;
+	v.z = v1.z / mag;
+	return (v);
 }
