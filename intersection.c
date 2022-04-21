@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 14:13:18 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:19:13 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_point position_ray(t_ray ray, double move)
 }
 
 //En vez de que devuelva un t_intertesec, se loe puede pasar uno y que lo relleno
-t_intersec *intersect_ray(t_ray ray, t_sphere s)
+t_intersec intersect_ray(t_ray ray, t_sphere s)
 {
-	double 		discriminat;
+	double 		discriminant;
 	double 		a;
 	double		 b;
 	t_intersec	inter;
@@ -37,20 +37,23 @@ t_intersec *intersect_ray(t_ray ray, t_sphere s)
 	b = 0;
 	//He pasado puntero porque necesitos el valor de a y b para calcular el punto
 	//de intersección
-	discriminat = discriminat_ray(ray, sphere_to_ray, &a, &b);
-	//Poner ft_calloc
-	inter = calloc(sizeof(t_intersec), 0);
-	if (!inter)
-		return (NULL);
+	discriminant = discriminat_ray(ray, sphere_to_ray, &a, &b);
 	inter->obj = 's';
-	if (discriminat < 0) //Si discriminat es negativo, no intersecta.
+	//Es mejor tener guardados los puntos aunque sean negativos, para hacer laas reflectio y refraction.
+	//Aunque eso solo se para el bonus
+/*	if (discriminant < 0) //Si discriminat es negativo, no intersecta.
 	{
 		inter->count = 0;
 		return (NULL);
-	}
-	inter->point[0] = ((b * (-1) - sqrt(discriminat)) (2 * a))
-	inter->point[1] = ((b * (-1) + sqrt(discriminat)) (2 * a))
-	inter->count = 2;
+	}*/
+	inter.point[0] = ((b * (-1) - sqrt(discriminat)) (2 * a))
+	inter.point[1] = ((b * (-1) + sqrt(discriminat)) (2 * a))
+	if (discriminant == 0)
+		inter.count = 1;
+	else if (discriminant < 0)
+		inter.count = 0;
+	else
+		inter.count = 2;
 	return (inter);
 }
 

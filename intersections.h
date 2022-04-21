@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 14:13:19 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:19:15 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_intersection
 {
 	char	obj; //Objeto con el que intersecta
 	int		nbr_inter;	//Cantidad de intersecciones 
-	double	*point; //Puntos en el que intersecta con el objeto.
+	double	point[2]; //Puntos en el que intersecta con el objeto.
 }t_intersec;
 
 typedef struct s_ray
