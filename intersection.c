@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 12:20:38 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:13:18 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 //Esta funcion se usara en el cap 6. Para las luces
 //Calcular la posicion de un punto determinado del rayo en el plano 3d.
-double	*position_ray(t_ray ray, double move)
+t_point position_ray(t_ray ray, double move)
 {
-	double *new_point;
-	double *temp_point;
+	t_point new_point;
+	t_vect	temp_vect;
 
-	temp_point = scalar_mul_vec(ray.direction, move);
-	new_point = add_tuple(ray.point, new_point);
-	free(temp_point);
+	temp_vect = scalar_mul_vect(ray.direction, move);
+	new_point = add_vect_point(ray.origin, temp_vect);
 	return (new_point);
 }
 
@@ -57,17 +56,16 @@ t_intersec *intersect_ray(t_ray ray, t_sphere s)
 
 double     discriminat_ray(t_ray ray, t_sphere s, a, b)
 {
-	double	*sphere_to_ray;
-	double	*origin_point;
+	t_vect	sphere_to_ray;
+	t_point	origin_point;
 	double	c;
 
 	//Hemos supesto que el diametro de la esferea es 1 y esta
 	//ubicada en el punto 0, 0, 0. 
 	//Supongo que si luego lo cambiamos tendremos que modificar esto.	
-	origin_point = create_tuple(0, 0, 0, 1);
-	sphere_to_ray = sub_tuple(ray.origin, origin_point);
-	free(origin_point);
-	(*a) = dot_product_vec(ray.direction, ray.direction);
+	origin_point = create_point(0, 0, 0);
+	sphere_to_ray = sub_point_point(ray.origin, origin_point);
+	(*a) = dot_product_vect(ray.direction, ray.direction);
 	(*b) = 2 *  dot_product_vec(ray.direction, sphere_to_ray);
 	c = dot_product_vec(sphere_to_ray, sphere_to_ray);
 	return (((*b) * (*b)) - (4 * (*a) * c))

@@ -6,13 +6,15 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 12:03:25 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:13:19 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERSECTION.H
 #define INTERSECTION.H
 
+#include "point_vector.h"
+g
 typedef struct s_intersection
 {
 	char	obj; //Objeto con el que intersecta
@@ -41,23 +43,20 @@ typedef struct s_sphere
 	int	b;
 }t_sphere;
 
-
-
 /*Crear rayos*/
 //Calcular la posicion de un punto determinado del rayo en el plano 3d.
-double	*position_ray(t_ray ray, double point);
+t_point position_ray(t_ray ray, double move);
 
 /*Intersecting Rays with Spheres*/
 //1. Calculamos el valor de discriminant
 //Nos indica si el rayo intersecta con la esfera.
 //Si es negativo -> no hay interseccion
-double		discriminat_ray(t_ray ray, t_sphere s);
+double     discriminat_ray(t_ray ray, t_sphere s, a, b);
 
 //2. Con el valor de discriminat calculamos en que puntos intersecta el rayo
 //con el objeto. Devuelve dos puntos. Si tiene el mimso valor, quiere decir
 //que intersecta una única vez.
-t_intersec *intersect_ray(t_ray ray, t_sphere s, double *a, double *b);
-
+t_intersec *intersect_ray(t_ray ray, t_sphere s);
 
 /*Tracking Intersections*/
 //SIN HACER -> Funciones que te agura las intersecciones
@@ -66,11 +65,6 @@ t_intersec *intersect_ray(t_ray ray, t_sphere s, double *a, double *b);
 
 
 /*Identifying Hits*/
-
-
-
-
-
 
 
 #endif

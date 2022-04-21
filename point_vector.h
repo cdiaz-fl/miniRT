@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:39:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 13:48:58 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:13:23 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_point	add_point_vect(t_point v1, t_vect v2);
 t_point	sub_point_vect(t_point p1, t_vect v2);
 t_vect	sub_point_point(t_point v1, t_point v2);
 t_vect	sub_vect_vect(t_vect v1, t_vect v2);
-
 
 /*OPERACIONES ENTRE VECTORES*/
 //Operacion: divisiones y multiplicaciones 
