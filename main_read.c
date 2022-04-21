@@ -9,7 +9,7 @@ int	get_val(char *line, t_objects *all)
 
 
 	i = -1;
-	while(line[++i])
+	while (line[++i])
 	{
 		//Falta incluir Libft
 		//Qué te parece este enfoque?
@@ -59,6 +59,5 @@ int	main(int argc, char **argv)
 		free(line);
 	}
 	close(fd);
-	
 	return 0;
 }
