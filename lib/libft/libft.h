@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 12:52:50 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 10:53:15 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:24:44 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -22,6 +22,7 @@ typedef struct s_list
 }	t_list;
 
 int				ft_atoi(const char *str);
+float			ft_atof(char *s); //Añadido
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);

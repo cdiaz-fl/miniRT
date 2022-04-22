@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:40:49 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:57:10 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define INTERSECTIONS_H
 
 #include "point_vector.h"
-
+#include "objects.h"
 typedef struct s_intersection
 {
 	char					obj; //Objeto con el que intersecta
@@ -31,7 +31,7 @@ typedef struct s_ray
 }t_ray;
 
 //Borrar, ya esta en el object.h
-typedef struct s_sphere
+/*typedef struct s_sphere
 {
 	//Ahora se asume que x, y, z = 0 y diameter = 1
 	double	x;	//El punto describe el centro de la esfera
@@ -43,7 +43,7 @@ typedef struct s_sphere
 	int	r;	//[0 - 255]
 	int	g;
 	int	b;
-}t_sphere;
+}t_sphere;*/
 
 /*Crear rayos*/
 t_ray	create_ray(t_point p, t_vect v);

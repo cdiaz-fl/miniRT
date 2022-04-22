@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 14:07:46 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 10:10:19 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:06:23 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "../includes/miniRT_temp.h"
 
 char	*find_next_line(char *holder)
 {

@@ -6,20 +6,21 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/04/22 12:26:50 by zcanales         ###   ########.fr        #
+#    Updated: 2022/04/22 13:27:23 by zcanales         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
-SRCS = src/main_prueba.c\
-	   src/point_vect_operations.c\
+SRCS = src/point_vect_operations.c\
 	   src/vect_operations1.c\
 	   src/vect_operations2.c\
 	   src/intersection.c\
 	   src/mlx_utils.c\
 	   src/mlx_event.c\
-	   #src/get_next_line.c\
+	   src/main_read.c\
+	   src/get_next_line.c\
+	   #src/main_prueba.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -35,8 +36,8 @@ LIB_A = lib/libft/libft.a
 
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror
-MLX_FLAGS = -L./lib/mlx -framework OpenGL -framework AppKit #-lmlx
-SEG_FRAGS = -g3 -fsanitize=address
+SEG_FLAGS = -g3 -fsanitize=address
+MLX_FLAGS = -L./lib/mlx -framework OpenGL -framework AppKit $(SEG_FLAGS) #-lmlx 
 
 all: $(NAME)
 

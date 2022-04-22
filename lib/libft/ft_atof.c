@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/02 12:27:22 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 13:06:22 by zcanales         ###   ########.fr       */
+/*   Created: 2022/04/22 13:16:37 by zcanales          #+#    #+#             */
+/*   Updated: 2022/04/22 13:53:36 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-char	*ft_strchr(const char *s, int c)
+#include "math.h"
+#include <stdio.h>
+float	ft_atof(char *s)
 {
-	if (!s)
-		return (NULL);
-	while (*s)
+	int first;
+	int decimal;
+	int	i;
+	int	len;
+
+	len = 0;
+	first = ft_atoi(&s[0]);
+	i = -1;
+	decimal = 0;
+	while (s[++i])
 	{
-		if (*s == c)
-			return ((char *) s);
-		s++;
+		if (s[i] == '.')
+		{
+			i++;
+			decimal = ft_atoi(&s[i]);
+			while (s[i] && ft_isdigit(s[i]))
+			{
+				len++;
+				i++;
+			}
+			return ((float)first + decimal / pow(10, len));
+		}
 	}
-	if (c == '\0')
-		return ((char *) s);
-	return (0);
+	return ((float)first + decimal);
 }
