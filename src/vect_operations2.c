@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:37:55 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 13:51:09 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:40:41 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "point_vector.h"
+#include "../includes/point_vector.h"
 #include "math.h"
 
 t_vect  neg_vect(t_vect v1)
@@ -44,4 +44,13 @@ t_vect  normalization_vect(t_vect v1)
 	v.y = v1.y / mag;
 	v.z = v1.z / mag;
 	return (v);
+}
+
+t_vect  transform_vect(t_vect v, double **matrix)
+{
+	//Multiplicar un vecto por una matrix
+	t_vect	new;
+
+	//new = mul_vect_mtx(v, matrix);
+	return (new);
 }

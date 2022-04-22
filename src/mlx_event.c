@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:56:29 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 09:26:08 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 11:47:30 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "../includes/miniRT_temp.h"
 
 static int	mouse_press_exit(int keycode, t_mlx *mlx)
 {

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   main_prueba.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 10:53:57 by zcanales          #+#    #+#             */
-/*   Updated: 2022/03/07 14:03:14 by zcanales         ###   ########.fr       */
+/*   Created: 2022/04/22 09:36:28 by zcanales          #+#    #+#             */
+/*   Updated: 2022/04/22 12:40:45 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "../includes/miniRT_temp.h"
 
-t_list	*ft_lstnew(void	*content)
+int main()
 {
-	t_list	*new;
+    t_mlx   mlx;
 
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
+    mlx_utils_init(&mlx);
+    mlx_event(&mlx);
+    draw(&mlx);
+    mlx_loop(mlx.mlx);
+
+    return (0);
 }

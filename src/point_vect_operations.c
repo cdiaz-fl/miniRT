@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:52:37 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 13:51:10 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 11:47:25 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "point_vector.h"
+#include "../includes/point_vector.h"
 
 void print_point(t_point p)
 {
@@ -97,7 +97,7 @@ t_point  sub_point_vect(t_point p1, t_vect v2)
 	p.z = p1.z - v2.z;
 	return (p);
 }
-
+/*
 int main()
 {
 	t_point p1 = create_point(1, 2, 3);
@@ -124,4 +124,4 @@ int main()
 	print_vect(normalization_vect(v1));
 
 	return (0);
-}
+}*/

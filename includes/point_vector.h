@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:39:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 14:13:23 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:40:47 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ double	dot_product_vect(t_vect v1, t_vect v2);
 t_vect	normalization_vect(t_vect v1);
 double	magnitude_vect(t_vect v1);
 t_vect	neg_vect(t_vect v1);
-
+t_vect	transform_vect(t_vect v, double **matrix);
 
 #endif

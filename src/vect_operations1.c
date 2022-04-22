@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:09:48 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/21 13:51:09 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 11:47:26 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "point_vector.h"
+#include "../includes/point_vector.h"
 
 t_vect  scalar_mul_vect(t_vect v1, double scalar)
 {
@@ -29,6 +29,9 @@ t_vect  scalar_div_vect(t_vect v1, double scalar)
 	if (scalar == 0)
 	{
 		write(2, "Error: scalar div = 0\n", 23);
+		v.x = 0;
+		v.y = 0;
+		v.z = 0;
 		return (v);
 	}
 	v.x = v1.x / scalar;

@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 09:26:09 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:40:39 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#include "../includes/miniRT_temp.h"
 
 static void wall_init(t_mlx *mlx)
 {
@@ -44,28 +44,28 @@ void	draw(t_mlx	*mlx)
 {
 	int i;
 	int	j;
-
+	t_ray	ray;
+	t_point	ray_origin;
+	t_point	position;
+	t_inter xs;
+	
+	t_sphere s;
+//	s.tranform = identity_matrix;
+	ray_origin = create_point(0, 0, 0);
 	i = -1;
 	while (++i < WIDTH -1)
 	{
 		j = -1;
 		while (++j < HEIGHT - 1)
-			mlx->img.addr[j * WIDTH + i] = 0xFF00FF;
+		{
+			position = create_point(i, j, 10);
+			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
+			xs = intersect_ray(ray, s);
+			printf("xs-> %d\n", xs.count);
+			if (xs.count > 0) 
+				mlx->img.addr[j * WIDTH + i] = 0xFF00FF;
+		}
 	}
+	printf("fin\n");;
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
-}
-
-
-int main()
-{
-	t_mlx	mlx;
-
-	mlx_utils_init(&mlx);
-	mlx_event(&mlx);
-/*	window_init(&mlx);
-	img_init(&mlx);
-	wall_init(&mlx);*/
-	draw(&mlx);
-	mlx_loop(mlx.mlx);
-	return (0);
 }
