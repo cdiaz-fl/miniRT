@@ -97,4 +97,7 @@ typedef struct s_objects
 	unsigned int	cyls_nb;
 }t_objects;
 
+int	create_amblight(char *line, t_objects *all);
+
+
 #endif
