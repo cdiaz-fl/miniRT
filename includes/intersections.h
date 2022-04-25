@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:40:49 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:38:01 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ double  get_minpoint(double t1, double t2);
 
 /*Create a list of intersections*/
 //MALLOC
-t_inter	*create_interlst(t_inter temp);
+t_inter		*create_interlst(t_inter temp);
 void		add_intersection(t_inter **head, t_inter *new);
 
 /*Identifying Hits*/

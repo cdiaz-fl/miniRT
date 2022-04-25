@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:40:43 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:37:58 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ double	get_minpoint(double t1, double t2)
 		return (t1);
 	else
 		return (t2);
-
 }
 
 
@@ -60,6 +59,7 @@ t_inter intersect_ray(t_ray ray, t_sphere s)
 	double 		a;
 	double		 b;
 	t_inter		inter;
+
 	
 	a = 0;
 	b = 0;
@@ -97,8 +97,8 @@ double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b)
 	//1. Invert matrix of sphere
 //	invert_matrix = inverse(sphere.tranform);
 	
-	//2. Tranform matrix of sphere
-//	transform_vect(rayv, invert_matrix);
+	//2. Tranform matrix of sphere. 
+//	ray2 = transform_vect(ray, invert_matrix);
 	
 	//3. Crear un vector desde el origin point al rayo.
 		//Hemos supesto que el diametro de la esferea es 1 y esta ubicada en el punto 0, 0, 0. 
@@ -109,7 +109,7 @@ double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b)
 	//4. Calcular los parametros a, b, y c para savar el discriminant.
 	(*a) = dot_product_vect(ray.direction, ray.direction);
 	(*b) = 2 *  dot_product_vect(ray.direction, sphere_to_ray);
-	c = dot_product_vect(sphere_to_ray, sphere_to_ray);
+	c = dot_product_vect(sphere_to_ray, sphere_to_ray) -1;
 	
 	return (((*b) * (*b)) - (4 * (*a) * c));
 }

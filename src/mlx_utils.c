@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:40:39 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:38:01 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,42 @@ void	mlx_utils_init(t_mlx *mlx)
 
 void	draw(t_mlx	*mlx)
 {
-	int i;
-	int	j;
+	int x;
+	int	y;
+	double	world_x;
+	double	 world_y;
+	double	 world_z = 10;
+
 	t_ray	ray;
 	t_point	ray_origin;
 	t_point	position;
 	t_inter xs;
+	t_point center_sphere;
+
+	double	wall_size = 7;
+	double	pixel_size = wall_size / HEIGHT;
+	double	half = wall_size / 2;
 	
 	t_sphere s;
 //	s.tranform = identity_matrix;
-	ray_origin = create_point(0, 0, 0);
-	i = -1;
-	while (++i < WIDTH -1)
+	ray_origin = create_point(0, 0, -5);
+	center_sphere = create_point(0, 0, 0);
+	y = -1;
+	while (++y < HEIGHT -1)
 	{
-		j = -1;
-		while (++j < HEIGHT - 1)
+		x = -1;
+		world_y = half - (y * pixel_size);
+		while (++x < WIDTH - 1)
 		{
-			position = create_point(i, j, 10);
+			world_x = (-1 * half) + (x * pixel_size);
+			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			xs = intersect_ray(ray, s);
-			printf("xs-> %d\n", xs.count);
 			if (xs.count > 0) 
-				mlx->img.addr[j * WIDTH + i] = 0xFF00FF;
+			{
+				mlx->img.addr[x * WIDTH + y] = 0xFF00FF;
+	//			printf("xs-> %d\n", xs.count);
+			}
 		}
 	}
 	printf("fin\n");;
