@@ -6,7 +6,7 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/04/22 12:26:50 by zcanales         ###   ########.fr        #
+#    Updated: 2022/04/25 12:39:45 by zcanales         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = src/main_prueba.c\
 	   src/intersection.c\
 	   src/mlx_utils.c\
 	   src/mlx_event.c\
+	   src/mtx_calculos_borrar.c\
 	   #src/get_next_line.c\
 
 OBJS = $(SRCS:.c=.o)
@@ -57,6 +58,7 @@ $(MLX_A) :
 
 clean :
 	make -C lib/libft/ clean
+	rm -rf $(OBJS)
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
 
 fclean : clean
