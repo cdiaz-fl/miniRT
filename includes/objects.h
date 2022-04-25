@@ -10,9 +10,7 @@ typedef struct s_camera
 	
 	double	nov_x;	//Normalized Orientation Vector 
 	double	nov_y;
-	double	nov_z;	//[-1.0 - 1.0]
-
-	double	FOV; //Field Of View [0 - 180] No puede ser con decimales
+	double	nov_z;	//[-1.0 - 1.int	double	FOV; //Field Of View [0 - 180] No puede ser con decimales
 }t_camera;
 
 typedef struct s_amb_light
