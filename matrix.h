@@ -6,19 +6,39 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:39:26 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/20 12:14:45 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:53:59 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	MATRIX_H
 # define	MATRIX_H
 
-void		print_mtx(float **mtx);
-void		init_mtx(float **mtx, float one, float two, float three, float four);
-float		**mul_mtx(float **mtx1, float **mtx2);
-float   *mul_mtx_tup(float **mtx, float *tup);
+typedef struct s_mtx
+{
+	double				**data;
+	unsigned int	size;
+}t_mtx;
 
-float		**create_mtx(void);
-void		free_mtx(float **mtx);
+t_mtx		create_mtx(unsigned int size);
+void		print_mtx(t_mtx *mtx);
+void		init_mtx(t_mtx	*mtx, double *v, unsigned int row);
+t_mtx		identity_mtx(unsigned int size);
+void		free_mtx(t_mtx *mtx);
+t_mtx		mul_mtx(t_mtx *mtx1, t_mtx *mtx2);
+double	*mul_mtx_tup(t_mtx *mtx, double *tup);
+t_mtx		transpose_mtx(t_mtx *mtx);
+
+double	det_2d_mtx(t_mtx *mtx);
+t_mtx		sub_mtx(t_mtx *mtx, int x, int y);
+double	minor_3d_mtx(t_mtx *mtx, unsigned int x, unsigned int y);
+double	cofactor_3d_mtx(t_mtx *mtx, unsigned int x, unsigned int y);
+double	det_mtx(t_mtx *mtx);
+
+t_mtx	create_cofactor_mtx(t_mtx *mtx);
+t_mtx	invert_mtx(t_mtx *mtx);
+
+
+
+
 
 #endif
