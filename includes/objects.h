@@ -85,7 +85,7 @@ typedef struct s_cylinder
 typedef struct s_objects
 {
 	t_camera	cam;		//Solo puede haber una
-	t_amb_light	a_lgt;		//Solo puede haber una
+	t_amb_light	a_light;		//Solo puede haber una
 	t_light		light;		//Solo puede haber una
 	t_sphere	*sphs;
 	t_plane		*plns;

@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:55:22 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/25 12:17:18 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "mlx_utils.h"
 #include "get_next_line.h"
 #include "objects.h"
+#include "errors.h"
 #include "../lib/libft/libft.h"
 #include "../lib/mlx/mlx.h"
 # include <stdlib.h>

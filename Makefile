@@ -6,7 +6,7 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/04/22 13:27:23 by zcanales         ###   ########.fr        #
+#    Updated: 2022/04/25 11:56:55 by zcanales         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = src/point_vect_operations.c\
 	   src/mlx_event.c\
 	   src/main_read.c\
 	   src/get_next_line.c\
+	   src/error_handling.c\
 	   #src/main_prueba.c\
 
 OBJS = $(SRCS:.c=.o)
