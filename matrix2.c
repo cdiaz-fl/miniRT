@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.c                                           :+:      :+:    :+:   */
+/*   matrix2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:49:11 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/25 11:54:02 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:33:50 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,8 @@ double	cofactor_3d_mtx(t_mtx *mtx, unsigned int x, unsigned int y)
 	return result;
 }
 
+
+
 double	det_mtx(t_mtx *mtx)
 {
 	double				det;
@@ -193,7 +195,7 @@ t_mtx	create_cofactor_mtx(t_mtx *mtx)
 		y = -1;
 		while ((unsigned int)++y < new.size)
 		{
-			printf("x = %d, y = %d\n", x, y);
+			printf("x = %d, y = %d cofacto = %f\n", x, y, cofactor_3d_mtx(mtx, x, y));
 			new.data[x][y] = cofactor_3d_mtx(mtx, x, y); 
 		}
 	}

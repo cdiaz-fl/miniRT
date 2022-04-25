@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:19:48 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/25 13:08:19 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:33:49 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ int main()
 
 
 		//Finally invert
-	t_mtx	invert_mtx;
+	t_mtx	inverted_mtx;
 
-	invert_mtx = invert_mtx(&mtx7);
-	print_mtx(&invert_mtx);
+	inverted_mtx = invert_mtx(&mtx7);
+	print_mtx(&inverted_mtx);
 
 
 	//Free
