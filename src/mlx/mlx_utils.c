@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 12:34:27 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 13:20:53 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	draw(t_mlx	*mlx)
 	{
 		x = -1;
 		world_y = half - (y * pixel_size);
+		printf("world_y -> %f\n", world_y);
 		while (++x < WIDTH - 1)
 		{
 			world_x = (-1 * half) + (x * pixel_size);
