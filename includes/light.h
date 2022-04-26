@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT_temp.h                                      :+:      :+:    :+:   */
+/*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 13:13:25 by cdiaz-fl         ###   ########.fr       */
+/*   Created: 2022/04/25 12:44:32 by zcanales          #+#    #+#             */
+/*   Updated: 2022/04/26 11:36:34 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-#define MINIRT_H
+#ifndef LIGHT.H
+#define LIGHT.H
 
-#include "point_vector.h"
-#include "intersections.h"
-#include "mlx_utils.h"
-#include "get_next_line.h"
-#include "objects.h"
-#include "errors.h"
-#include "../lib/libft/libft.h"
-#include "../lib/mlx/mlx.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
+typedef struct s_material
+{
+	double	ambient;		//	[0.0 - 1.0]
+	double	diffuse;		//	[0.0 - 1.0]
+	double	specular;		//	[0.0 - 1.0]
+	double	shininess;	//	[10.0 - 200.0]  10 = mucha luz    200 = poca luz
+
+}t_material;
+
+t_vect  normal_at(t_sphere s, t_point p);
 
 #endif
+
