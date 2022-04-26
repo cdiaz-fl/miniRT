@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT_temp.h                                      :+:      :+:    :+:   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 09:12:53 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:34:29 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "point_vector.h"
 #include "intersections.h"
 #include "mlx_utils.h"
+#include "mtx_transform.h"
+#include "matrix.h"
 #include "get_next_line.h"
 #include "objects.h"
 #include "errors.h"

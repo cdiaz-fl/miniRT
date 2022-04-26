@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:49:11 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/26 09:24:06 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:01:06 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,44 @@ t_mtx	mul_mtx(t_mtx *mtx1, t_mtx *mtx2)
 	return new;
 }
 
-double   *mul_mtx_tup(t_mtx *mtx, double *tup)
+t_vect mul_vect_mtx(t_mtx *mtx, t_vect v)
 {
-	double	*new;
 	int		i;
 	int		j;
 	double	result;
+	double	tup[4];
+	double	new[4];
 
-	new = malloc(sizeof(double) * 4);
-	if (!new)
-	{
-		perror("Error: ");
-		//función de salida
-	}
 	i = -1;
+	tup[0] = v.x;
+	tup[1] = v.y;
+	tup[2] = v.z;
+	tup[3] = 0;
+	while((unsigned int)++i < mtx->size)
+	{
+		j = -1;
+		result = 0.0f;
+		while((unsigned int)++j < mtx->size)
+			result += mtx->data[i][j] * tup [j];
+		new[i] = result;
+	}
+
+	return create_vect(new[0], new[1], new[2]);
+}
+
+t_point	mul_point_mtx(t_mtx *mtx, t_point p)
+{
+	int		i;
+	int		j;
+	double	result;
+	double	tup[4];
+	double	new[4];
+	
+	i = -1;
+	tup[0] = p.x;
+	tup[1] = p.y;
+	tup[2] = p.z;
+	tup[3] = 1;
 	while((unsigned int)++i < mtx->size)
 	{
 		j = -1;
@@ -61,7 +85,8 @@ double   *mul_mtx_tup(t_mtx *mtx, double *tup)
 			result += mtx->data[i][j] * tup[j];
 		new[i] = result;
 	}
-	return new;
+	return create_point(new[0], new[1], new[2]);
+	
 }
 
 t_mtx	transpose_mtx(t_mtx *mtx)
@@ -230,6 +255,11 @@ t_mtx	invert_mtx(t_mtx *mtx)
 
 	new_original = create_cofactor_mtx(mtx);
 	original_det = det_mtx(mtx);
+	if (original_det == 0)
+	{
+		printf("ERROR: DET = 0. No se puede invertir\n");
+		original_det = 1;
+	}
 	new_trans = transpose_mtx(&new_original); 
 	i = 0;
 	while (i < 4)

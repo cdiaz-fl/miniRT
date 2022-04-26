@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:17:44 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 09:36:06 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:16:13 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_mtx	translation_mtx(double x, double y, double z)
 	t_mtx	mtx;
 
 	mtx = identity_mtx(4); //Añadir la matriz identity
-	mtx.data[0][4] = x;
-	mtx.data[1][4] = y;
-	mtx.data[2][4] = z;
+	mtx.data[0][3] += x;
+	mtx.data[1][3] += y;
+	mtx.data[2][3] += z;
 	return (mtx);
 }
 

@@ -6,36 +6,15 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 09:13:48 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:34:46 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 #include <math.h>
-t_ray	create_ray(t_point p, t_vect v)
-{
-	t_ray r;
-
-	r.origin = p;
-	r.direction = v;
-	return (r);
-}
-
-//Esta funcion se usara en el cap 6. Para las luces
-//Calcular la posicion de un punto determinado del rayo en el plano 3d.
-t_point position_ray(t_ray ray, double move)
-{
-	t_point new_point;
-	t_vect	temp_vect;
-
-	temp_vect = scalar_mul_vect(ray.direction, move);
-	new_point = add_point_vect(ray.origin, temp_vect);
-	return (new_point);
-}
 
 double	get_minpoint(double t1, double t2)
 {
-
 	if (t1 < 0 || t2 < 0)
 	{
 		if (t1 > 0)
@@ -49,7 +28,6 @@ double	get_minpoint(double t1, double t2)
 		return (t1);
 	else
 		return (t2);
-
 }
 
 
@@ -91,26 +69,35 @@ double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b)
 	t_vect	sphere_to_ray;
 	t_point	origin_point;
 	double	c;
-	double	**invert_matrix;
-	
+	t_mtx	inverted_matrix;
+	t_ray	ray_transform;
 	
 	//1. Invert matrix of sphere
-//	invert_matrix = inverse(sphere.tranform);
+//	inverted_matrix = invert_mtx(&s.transform);
+//	printf("s. -> %f\n", inverted_matrix.data[0][0]);
 	
 	//2. Tranform matrix of sphere
-//	transform_vect(rayv, invert_matrix);
+	ray_transform =  transform_ray(ray, s.inverse);
 	
 	//3. Crear un vector desde el origin point al rayo.
 		//Hemos supesto que el diametro de la esferea es 1 y esta ubicada en el punto 0, 0, 0. 
 		//Supongo que si luego lo cambiamos tendremos que modificar esto.	
 	origin_point = create_point(0, 0, 0);
-	sphere_to_ray = sub_point_point(ray.origin, origin_point);
+	sphere_to_ray = sub_point_point(ray_transform.origin, origin_point);
 
 	//4. Calcular los parametros a, b, y c para savar el discriminant.
-	(*a) = dot_product_vect(ray.direction, ray.direction);
+	(*a) = dot_product_vect(ray_transform.direction, ray_transform.direction);
 	(*b) = 2 *  dot_product_vect(ray.direction, sphere_to_ray);
-	c = dot_product_vect(sphere_to_ray, sphere_to_ray);
-	
+	c = dot_product_vect(sphere_to_ray, sphere_to_ray) -1;
 	return (((*b) * (*b)) - (4 * (*a) * c));
 }
 
+//Transformat la matrix de la esfera
+t_mtx	set_transform_sp(t_sphere s, t_mtx m)
+{
+	t_mtx	tmp;
+	//print_mtx(&m);
+	tmp = mul_mtx(&s.transform, &m);
+	//Frea la matriz de la esfera
+	return (tmp);
+}

@@ -2,6 +2,8 @@
 #ifndef	OBJECTS_H
 # define OBJECTS_H
 
+#include "matrix.h"
+
 typedef struct s_camera
 {
 	double	x;
@@ -43,7 +45,8 @@ typedef struct s_sphere
 	double	z;
 
 	double	diameter;
-
+	t_mtx	transform;	//Por defecto es la identity matrix
+	t_mtx	inverse;
 	int	r;	//[0 - 255]
 	int	g;
 	int	b;

@@ -6,13 +6,14 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:39:26 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/25 14:32:28 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:34:31 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	MATRIX_H
 # define	MATRIX_H
 
+#include "point_vector.h"
 typedef struct s_mtx
 {
 	double				**data;
@@ -25,7 +26,8 @@ void		init_mtx(t_mtx	*mtx, double *v, unsigned int row);
 t_mtx		identity_mtx(unsigned int size);
 void		free_mtx(t_mtx *mtx);
 t_mtx		mul_mtx(t_mtx *mtx1, t_mtx *mtx2);
-double	*mul_mtx_tup(t_mtx *mtx, double *tup);
+t_point		mul_point_mtx(t_mtx *mtx, t_point p);
+t_vect		mul_vect_mtx(t_mtx *mtx, t_vect v);
 t_mtx		transpose_mtx(t_mtx *mtx);
 
 double	det_2d_mtx(t_mtx *mtx);

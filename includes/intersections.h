@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 09:16:15 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:34:30 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,18 @@ typedef struct s_ray
 	int	b;
 }t_sphere;*/
 
+/*RAY.C*/
 /*Crear rayos*/
 t_ray	create_ray(t_point p, t_vect v);
 
 //Calcular la posicion de un punto determinado del rayo en el plano 3d.
 t_point position_ray(t_ray ray, double move);
 
+//Trasnformar un rayo
+t_ray	transform_ray(t_ray r, t_mtx transform);
+
+
+/*INTERSECTIONS.C*/
 /*Intersecting Rays with Spheres*/
 //1. Calculamos el valor de discriminant
 //Nos indica si el rayo intersecta con la esfera.
@@ -78,4 +84,6 @@ void		add_intersection(t_inter **head, t_inter *new);
 /*Identifying Hits*/
 t_inter *get_hit(t_inter *lst);
 
+//Modificar la matriz de la esfera
+t_mtx	set_transform_sp(t_sphere s, t_mtx m);
 #endif
