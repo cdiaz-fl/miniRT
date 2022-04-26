@@ -139,22 +139,36 @@ double	cofactor_3d_mtx(t_mtx *mtx, unsigned int x, unsigned int y)
 	t_mtx		sub;
 	double	result;
 
-	if (mtx->size >= 3)
-	{
+	//if (mtx->size >= 3)
+	//{
 		sub = sub_mtx(mtx, x, y);
-		result = cofactor_3d_mtx(&sub, x, y);
+		//result = cofactor_3d_mtx(&sub, x, y);
+		result = det_2d_mtx(&sub);
 		free_mtx(&sub);
-	}
+	/*}
 	else
 	{
 		result = det_2d_mtx(mtx);
+		*/
 		if ((x + y) % 2 != 0)
 			result *= -1;
-	}
+	//}
 	return result;
 }
 
+double	cofactor_trash_mtx(t_mtx *mtx, unsigned int x, unsigned int y, unsigned int sum)
+{
+	t_mtx		sub;
+	double	result;
 
+		
+	sub = sub_mtx(mtx, x, y);
+	result = det_2d_mtx(&sub);
+	free_mtx(&sub);
+	if ((sum) % 2 != 0)
+		result *= -1;
+	return result;
+}
 
 double	det_mtx(t_mtx *mtx)
 {
@@ -185,6 +199,7 @@ double	det_mtx(t_mtx *mtx)
 t_mtx	create_cofactor_mtx(t_mtx *mtx)
 {
 	t_mtx	new;
+	t_mtx	sub;
 	int		x;
 	int		y;
 
@@ -195,8 +210,11 @@ t_mtx	create_cofactor_mtx(t_mtx *mtx)
 		y = -1;
 		while ((unsigned int)++y < new.size)
 		{
-			printf("x = %d, y = %d cofacto = %f\n", x, y, cofactor_3d_mtx(mtx, x, y));
-			new.data[x][y] = cofactor_3d_mtx(mtx, x, y); 
+			sub = sub_mtx(mtx, x, y);
+			new.data[x][y] = cofactor_trash_mtx(&sub, 0, 0, x + y) * sub.data[0][0];
+			new.data[x][y] += cofactor_trash_mtx(&sub, 0, 1, x + y + 1) * sub.data[0][1]; 
+			new.data[x][y] += cofactor_trash_mtx(&sub, 0, 2, x + y + 2) * sub.data[0][2];
+			free_mtx(&sub);
 		}
 	}
 	return new;
@@ -204,8 +222,26 @@ t_mtx	create_cofactor_mtx(t_mtx *mtx)
 
 t_mtx	invert_mtx(t_mtx *mtx)
 {
-	t_mtx	new;
+	t_mtx	new_original;
+	t_mtx	new_trans;
+	float	original_det;
+	unsigned int	i;
+	unsigned int	j;
 
-	new = create_cofactor_mtx(mtx);
-	return	new;
+	new_original = create_cofactor_mtx(mtx);
+	original_det = det_mtx(mtx);
+	new_trans = transpose_mtx(&new_original); 
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			new_trans.data[i][j] /= original_det;
+			j++;
+		}
+		i++;
+	}
+	free_mtx(&new_original);
+	return	new_trans;
 }

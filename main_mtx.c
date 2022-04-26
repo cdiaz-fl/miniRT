@@ -85,7 +85,7 @@ int main()
 		//Sub matrix
 
 	t_mtx	mtx6;
-	double	array5[4] = {-5.0f, -2.0f, 6.0f, -8.0f};
+	double	array5[4] = {-5.0f, 2.0f, 6.0f, -8.0f};
 	double	array6[4] = {1.0f, -5.0f, 1.0f, 8.0f};
 	double	array7[4] = {7.0f, 7.0f, -6.0f, -7.0f};
 	double	array8[4] = {1.0f, -3.0f, 7.0f, 4.0f};
@@ -107,23 +107,37 @@ int main()
 	printf("The 0 1 minor is... %.2f\n", cofactor_3d_mtx(&mtx6, 0, 1));
 
 	printf("\n...........................Inverting........................\n\n");
-		//Any size Determinant
+		//Any size Determinant Book Example
 	printf("Any size determinant\n");
 	t_mtx	mtx7;
+	double	array9[4] = {-2.0f, -8.0f, 3.0f, 5.0f};
+	double	array10[4] = {-3.0f, 1.0f, 7.0f, 3.0f};
+	double	array11[4] = {1.0f, 2.0f, -9.0f, 6.0f};
+	double	array12[4] = {-6.0f, 7.0f, 7.0f, -9.0f};
 
 	mtx7 = create_mtx(4);
-	init_mtx(&mtx7, array5, 0);
-	init_mtx(&mtx7, array6, 1);
-	init_mtx(&mtx7, array7, 2);
-	init_mtx(&mtx7, array8, 3);
+	init_mtx(&mtx7, array9, 0);
+	init_mtx(&mtx7, array10, 1);
+	init_mtx(&mtx7, array11, 2);
+	init_mtx(&mtx7, array12, 3);
 	print_mtx(&mtx7);
 	printf("The determinant is... %.2f\n", det_mtx(&mtx7));
 
 
 		//Finally invert
+	printf("\n~~~~~~~~~~~~~~~~~~~~~~Finally inverting~~~~~~~~~~~~~~~~~\n\n");
 	t_mtx	inverted_mtx;
+	t_mtx	mtx8;
 
-	inverted_mtx = invert_mtx(&mtx7);
+	mtx8 = create_mtx(4);
+	init_mtx(&mtx8, array5, 0);
+	init_mtx(&mtx8, array6, 1);
+	init_mtx(&mtx8, array7, 2);
+	init_mtx(&mtx8, array8, 3);
+	print_mtx(&mtx8);
+	printf("The determinant is... %.2f\n", det_mtx(&mtx8));
+
+	inverted_mtx = invert_mtx(&mtx8);
 	print_mtx(&inverted_mtx);
 
 

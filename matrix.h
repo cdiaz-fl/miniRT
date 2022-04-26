@@ -36,6 +36,7 @@ double	det_mtx(t_mtx *mtx);
 
 t_mtx	create_cofactor_mtx(t_mtx *mtx);
 t_mtx	invert_mtx(t_mtx *mtx);
+double	cofactor_4d_mtx(t_mtx *mtx, unsigned int x, unsigned int y);
 
 
 

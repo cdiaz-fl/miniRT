@@ -84,7 +84,7 @@ void	print_mtx(t_mtx *mtx)
 		j = 0;
 		while(j < mtx->size)
 		{
-			printf("[ %.2f ]  ", mtx->data[i][j]);
+			printf("[ %.5f ]  ", mtx->data[i][j]);
 			j++;
 		}
 		printf("\n");
