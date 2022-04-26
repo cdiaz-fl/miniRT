@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:56:29 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 11:47:30 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:10:55 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT_temp.h"
+#include "../../includes/miniRT.h"
 
 static int	mouse_press_exit(int keycode, t_mlx *mlx)
 {

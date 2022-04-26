@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:56:34 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:13:48 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT_temp.h"
+#include "../../includes/miniRT.h"
 #include <math.h>
 t_ray	create_ray(t_point p, t_vect v)
 {

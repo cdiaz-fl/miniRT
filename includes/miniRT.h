@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_prueba.c                                      :+:      :+:    :+:   */
+/*   miniRT_temp.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 09:36:28 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 13:25:18 by zcanales         ###   ########.fr       */
+/*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
+/*   Updated: 2022/04/26 09:12:53 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT_temp.h"
+#ifndef MINIRT_H
+#define MINIRT_H
 
-int main()
-{
-    t_mlx   mlx;
+#include "point_vector.h"
+#include "intersections.h"
+#include "mlx_utils.h"
+#include "get_next_line.h"
+#include "objects.h"
+#include "errors.h"
+#include "../lib/libft/libft.h"
+#include "../lib/mlx/mlx.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
 
-    mlx_utils_init(&mlx);
-    mlx_event(&mlx);
-    draw(&mlx);
-    mlx_loop(mlx.mlx);
-
-    return (0);
-}
+#endif

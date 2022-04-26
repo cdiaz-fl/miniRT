@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:37:55 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:40:41 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:13:12 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point_vector.h"
+#include "../../includes/point_vector.h"
 #include "math.h"
 
 t_vect  neg_vect(t_vect v1)

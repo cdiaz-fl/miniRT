@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:09:48 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 11:47:26 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:13:14 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point_vector.h"
+#include "../../includes/point_vector.h"
 
 t_vect  scalar_mul_vect(t_vect v1, double scalar)
 {

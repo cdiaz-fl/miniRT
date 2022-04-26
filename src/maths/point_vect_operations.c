@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:52:37 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 11:47:25 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:13:16 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point_vector.h"
+#include "../../includes/point_vector.h"
 
 void print_point(t_point p)
 {

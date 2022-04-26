@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:40:39 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:11:11 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT_temp.h"
+#include "../../includes/miniRT.h"
 
 static void wall_init(t_mlx *mlx)
 {

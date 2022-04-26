@@ -1,4 +1,4 @@
-#include	"../includes/miniRT_temp.h"
+#include	"../../includes/miniRT.h"
 
 void	wrong_values_handling(char *line, t_objects *all)
 {

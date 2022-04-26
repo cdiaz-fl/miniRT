@@ -6,11 +6,11 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/22 12:40:40 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:16:22 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/intersections.h"
+#include "../../includes/intersections.h"
 #include <math.h>
 //ADD una interseccion
 void	add_intersection(t_inter **head, t_inter new)
@@ -35,7 +35,7 @@ t_inter *create_interlst(t_inter temp)
 {
 	t_inter *new;
 
-	new = (t_intersec)malloc(sizeof(t_intersec));
+	new = (t_inter)malloc(sizeof(t_inter));
 	if (!new)
 		return (NULL);
 	new->point[0] = temp.point[0];

@@ -6,14 +6,14 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:52:42 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/25 11:59:46 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:09:43 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include	<fcntl.h>	//Open
 #include	<unistd.h>	//Write
-#include	"../includes/miniRT_temp.h"
+#include	"../../includes/miniRT.h"
 
 void	fill_amblight_data(t_amb_light *amb, int variable, float nbr)
 {

@@ -1,7 +1,5 @@
 
-//#include	"libft.h"	Deberíamos meter Atof en Libft?
-#include	"objects.h"
-#include	"errors.h"
+#include "../../includes/miniRT.h"
 
 
 t_camera	create_camera(char *line, int i, t_objects *all)

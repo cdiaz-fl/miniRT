@@ -1,7 +1,7 @@
 
 #include	<fcntl.h>	//Open
 #include	<unistd.h>	//Write
-#include	"../includes/miniRT_temp.h"
+#include	"../../includes/miniRT.h"
 
 void	fill_amblight_data(t_amb_light *amb, int variable, float nbr)
 {
