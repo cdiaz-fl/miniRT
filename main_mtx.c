@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:19:48 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/25 14:33:49 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 08:35:05 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ int main()
 	free_mtx(&mtx5);
 	free_mtx(&mtx6);
 	free_mtx(&mtx7);
+	free_mtx(&mtx8);
+	free_mtx(&inverted_mtx);
 	free_mtx(&mtx_2d);
 	free_mtx(&s_mtx);
 	free(tup);
