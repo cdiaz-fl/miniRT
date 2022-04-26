@@ -6,11 +6,11 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:21:06 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/25 09:14:46 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:23:45 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"matrix.h"
+#include	"../../includes/matrix.h"
 #include	<stdio.h>
 #include	<stdlib.h>
 

@@ -6,14 +6,14 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:49:11 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/25 14:33:50 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/26 09:24:06 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"matrix.h"
+#include	"../../includes/matrix.h"
 #include	<stdlib.h>
 
-#include	<stdio.h>
+#include	<stdio.h> //quitar
 t_mtx	mul_mtx(t_mtx *mtx1, t_mtx *mtx2)
 {
 	t_mtx	new;

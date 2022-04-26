@@ -26,7 +26,7 @@ int	create_amblight(char *line, t_objects *all)
 	{
 		if (ft_isdigit(line[i]) || line[i] == '-')
 		{
-			fill_amblight_data(&all->a_light, variable, ft_atof(&line[i]));
+			fill_amblight_data(&all->a_light, variable, ft_atof(&line[i], 10));
 			variable++;
 			while (ft_isdigit(line[i]) || line[i] == '.')
 				i++;
