@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 12:34:27 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:24:27 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,39 @@ void	mlx_utils_init(t_mlx *mlx)
 	wall_init(mlx);
 }
 
+t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, t_light2 light)
+{
+	//1. Calculamos el punto donde intersecta el rayo con la espfera en el mundo real.
+	//Con el vector del rayo y el punto de interscció.
+	double z ;
+
+	t_color final;
+//	if (x == 500 && y == 500)
+//	{
+		z = min_point - 5;
+	//	printf("Intersecion z mundo real->  z[%f]\n",  min_point);
+		t_point world_point2 = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
+//		printf("Intersecion punto mundo objecto: ");
+//		print_point(world_point2);
+
+	
+	//Creamos la luz
+	
+	t_point world_point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
+	t_vect normal_vect = get_normal_sphere(s, world_point);
+//	t_vect	ray_vect = create_vect(ray.origin, ray.direction);
+	final = lighting2( light, s, world_point, normal_vect, ray.direction);
+//	printf("color -> [%f] [%f] [%f]\n", final.r, final.g, final.b);
+//	}	
+	if (final.r >= 1 )
+		final.r = 1;
+	if (final.g >= 1 )
+		final.g = 1;
+	if (final.b >= 1 )
+		final.b = 1;
+	return (final);
+}
+
 
 void	draw(t_mlx	*mlx)
 {
@@ -63,17 +96,25 @@ void	draw(t_mlx	*mlx)
 	s.transform = identity_mtx(4);
 //	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
 //	t_mtx super_trasn
-	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
+//	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
 	s.inverse = invert_mtx(&s.transform);
-	
+	s.transpose = transpose_mtx(&s.inverse);
+
 	t_sphere s2;
 	t_inter	xs2;
 	s2.transform = identity_mtx(4);
-	s2.transform = set_transform_sp(s2, translation_mtx(1, 0.2, 1));
+//	s2.transform = set_transform_sp(s2, translation_mtx(1, 0.2, 1));
 	s2.inverse = invert_mtx(&s2.transform);
-	
 	ray_origin = create_point(0, 0, -5);
 	center_sphere = create_point(0, 0, 0);
+
+
+	//Create light
+	t_light2    light;
+    light.position = create_point(0, 10, -10);
+    light.brightness = 0.9;
+    light.intensity = create_color(0.6, 0.6,0.6);
+
 	y = -1;
 	while (++y < HEIGHT -1)
 	{
@@ -88,9 +129,12 @@ void	draw(t_mlx	*mlx)
 			xs = intersect_ray(ray, s);
 			xs2 = intersect_ray(ray, s2);
 			if (xs.count > 0) 
-				mlx->img.addr[x * WIDTH + y] = 0xFF00FF;
-			if (xs2.count > 0) 
-				mlx->img.addr[x * WIDTH + y] = 0xFF0000;
+			{
+				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
+				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final);
+			}
+			//if (xs2.count > 0) 
+			//	mlx->img.addr[x * WIDTH + y] = 0xFF0000;
 		}
 	}
 	printf("fin\n");;

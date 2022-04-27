@@ -46,7 +46,9 @@ typedef struct s_sphere
 
 	double	diameter;
 	t_mtx	transform;	//Por defecto es la identity matrix
-	t_mtx	inverse;
+	t_mtx	inverse;	//Inversa de la trasnformada
+	t_mtx	transpose;	//Traspuesta de la inversa
+	
 	int	r;	//[0 - 255]
 	int	g;
 	int	b;

@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 12:34:46 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:16:25 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ double	get_minpoint(double t1, double t2)
 			return (t1);
 	}
 	if (t1 > t2)
-		return (t1);
-	else
 		return (t2);
+	else
+		return (t1);
 }
 
 

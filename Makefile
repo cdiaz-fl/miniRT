@@ -6,7 +6,7 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/04/26 11:39:29 by zcanales         ###   ########.fr        #
+#    Updated: 2022/04/27 15:41:12 by zcanales         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = src/maths/point_vect_operations.c\
 	   src/maths/matrix1.c\
 	   src/maths/matrix2.c\
 	   src/maths/mtx_transform.c\
+	   src/maths/mtx_rotations.c\
 	   src/intersections/intersection.c\
 	   src/intersections/ray.c\
 	   src/mlx/mlx_utils.c\
@@ -25,9 +26,9 @@ SRCS = src/maths/point_vect_operations.c\
 	   src/get_data/get_next_line.c\
 	   src/errors/error_handling.c\
 	   src/get_data/main_prueba.c\
+	   src/light/color.c\
+	   src/light/light.c\
 	 #  src/get_data/main_read.c\
-	   src/maths/mtx_rotation.c\
-	   src/maths/mtx_rotation.c\
 		 #src/get_data/create_objects.c\#
 		 #src/intersections/inter_lst.c\#
 
