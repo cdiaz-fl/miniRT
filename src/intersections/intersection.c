@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 12:34:46 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/27 08:43:05 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b)
 	//3. Crear un vector desde el origin point al rayo.
 		//Hemos supesto que el diametro de la esferea es 1 y esta ubicada en el punto 0, 0, 0. 
 		//Supongo que si luego lo cambiamos tendremos que modificar esto.	
-	origin_point = create_point(0, 0, 0);
+	origin_point = create_point(1, 1, 1);
 	sphere_to_ray = sub_point_point(ray_transform.origin, origin_point);
 
 	//4. Calcular los parametros a, b, y c para savar el discriminant.

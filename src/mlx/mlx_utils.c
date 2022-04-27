@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 13:20:53 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/27 08:43:03 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	draw(t_mlx	*mlx)
 	int	y;
 	double	world_x;
 	double	 world_y;
-	double	 world_z = 10;
+	double	 world_z = 7;
 
 	t_ray	ray;
 	t_point	ray_origin;
@@ -55,6 +55,7 @@ void	draw(t_mlx	*mlx)
 	t_inter xs;
 	t_point center_sphere;
 
+	printf("l -> %d\n", mlx->img.bpp);
 	double	wall_size = 7;
 	double	pixel_size = wall_size / HEIGHT;
 	double	half = wall_size / 2;
@@ -63,7 +64,7 @@ void	draw(t_mlx	*mlx)
 	s.transform = identity_mtx(4);
 //	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
 //	t_mtx super_trasn
-	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
+//	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
 	s.inverse = invert_mtx(&s.transform);
 	
 	t_sphere s2;
@@ -73,13 +74,12 @@ void	draw(t_mlx	*mlx)
 	s2.inverse = invert_mtx(&s2.transform);
 	
 	ray_origin = create_point(0, 0, -5);
-	center_sphere = create_point(0, 0, 0);
+	center_sphere = create_point(1, 1, 1);
 	y = -1;
 	while (++y < HEIGHT -1)
 	{
 		x = -1;
 		world_y = half - (y * pixel_size);
-		printf("world_y -> %f\n", world_y);
 		while (++x < WIDTH - 1)
 		{
 			world_x = (-1 * half) + (x * pixel_size);
