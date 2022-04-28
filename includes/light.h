@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:44:32 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 15:51:49 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:29:25 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_color mul_color_color(t_color c1, t_color c2); //Igual no hace falta
 t_color add_color_color(t_color c1, t_color c2);
 void	check_color_range(t_color c);
 int		convert_color_to_int(t_color c);
+void	check_max_color(t_color *c);
 
 //LIGHT.c -> Calcular color teniendo en cuanta la luz
 t_vect  get_normal_sphere(t_sphere s, t_point p);

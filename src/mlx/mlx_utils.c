@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 16:24:27 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:29:29 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,21 @@ t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, 
 	//Con el vector del rayo y el punto de interscció.
 	double z ;
 
-	t_color final;
-//	if (x == 500 && y == 500)
-//	{
-		z = min_point - 5;
-	//	printf("Intersecion z mundo real->  z[%f]\n",  min_point);
+	t_color final = create_color(1, 1, 0);
+	if (x == 500 && y == 500)
+	{
+		z = min_point ;
+		printf("Distancia entre el ray.origin y interseccion en el eje z ->  [%f]\n",  min_point);
+	}
 		t_point world_point2 = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
-//		printf("Intersecion punto mundo objecto: ");
-//		print_point(world_point2);
+	if (x == 500 && y == 500)
+	{
+		printf("Intersecion punto mundo REAL: ");
+		print_point(world_point2);
+		printf("Intersecion punto mundo OBJETO: ");
+		t_point object_point = mul_point_mtx(&s.inverse, world_point2);
+		print_point(object_point);
+	}
 
 	
 	//Creamos la luz
@@ -64,12 +71,7 @@ t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, 
 	final = lighting2( light, s, world_point, normal_vect, ray.direction);
 //	printf("color -> [%f] [%f] [%f]\n", final.r, final.g, final.b);
 //	}	
-	if (final.r >= 1 )
-		final.r = 1;
-	if (final.g >= 1 )
-		final.g = 1;
-	if (final.b >= 1 )
-		final.b = 1;
+
 	return (final);
 }
 
@@ -94,7 +96,8 @@ void	draw(t_mlx	*mlx)
 	
 	t_sphere s;
 	s.transform = identity_mtx(4);
-//	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
+//	s.transform = set_transform_sp(s, translation_mtx(0, 0, 3));
+//	s.transform = set_transform_sp(s, scaling_mtx(1, 1, 2));
 //	t_mtx super_trasn
 //	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
 	s.inverse = invert_mtx(&s.transform);
@@ -111,9 +114,10 @@ void	draw(t_mlx	*mlx)
 
 	//Create light
 	t_light2    light;
-    light.position = create_point(0, 10, -10);
+    light.position = create_point(-10, 10, -10);
     light.brightness = 0.9;
-    light.intensity = create_color(0.6, 0.6,0.6);
+   // light.intensity = create_color(1, 1, 1);
+    light.intensity = create_color(1, 1, 1);
 
 	y = -1;
 	while (++y < HEIGHT -1)
@@ -123,6 +127,13 @@ void	draw(t_mlx	*mlx)
 		while (++x < WIDTH - 1)
 		{
 			world_x = (-1 * half) + (x * pixel_size);
+			static int i;
+			if (i < 3)
+			{
+				printf("%d punto en la pantalla\n", i);
+				print_point(create_point(world_x, world_y, world_z));
+				i++;
+			}
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			//Aqui habria que calcular todas las intersecciones en una sola funcion
@@ -132,7 +143,11 @@ void	draw(t_mlx	*mlx)
 			{
 				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
 				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final);
+//				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(create_color(0, 255, 0));
 			}
+			else
+				mlx->img.addr[x * WIDTH + y] = 0x000000;
+
 			//if (xs2.count > 0) 
 			//	mlx->img.addr[x * WIDTH + y] = 0xFF0000;
 		}

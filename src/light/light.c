@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:43:51 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 16:24:28 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:29:20 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,11 @@ t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect)
 
 t_color  lighting2(t_light2 light,t_sphere s, t_point world_point, t_vect normal_vect, t_vect ray_vect)
 {
-    t_color     effective_color  = mul_color_color(create_color(0.945, 0.435, 0.137), light.intensity); //s.color -> 0, 1, 0
+    t_color     effective_color  = mul_color_color(create_color(1, 0.2, 1), light.intensity); //s.color -> 0, 1, 0
 
     t_vect  light_vect = normalization_vect(sub_point_point(light.position, world_point));
 
-    t_color ambient_color = scalar_mul_color(effective_color, 0.9); //0.9 s-> s.ambient
+    light.ambient = scalar_mul_color(effective_color, 0.1); //0.9 s-> s.ambient
 
     double  angle_light_normal = dot_product_vect(light_vect, normal_vect);
     if (angle_light_normal < 0)
@@ -150,10 +150,15 @@ t_color  lighting2(t_light2 light,t_sphere s, t_point world_point, t_vect normal
         else
         {
             double factor = pow(angle_reflect_camera, 200); //200 -> materila.shinies
-            light.specular =  scalar_mul_color(light.intensity,  0.9 * factor);
+            light.specular =  scalar_mul_color(light.intensity,  (0.9 * factor));
+	//		static int i;
+	//		if (++i == 1)
+	//			printf("color %f angle = %f\n", light.diffuse.r, angle_light_normal);
         }
     }
-    return (add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse))));
+	t_color c = add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse)));
+//	check_max_color(&c);
+    return (c);
 }
 
 

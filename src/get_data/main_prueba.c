@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:36:28 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 16:16:48 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:29:27 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ int main()
     print_vect(normal1);
     print_vect(reflect_vect(create_vect(2, 3, 2), normal1));
 	*/
-	
-	printf("Scaling : \n");
+/*	printf("Convert color 255 -> hexadecimal\n");
+	t_color c_255 = create_color(1, 0, 0);
+	printf("Color Int %d\n", convert_color_to_int(c_255));
+	*/
+/*	printf("Scaling : \n");
 	t_point	ps = create_point(-4,6,8);
 	t_vect vs = create_vect(-4,6,8);
 	t_mtx	ms = scaling_mtx(2, 3, 4);
@@ -84,23 +87,29 @@ int main()
 	print_vect(reflect_v);
 	print_vect(reflect_v2);
 	printf("\n");
-		
+*/		
 	printf("Light\n");
-	t_vect	eye_vect = create_vect(0,  0,  -1);
-	t_vect	normal_v1 = create_vect(0, 0, -1);
+	{
+   		t_sphere s1;
+    	s1.transform = identity_mtx(4);
+    	s1.inverse = invert_mtx(&s1.transform);
+    	s1.transpose = transpose_mtx(&s1.inverse);
 
-	t_light2    light;
-	light.position = create_point(0, 10, -10);
-    light.brightness = 1;
-    light.intensity = create_color(1, 1, 1);
+		t_vect	eye_vect = create_vect(0,  0,  -1);
+		t_vect	normal_v = create_vect(0, 0, -1);
+
+		t_light2    light;
+		light.position = create_point(0, 10, -10);
+    	light.brightness = 1;
+    	light.intensity = create_color(1, 1, 1);
     
-	t_point	world_point = create_point(0, 0, 0);
-    s1.transform = identity_mtx(4);
-
+		t_point	world_point = create_point(0, 0, 0);
 	
-	t_color final = lighting2(light, s, world_point, normal_v, create_vect(0, 0, -1));
-	printf("color -> %f %f %f\n", final.r, final.g, final.b);
-	printf("\n");
+	
+		t_color final = lighting2(light, s1, world_point, normal_v, create_vect(0, 0, -1));
+		printf("color -> %f %f %f\n", final.r, final.g, final.b);
+		printf("\n");
+	}
 	
 
 	printf("Pintart\n");

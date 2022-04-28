@@ -6,7 +6,7 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/04/27 15:41:12 by zcanales         ###   ########.fr        #
+#    Updated: 2022/04/28 12:35:01 by zcanales         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ LIB_A = lib/libft/libft.a
 
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror
-SEG_FLAGS = -g3 -fsanitize=address
+SEG_FLAGS = -g -fsanitize=address
 MLX_FLAGS = -L./lib/mlx -framework OpenGL -framework AppKit $(SEG_FLAGS) #-lmlx 
 
 all: $(NAME)
