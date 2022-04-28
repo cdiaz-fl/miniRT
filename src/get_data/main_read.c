@@ -3,44 +3,6 @@
 #include	<unistd.h>	//Write
 #include	"../../includes/miniRT.h"
 
-void	fill_amblight_data(t_amb_light *amb, int variable, float nbr)
-{
-	if (variable == 0)
-		amb->rate = nbr;
-	else if (variable == 1)
-		amb->r = (int)nbr;
-	else if (variable == 2)
-		amb->g = (int)nbr;
-	else if (variable == 3)
-		amb->b = (int)nbr;
-}
-
-int	create_amblight(char *line, t_objects *all)
-{
-	int i;
-	int variable;
-
-	i = 0;
-	variable = 0; 
-	while (line[++i])
-	{
-		if (ft_isdigit(line[i]) || line[i] == '-')
-		{
-			fill_amblight_data(&all->a_light, variable, ft_atof(&line[i]));
-			variable++;
-			while (ft_isdigit(line[i]) || line[i] == '.')
-				i++;
-
-		}
-		else if (line[i] == ',' || line[i] == 32)
-			continue;
-//		else
- //			write(2, "Wrong parameters ❌\n", 21);
-
-	}
-	return (1);
-}
-
 int	is_float(char *s, int *i, int j, int nb)
 {
 	int	sign;
@@ -109,24 +71,20 @@ void	get_values(char *line, t_objects *all)
 	//	if (check_line_syntax(line))
 	//		wrong_values_handling(line, all);
 		if (line[i] == 'A')
-			 create_amblight(line, all);
-/*		else if (line[i] == 'C')
-			all->cam = create_camera(line, i, all);
+			create_amblight(line, all);
+		if (line[i] == 'C')
+			create_camera(line, i, all);
 		else if (line[i] == 'L')
-			all->light = create_light(line, i, all);
-		else if (line[i] == 'p')
-			all->plns[all->plns_nb] = create_planes(line, i, all);
+			create_light(line, all);
+//		else if (line[i] == 'p')
+//			all->plns[all->plns_nb] = create_planes(line, i, all);
 		else if (line[i] == 's')
-			all->sphs[all->sphs_nb] = create_sphere(line, i, all);
-		else if (line[i] == 'c')
+			create_spheres(line, all);
+/*		else if (line[i] == 'c')
 			all->cyls[all->cyls_nb] = create_cylinder(line, i, all);*/
 	//	else if (line[i] > 32) //Es char imprimible
 	//		wrong_values_handling(line, all);
 	}
-	printf("rate -> %f\n", all->a_light.rate);
-	printf("r -> %d\n", all->a_light.r);
-	printf("g -> %d\n", all->a_light.g);
-	printf("b -> %d\n", all->a_light.b);
 }
 
 
@@ -148,6 +106,64 @@ static int	basic_error_handling(int argc, char **argv)
 	return fd;
 }
 
+void	print_values(t_objects	*all)
+{
+	t_sphere	*tmp;
+	t_sphere	**s_head;
+
+	printf("\n\n--------------------  Camera  ---------------------\n");
+	printf("|                                                 |\n");
+	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", all->cam->pos.x, all->cam->pos.y, all->cam->pos.z);
+	printf("|    nx = %6.2f    ny = %6.2f    nz = %6.2f    |\n", all->cam->n_vec.x, all->cam->n_vec.y, all->cam->n_vec.z);
+	printf("|    FOV = %6d                                 |\n", all->cam->FOV);
+	printf("|                                                 |\n");
+	printf("---------------------------------------------------\n");
+
+	
+	printf("\n\n--------------------  ALight  ---------------------\n");
+	printf("|                                                 |\n");
+	printf("|     rate = %6.2f                               |\n", all->a_light->rate);
+	printf("|     R = %6d   G = %6d    B = %6d       |\n", all->a_light->r, all->a_light->g, all->a_light->b);
+	printf("|                                                 |\n");
+	printf("---------------------------------------------------\n");
+
+	printf("\n\n--------------------   Light  ---------------------\n");
+	printf("|                                                 |\n");
+	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", all->light->pos.x, all->light->pos.y, all->light->pos.z);
+	printf("|     glow = %6.2f                               |\n", all->light->glow);
+	printf("|     R = %6d   G = %6d    B = %6d       |\n", all->light->r, all->light->g, all->light->b);
+	printf("|                                                 |\n");
+	printf("---------------------------------------------------\n");
+
+	printf("\n\n--------------------  Sphers  ---------------------\n");
+	printf("|                                                 |\n");
+	s_head = &all->sphs;
+	tmp = *s_head;
+	int	i;
+	i = 0;
+	while (tmp->next != NULL && ++i)
+	{
+		printf("|     Number = %6d                                   |\n", i);
+		printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", tmp->pos.x, tmp->pos.y, tmp->pos.z);
+		printf("|     diam = %6.2f                               |\n", tmp->diameter);
+		printf("|     R = %6d   G = %6d    B = %6d       |\n", tmp->r, tmp->g, tmp->b);
+	}
+	printf("|                                                 |\n");
+	printf("|     Number = %d                                 |\n", i);
+	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", tmp->pos.x, tmp->pos.y, tmp->pos.z);
+	printf("|     diam = %6.2f                               |\n", tmp->diameter);
+	printf("|     R = %6d   G = %6d    B = %6d       |\n", tmp->r, tmp->g, tmp->b);
+	printf("|                                                 |\n");
+	printf("---------------------------------------------------\n");
+
+	printf("\n\n--------------------  Planes  ---------------------\n");
+	printf("|                                                 |\n");
+	printf("---------------------------------------------------\n");
+
+	printf("\n\n--------------------  Cylinds ---------------------\n");
+	printf("|                                                 |\n");
+	printf("---------------------------------------------------\n");
+}
 
 int	main(int argc, char **argv)
 {
@@ -156,6 +172,7 @@ int	main(int argc, char **argv)
 	t_objects	all; //Hay que inicializar all
 
 	fd = basic_error_handling(argc, argv);
+	all.sphs = NULL;	//ft_initialize
 	//Falta incluir librería gnl
 	while(1)
 	{
@@ -165,6 +182,7 @@ int	main(int argc, char **argv)
 		get_values(line, &all);
 		free(line);
 	}
+	print_values(&all);
 	close(fd);
 	return 0;
 }
