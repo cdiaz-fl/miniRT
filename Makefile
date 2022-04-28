@@ -16,13 +16,16 @@ SRCS = src/maths/point_vect_operations.c\
 	   src/maths/vect_operations1.c\
 	   src/maths/vect_operations2.c\
 	   src/intersections/intersection.c\
-		 src/intersections/inter_lst.c\
 	   src/mlx/mlx_utils.c\
 	   src/mlx/mlx_event.c\
 	   src/get_data/main_read.c\
 	   src/get_data/get_next_line.c\
 		 src/get_data/create_objects.c\
+		 src/get_data/spheres.c\
+		 src/get_data/planes.c\
+		 src/get_data/cylinders.c\
 	   src/errors/error_handling.c\
+		 #src/intersections/inter_lst.c\#
 	   #src/main_prueba.c\
 
 OBJS = $(SRCS:.c=.o)
