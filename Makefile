@@ -6,7 +6,7 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/04/28 12:35:01 by zcanales         ###   ########.fr        #
+#    Updated: 2022/05/02 10:09:36 by zcanales         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,13 @@ SRCS = src/maths/point_vect_operations.c\
 	   src/get_data/main_prueba.c\
 	   src/light/color.c\
 	   src/light/light.c\
-	 #  src/get_data/main_read.c\
-		 #src/get_data/create_objects.c\#
+	   src/get_data/create_objects.c\
+	   src/get_data/spheres.c\
+	   src/get_data/planes.c\
+		 src/get_data/cylinders.c\
+	   src/errors/error_handling.c\
 		 #src/intersections/inter_lst.c\#
+	   #src/main_prueba.c\
 
 OBJS = $(SRCS:.c=.o)
 
