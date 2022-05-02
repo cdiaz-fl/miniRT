@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 12:34:30 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:04:15 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 #include "objects.h"
 typedef struct s_intersection
 {
-	char					obj; //Objeto con el que intersecta
+	char					obj_type; //Objeto con el que intersecta
+	void					*object;
+	t_sphere				*object_s;
+	int						id;
 	int						count;	//Cantidad de intersecciones 
 	double					point[2]; //Puntos en el que intersecta con el objeto.
 	double					min_point;

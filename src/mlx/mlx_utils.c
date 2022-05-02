@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 08:43:03 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:06:44 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,41 @@ void	mlx_utils_init(t_mlx *mlx)
 	wall_init(mlx);
 }
 
+t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, t_light2 light)
+{
+	//1. Calculamos el punto donde intersecta el rayo con la espfera en el mundo real.
+	//Con el vector del rayo y el punto de interscció.
+	double z ;
+
+	t_color final = create_color(1, 1, 0);
+	if (x == 500 && y == 500)
+	{
+		z = min_point ;
+		printf("Distancia entre el ray.origin y interseccion en el eje z ->  [%f]\n",  min_point);
+	}
+		t_point world_point2 = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
+	if (x == 500 && y == 500)
+	{
+		printf("Intersecion punto mundo REAL: ");
+		print_point(world_point2);
+		printf("Intersecion punto mundo OBJETO: ");
+		t_point object_point = mul_point_mtx(&s.inverse, world_point2);
+		print_point(object_point);
+	}
+
+	
+	//Creamos la luz
+	
+	t_point world_point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
+	t_vect normal_vect = get_normal_sphere(s, world_point);
+//	t_vect	ray_vect = create_vect(ray.origin, ray.direction);
+	final = lighting2( light, s, world_point, normal_vect, ray.direction);
+//	printf("color -> [%f] [%f] [%f]\n", final.r, final.g, final.b);
+//	}	
+
+	return (final);
+}
+
 
 void	draw(t_mlx	*mlx)
 {
@@ -62,19 +97,33 @@ void	draw(t_mlx	*mlx)
 	
 	t_sphere s;
 	s.transform = identity_mtx(4);
-//	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
+//	s.transform = set_transform_sp(s, translation_mtx(0, 0, 3));
+//	s.transform = set_transform_sp(s, scaling_mtx(1, 1, 2));
 //	t_mtx super_trasn
 //	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
 	s.inverse = invert_mtx(&s.transform);
-	
+	s.transpose = transpose_mtx(&s.inverse);
+
 	t_sphere s2;
 	t_inter	xs2;
 	s2.transform = identity_mtx(4);
-	s2.transform = set_transform_sp(s2, translation_mtx(1, 0.2, 1));
+//	s2.transform = set_transform_sp(s2, translation_mtx(1, 0.2, 1));
 	s2.inverse = invert_mtx(&s2.transform);
-	
 	ray_origin = create_point(0, 0, -5);
+<<<<<<< HEAD
 	center_sphere = create_point(1, 1, 1);
+=======
+	center_sphere = create_point(0, 0, 0);
+
+
+	//Create light
+	t_light2    light;
+    light.position = create_point(-10, 10, -10);
+    light.brightness = 0.9;
+   // light.intensity = create_color(1, 1, 1);
+    light.intensity = create_color(1, 1, 1);
+
+>>>>>>> mtx_transform
 	y = -1;
 	while (++y < HEIGHT -1)
 	{
@@ -83,15 +132,29 @@ void	draw(t_mlx	*mlx)
 		while (++x < WIDTH - 1)
 		{
 			world_x = (-1 * half) + (x * pixel_size);
+			static int i;
+			if (i < 3)
+			{
+				printf("%d punto en la pantalla\n", i);
+				print_point(create_point(world_x, world_y, world_z));
+				i++;
+			}
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			//Aqui habria que calcular todas las intersecciones en una sola funcion
 			xs = intersect_ray(ray, s);
 			xs2 = intersect_ray(ray, s2);
 			if (xs.count > 0) 
-				mlx->img.addr[x * WIDTH + y] = 0xFF00FF;
-			if (xs2.count > 0) 
-				mlx->img.addr[x * WIDTH + y] = 0xFF0000;
+			{
+				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
+				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final);
+//				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(create_color(0, 255, 0));
+			}
+			else
+				mlx->img.addr[x * WIDTH + y] = 0x000000;
+
+			//if (xs2.count > 0) 
+			//	mlx->img.addr[x * WIDTH + y] = 0xFF0000;
 		}
 	}
 	printf("fin\n");;

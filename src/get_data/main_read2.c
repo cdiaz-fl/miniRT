@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:52:42 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 09:09:43 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:53:33 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	fill_amblight_data(t_amb_light *amb, int variable, float nbr)
 		amb->b = (int)nbr;
 }
 
-int	create_amblight(char *line, t_objects *all)
+int	create_amblight(char *line, t_world *all)
 {
 	int i;
 	int variable;
@@ -63,7 +63,7 @@ int	create_amblight(char *line, t_objects *all)
 }
 
 
-int	get_val(char *line, t_objects *all)
+int	get_val(char *line, t_world *all)
 {
 	int	i;
 
@@ -93,7 +93,7 @@ int	main(int argc, char **argv)
 {
 	int		fd;
 	char		*line;
-	t_objects	all; //Hay que inicializar all
+	t_world	all; //Hay que inicializar all
 
 	if (argc != 2 && write(2, "\e[1;31mError\n", 13))
 	{

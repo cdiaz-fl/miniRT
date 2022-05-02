@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/26 12:34:29 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/04/27 10:19:36 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "get_next_line.h"
 #include "objects.h"
 #include "errors.h"
+#include "light.h"
 #include "../lib/libft/libft.h"
 #include "../lib/mlx/mlx.h"
 # include <stdlib.h>
