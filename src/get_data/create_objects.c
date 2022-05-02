@@ -1,7 +1,7 @@
 
 #include "../../includes/miniRT.h"
 
-t_camera	create_camera(char *s, t_objects *all)
+t_camera	create_camera(char *s, t_world *all)
 {
 	t_camera	new;
 
@@ -27,7 +27,7 @@ t_camera	create_camera(char *s, t_objects *all)
 	return	new;
 }
 
-t_amb_light	create_amblight(char *s, t_objects *all)
+t_amb_light	create_amblight(char *s, t_world *all)
 {
 	t_amb_light	new;
 	//if (all->cam->pos->x)	Comprobar que solo h->y una cámara
@@ -49,7 +49,7 @@ t_amb_light	create_amblight(char *s, t_objects *all)
 	return	new;
 }
 
-t_light	create_light(char *s, t_objects *all)
+t_light	create_light(char *s, t_world *all)
 {
 	t_light	new;
 	//if (all->cam->pos->x)	Comprobar que solo h->y una cámara

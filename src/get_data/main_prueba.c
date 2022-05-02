@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:36:28 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/28 14:29:27 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:55:17 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int main()
 {
-    t_mlx   mlx;
 
 /*	printf("Transform Ray\n");
 	t_ray	r;
@@ -112,11 +111,13 @@ int main()
 	}
 	
 
-	printf("Pintart\n");
+/*	printf("Pintart\n");
+    t_mlx   mlx;
+
 	mlx_utils_init(&mlx);
     mlx_event(&mlx);
     draw(&mlx);
     mlx_loop(mlx.mlx);
-
+*/
     return (0);
 }

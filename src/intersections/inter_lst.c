@@ -6,18 +6,18 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 09:49:51 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:04:16 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/intersections.h"
 #include <math.h>
 //ADD una interseccion
-void	add_intersection(t_inter **head, t_inter new)
+void	add_intersection(t_inter **head, t_inter *new)
 {
 	t_inter *temp;
 	
-	if (*head)
+	if (!*head)
 	{
 		*head = new;
 		return;
@@ -35,14 +35,15 @@ t_inter *create_interlst(t_inter temp)
 {
 	t_inter *new;
 
-	new = (t_inter)malloc(sizeof(t_inter));
+	new = (t_inter*)malloc(sizeof(t_inter));
 	if (!new)
 		return (NULL);
 	new->point[0] = temp.point[0];
 	new->point[1] = temp.point[1];
 	new->min_point = temp.min_point;
 	new->count = temp.count;
-	new->obj = temp.obj;
+	new->obj_type = temp.obj_type;
+	//new->object = temp.object;
 	new->next = NULL;
 	return (new);
 }
@@ -54,12 +55,12 @@ t_inter	*get_hit(t_inter *lst)
 	t_inter *temp;
 	t_inter *min_lst;
 	double	min;
-	
 	temp = lst;
 	min_lst = lst;
 	min = min_lst->min_point;
-	while (temp->next != NULL)
+	while (temp)
 	{
+		printf("min_hit -> %f\n", temp->min_point);
 		if (temp->min_point < min && temp->min_point >= 0)
 		{
 			min = temp->min_point;

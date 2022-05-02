@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/28 14:29:21 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:04:12 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ t_inter intersect_ray(t_ray ray, t_sphere s)
 	//He pasado puntero porque necesitos el valor de a y b para calcular el punto
 	//de intersección
 	discriminant = discriminat_ray(ray, s, &a, &b);
-	inter.obj = 's';
+	inter.obj_type = 's';
+//	*(t_sphere*)(inter.object) = &s;
+//	printf("peta\n");
 	//Es mejor tener guardados los puntos aunque sean negativos, para hacer laas reflectio y refraction.
 	//Aunque eso solo se para el bonus
 /*	if (discriminant < 0) //Si discriminat es negativo, no intersecta.
@@ -99,5 +101,6 @@ t_mtx	set_transform_sp(t_sphere s, t_mtx m)
 	//print_mtx(&m);
 	tmp = mul_mtx(&s.transform, &m);
 	//Frea la matriz de la esfera
+	free_mtx(&s.transform);
 	return (tmp);
 }

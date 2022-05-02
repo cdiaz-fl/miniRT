@@ -15,7 +15,7 @@
 		amb->b = (int)nbr;
 }
 
-int	create_amblight(char *line, t_objects *all)
+int	create_amblight(char *line, t_world *all)
 {
 	int i;
 	int variable;
@@ -96,7 +96,7 @@ int	check_line_syntax(char *s)
 	return 0;
 }
 
-void	get_values(char *line, t_objects *all)
+void	get_values(char *line, t_world *all)
 {
 	int	i;
 	int	out;
@@ -145,7 +145,7 @@ static int	basic_error_handling(int argc, char **argv)
 	return fd;
 }
 
-void	print_values(t_objects	*all)
+void	print_values(t_world	*all)
 {
 	t_sphere	*tmp;
 	t_plane		*p_tmp;
@@ -167,7 +167,7 @@ void	print_values(t_objects	*all)
 	printf("\n\n--------------------  ALight  ---------------------\n");
 	printf("|                                                 |\n");
 	printf("|     rate = %6.2f                               |\n", all->a_light.rate);
-	printf("|     R = %6d   G = %6d    B = %6d       |\n", all->a_light.rgb.r, all->a_light.rgb.g, all->a_light.rgb.b);
+	printf("|     R = %6f   G = %6f    B = %6f       |\n", all->a_light.rgb.r, all->a_light.rgb.g, all->a_light.rgb.b);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
@@ -175,7 +175,7 @@ void	print_values(t_objects	*all)
 	printf("|                                                 |\n");
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", all->light.pos.x, all->light.pos.y, all->light.pos.z);
 	printf("|     glow = %6.2f                               |\n", all->light.glow);
-	printf("|     R = %6d   G = %6d    B = %6d       |\n", all->light.rgb.r, all->light.rgb.g, all->light.rgb.b);
+	printf("|     R = %6f   G = %6f    B = %6f       |\n", all->light.rgb.r, all->light.rgb.g, all->light.rgb.b);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
@@ -189,14 +189,14 @@ void	print_values(t_objects	*all)
 		printf("|      Number = %6d                                   |\n", i);
 		printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", tmp->pos.x, tmp->pos.y, tmp->pos.z);
 		printf("|     diam = %6.2f                               |\n", tmp->diameter);
-		printf("|     R = %6d   G = %6d    B = %6d       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
+		printf("|     R = %6f   G = %6f    B = %6f       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
 		tmp = tmp->next;
 	}
 	printf("|                                                 |\n");
 	printf("|      Number = %d                                 |\n", i);
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", tmp->pos.x, tmp->pos.y, tmp->pos.z);
 	printf("|     diam = %6.2f                               |\n", tmp->diameter);
-	printf("|     R = %6d   G = %6d    B = %6d       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
+	printf("|     R = %6f   G = %6f    B = %6f       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
@@ -210,14 +210,14 @@ void	print_values(t_objects	*all)
 		printf("|    Number = %6d                                    |\n", i);
 		printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", p_tmp->pos.x, p_tmp->pos.y, p_tmp->pos.z);
 		printf("|     nx = %6.2f    ny = %6.2f    nz = %6.2f   |\n", p_tmp->n_vec.x, p_tmp->n_vec.y, p_tmp->n_vec.z);
-		printf("|     R = %6d   G = %6d    B = %6d       |\n", p_tmp->rgb.r, p_tmp->rgb.g, p_tmp->rgb.b);
+		printf("|     R = %6f   G = %6f    B = %6f       |\n", p_tmp->rgb.r, p_tmp->rgb.g, p_tmp->rgb.b);
 		p_tmp = p_tmp->next;
 	}
 	printf("|                                                 |\n");
 	printf("|      Number = %d                                 |\n", i);
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", p_tmp->pos.x, p_tmp->pos.y, p_tmp->pos.z);
 	printf("|     nx = %6.2f    ny = %6.2f    nz = %6.2f   |\n", p_tmp->n_vec.x, p_tmp->n_vec.y, p_tmp->n_vec.z);
-	printf("|     R = %6d   G = %6d    B = %6d       |\n", p_tmp->rgb.r, p_tmp->rgb.g, p_tmp->rgb.b);
+	printf("|     R = %6f   G = %6f    B = %6f       |\n", p_tmp->rgb.r, p_tmp->rgb.g, p_tmp->rgb.b);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
@@ -233,7 +233,7 @@ void	print_values(t_objects	*all)
 		printf("|     nx = %6.2f    ny = %6.2f    nz = %6.2f   |\n", c_tmp->n_vec.x, c_tmp->n_vec.y, c_tmp->n_vec.z);
 		printf("|     diam = %6.2f                               |\n", c_tmp->diameter);
 		printf("|     height = %6.2f                             |\n", c_tmp->height);
-		printf("|     R = %6d   G = %6d    B = %6d       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
+		printf("|     R = %6f   G = %6f    B = %6f       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
 		c_tmp = c_tmp->next;
 	}
 	printf("|                                                 |\n");
@@ -242,16 +242,38 @@ void	print_values(t_objects	*all)
 	printf("|     nx = %6.2f    ny = %6.2f    nz = %6.2f   |\n", c_tmp->n_vec.x, c_tmp->n_vec.y, c_tmp->n_vec.z);
 	printf("|     diam = %6.2f                               |\n", c_tmp->diameter);
 	printf("|     height = %6.2f                             |\n", c_tmp->height);
-	printf("|     R = %6d   G = %6d    B = %6d       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
+	printf("|     R = %6f   G = %6f    B = %6f       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 }
+
+void	prepare_object_transformations(t_world *world)
+{
+	t_sphere **s_head;
+	t_sphere *s;
+
+	s_head = &world->sphs;
+	s = *s_head;
+	while (s)
+	{
+		printf("Pre sphere %f\n", s->diameter);
+		s->transform = identity_mtx(4);
+		s->transform = set_transform_sp(*s, translation_mtx(s->pos.x, s->pos.y, s->pos.z));
+		if (s->diameter != 1)
+			s->transform = set_transform_sp(*s, scaling_mtx(s->diameter, s->diameter, s->diameter));
+		s->inverse = invert_mtx(&s->transform);
+		s->transpose = transpose_mtx(&s->inverse);
+		print_mtx(&s->transpose);
+		s = s->next;
+	}
+}
+
 
 int	main(int argc, char **argv)
 {
 	int		fd;
 	char		*line;
-	t_objects	all; //Hay que inicializar all
+	t_world	all; //Hay que inicializar all
 
 	fd = basic_error_handling(argc, argv);
 	all.sphs = NULL;	//ft_initialize
@@ -264,7 +286,25 @@ int	main(int argc, char **argv)
 		get_values(line, &all);
 		free(line);
 	}
-	print_values(&all);
+	printf("\nPrepare objects transformations\n");
+	//free_structures(&all);
+
+	printf("\nCalcular interseccion world\n");
+	t_inter	*head_lst;
+	t_inter	*closest_inter;
+	t_ray ray = create_ray(create_point(0, 0, -5), create_vect(0, 0, 1));
+	prepare_object_transformations(&all);
+	head_lst = intersect_world(&all, ray);
+	closest_inter = get_hit(head_lst);
+	printf("closes -> %f\n", closest_inter->min_point);
+
+/*	printf("Pintar\n");
+	t_mlx	mlx;
+    mlx_utils_init(&mlx);
+    mlx_event(&mlx);
+    draw(&mlx);
+    mlx_loop(mlx.mlx);*/
+//	print_values(&all);
 	close(fd);
 	return 0;
 }

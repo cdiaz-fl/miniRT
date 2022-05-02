@@ -1,6 +1,6 @@
 #include "../../includes/miniRT.h"
 
-static void	create_planes_list(t_objects *all)
+static void	create_planes_list(t_world *all)
 {
 	all->plns = (t_plane *)malloc(sizeof(t_plane));
 	if (!all->plns)
@@ -8,7 +8,7 @@ static void	create_planes_list(t_objects *all)
 	all->plns->next = NULL;
 }
 
-static void	add_planes_list(t_objects *all, t_plane **head)
+static void	add_planes_list(t_world *all, t_plane **head)
 {
 	t_plane *temp;
 	t_plane *new;
@@ -35,7 +35,7 @@ t_plane	*get_last_plane_list(t_plane **head)
 	return temp;
 }
 
-void	create_planes(char *s, t_objects *all)
+void	create_planes(char *s, t_world *all)
 {
 	t_plane	*tmp;
 
@@ -62,7 +62,7 @@ void	create_planes(char *s, t_objects *all)
 	tmp->n_vec.z = ft_atof(++s, 10);
 	printf("line2 es %s \n", s);
 	s = ft_strchr(s, ' ');
-
+ 
 	tmp->rgb.r = ft_atoi(++s);
 	while (s && *s != ',')
 		s++;

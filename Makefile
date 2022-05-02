@@ -6,35 +6,34 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/05/02 10:09:36 by zcanales         ###   ########.fr        #
+#    Updated: 2022/05/02 13:31:20 by zcanales         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
-SRCS = src/maths/point_vect_operations.c\
-	   src/maths/vect_operations1.c\
-	   src/maths/vect_operations2.c\
+SRCS = src/errors/error_handling.c\
+	   src/get_data/create_objects.c\
+	   src/get_data/cylinders.c\
+	   src/get_data/get_next_line.c\
+	   src/get_data/main_read.c\
+	   src/get_data/planes.c\
+	   src/get_data/spheres.c\
+	   src/intersections/intersection.c\
+	   src/intersections/inter_lst.c\
+	   src/intersections/ray.c\
 	   src/maths/matrix1.c\
 	   src/maths/matrix2.c\
 	   src/maths/mtx_transform.c\
 	   src/maths/mtx_rotations.c\
-	   src/intersections/intersection.c\
-	   src/intersections/ray.c\
+	   src/maths/point_vect_operations.c\
+	   src/maths/vect_operations1.c\
+	   src/maths/vect_operations2.c\
 	   src/mlx/mlx_utils.c\
 	   src/mlx/mlx_event.c\
-	   src/get_data/get_next_line.c\
-	   src/errors/error_handling.c\
-	   src/get_data/main_prueba.c\
 	   src/light/color.c\
+	   src/light/color_at.c\
 	   src/light/light.c\
-	   src/get_data/create_objects.c\
-	   src/get_data/spheres.c\
-	   src/get_data/planes.c\
-		 src/get_data/cylinders.c\
-	   src/errors/error_handling.c\
-		 #src/intersections/inter_lst.c\#
-	   #src/main_prueba.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -50,7 +49,7 @@ LIB_A = lib/libft/libft.a
 
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror
-SEG_FLAGS = -g -fsanitize=address
+SEG_FLAGS = -g3 -fsanitize=address
 MLX_FLAGS = -L./lib/mlx -framework OpenGL -framework AppKit $(SEG_FLAGS) #-lmlx 
 
 all: $(NAME)
@@ -60,7 +59,7 @@ $(NAME): $(OBJS) $(LIB_A) $(MLX_A)
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
 
 %.o: %.c 
-	@$(CC) $(CFLAGS) -Imlx -c $< -o $@
+	@$(CC) $(CFLAGS) $(SEG_FLAGS) -Imlx -c $< -o $@
 
 $(LIB_A) : lib/Libft/*.c lib/Libft/libft.h
 	@$(MAKE) -C lib/libft/ bonus

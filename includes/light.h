@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:44:32 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 09:49:52 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:04:17 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include "math.h"
 # define BLACK 0x000000
 
-typedef struct	s_color
+/*typedef struct	s_color
 {
 	double	r;
 	double	g;
 	double	b;
-}t_color;
+}t_color;*/
 
 typedef struct	s_light2
 {
@@ -52,6 +52,8 @@ t_color	lighting(t_light light, t_point world_point, t_vect normal_vect, t_vect 
 t_color  lighting2(t_light2 light,t_sphere s, t_point world_point, t_vect normal_vect, t_vect ray_vect);
 
 //COLOR_AT -> Agrupar todas las funciones para calcular el color en un punto
-t_color color_at(t_world world, t_ray rsy);
+t_inter	*intersect_world(t_world *world, t_ray ray);
+t_comps	prepare_computations(t_inter closest_inter, t_ray ray);
+t_color color_at(t_world world, t_ray ray);
 #endif
 

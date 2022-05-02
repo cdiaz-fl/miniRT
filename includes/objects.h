@@ -2,14 +2,15 @@
 #ifndef	OBJECTS_H
 # define OBJECTS_H
 
-#include "matrix.h"
-#include	"point_vector.h"
+# include "matrix.h"
+# include "point_vector.h"
+# include "stdbool.h"
 
 typedef struct s_color
 {
-	int	r;	//[0 - 255]
-	int	g;
-	int	b;
+	double	r;	//[0 - 255]
+	double	g;
+	double	b;
 }t_color;
 
 typedef struct s_camera
@@ -75,7 +76,7 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }t_cylinder;
 
-typedef struct s_objects
+typedef struct s_world
 {
 	t_camera	cam;		//Solo puede haber una
 	t_amb_light	a_light;	//Solo puede haber una
@@ -83,14 +84,25 @@ typedef struct s_objects
 	t_sphere	*sphs;
 	t_plane		*plns;
 	t_cylinder	*cyls;
-}t_objects;
+}t_world;
 
-t_camera	create_camera(char *s, t_objects *all);
-t_amb_light	create_amblight(char *s, t_objects *all);
-t_light	create_light(char *s, t_objects *all);
-void	create_planes(char *s, t_objects *all);
-void	create_spheres(char *s, t_objects *all);
-void	create_cylinders(char *s, t_objects *all);
+typedef struct s_computations
+{
+	char	obj_type;
+	void	*object;
+	double	t;
+	t_point	point;
+	t_vect	eyev;
+	t_vect	normalv;
+	bool	inside;
+}t_comps;
+
+t_camera	create_camera(char *s, t_world *all);
+t_amb_light	create_amblight(char *s, t_world *all);
+t_light	create_light(char *s, t_world *all);
+void	create_planes(char *s, t_world *all);
+void	create_spheres(char *s, t_world *all);
+void	create_cylinders(char *s, t_world *all);
 
 
 #endif

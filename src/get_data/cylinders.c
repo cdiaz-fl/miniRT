@@ -1,21 +1,20 @@
 #include "../../includes/miniRT.h"
 
-static void	create_cylinders_list(t_objects *all)
+static void	create_cylinders_list(t_world *all)
 {
-	all->cyls = (t_cylinder *)malloc(sizeof(t_cylinder));
+	all->cyls = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
 	if (!all->cyls)
 		perror("Error: ");  //liberar->y ->xit
 	all->cyls->next = NULL;
 }
 
-void	add_cylinders_list(t_objects *all, t_cylinder **head)
+void	add_cylinders_list(t_world *all, t_cylinder **head)
 {
 	t_cylinder *temp;
 	t_cylinder *new;
 
-
-
-	new = (t_cylinder *)malloc(sizeof(t_cylinder));
+ 
+	new = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
 	if (!new)
 		perror("Error: ");  //liberar->y ->xit
 	temp = *head;
@@ -35,7 +34,7 @@ t_cylinder	*get_last_cylinder_list(t_cylinder **head)
 	return temp;
 }
 
-void	create_cylinders(char *s, t_objects *all)
+void	create_cylinders(char *s, t_world *all)
 {
 	t_cylinder	*tmp;
 

@@ -1,27 +1,27 @@
 #include "../../includes/miniRT.h"
 
-void	create_spheres_list(t_objects *all)
+void	create_spheres_list(t_world *all)
 {
-	all->sphs = (t_sphere *)malloc(sizeof(t_sphere));
+	all->sphs = (t_sphere *)ft_calloc(sizeof(t_sphere), 1);
 	if (!all->sphs)
 		perror("Error: ");  //liberar->y ->xit
 	all->sphs->next = NULL;
 }
 
-void	add_spheres_list(t_objects *all, t_sphere **head)
+void	add_spheres_list(t_world *all, t_sphere **head)
 {
 	t_sphere *temp;
 	t_sphere *new;
 
 
 
-	new = (t_sphere *)malloc(sizeof(t_sphere));
+	new = (t_sphere *)ft_calloc(sizeof(t_sphere), 1);
 	if (!new)
 		perror("Error: ");  //liberar->y ->xit
 	temp = *head;
 	while (temp->next != NULL)
 	{
-		printf("add\n");
+	//	printf("add\n");
 		temp = temp->next;
 	}
 	temp->next = new;
@@ -38,7 +38,7 @@ t_sphere	*get_last_sphere_list(t_sphere **head)
 	return temp;
 }
 
-void	create_spheres(char *s, t_objects *all)
+void	create_spheres(char *s, t_world *all)
 {
 	t_sphere	*tmp;
 
