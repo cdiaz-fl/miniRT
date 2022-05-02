@@ -31,13 +31,13 @@ void	free_structures(t_world  *w)
 		free(temp_s);
 		temp_s = w->sphs;
 	}
-	while (w->plns->next != NULL)
+/*	while (w->plns->next != NULL)
 	{
 //		free_mtx(&w->plns->transform);
 //		free_mtx(&w->plns->inverse);
 //		free_mtx(&w->plns->transpose);
 		w->plns = w->plns->next;
-		free(temp_p);
+	//	free(temp_p);
 		temp_p = w->plns;
 	}
 	while (w->cyls->next != NULL)
@@ -46,10 +46,10 @@ void	free_structures(t_world  *w)
 //		free_mtx(&w->cyls->inverse);
 //		free_mtx(&w->cyls->transpose);
 		w->cyls = w->cyls->next;
-		free(temp_c);
+	//	free(temp_c);
 		temp_c = w->cyls;
 	}
-
+*/
 
 }
 

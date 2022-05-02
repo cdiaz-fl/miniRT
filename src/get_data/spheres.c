@@ -2,7 +2,7 @@
 
 void	create_spheres_list(t_world *all)
 {
-	all->sphs = (t_sphere *)ft_calloc(sizeof(t_sphere), 1);
+	all->sphs = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!all->sphs)
 		perror("Error: ");  //liberar->y ->xit
 	all->sphs->next = NULL;
@@ -15,7 +15,7 @@ void	add_spheres_list(t_world *all, t_sphere **head)
 
 
 
-	new = (t_sphere *)ft_calloc(sizeof(t_sphere), 1);
+	new = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!new)
 		perror("Error: ");  //liberar->y ->xit
 	temp = *head;
@@ -63,12 +63,12 @@ void	create_spheres(char *s, t_world *all)
 		s++;
 	s = ft_strchr(s, ' ');
 
-	tmp->rgb.r = ft_atoi(++s);
+	tmp->rgb.r = (double)ft_atoi(++s) / 255;
 	while (s && *s != ',')
 		s++;
-	tmp->rgb.g = ft_atoi(++s);
+	tmp->rgb.g = (double)ft_atoi(++s) / 255;
 	while (s && *s != ',')
 		s++;
-	tmp->rgb.b = ft_atoi(++s);
+	tmp->rgb.b = (double)ft_atoi(++s) / 255;
 	tmp->next = NULL;
 }

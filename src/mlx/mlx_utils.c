@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 14:04:14 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:45:26 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, 
 	t_point world_point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
 	t_vect normal_vect = get_normal_sphere(s, world_point);
 //	t_vect	ray_vect = create_vect(ray.origin, ray.direction);
-	final = lighting2( light, s, world_point, normal_vect, ray.direction);
+//	final = lighting2(light, s, world_point, normal_vect, ray.direction);
 //	printf("color -> [%f] [%f] [%f]\n", final.r, final.g, final.b);
 //	}	
 
