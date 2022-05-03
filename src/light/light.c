@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:43:51 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 10:44:18 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:18:06 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,18 @@ t_color  lighting2(t_light light,t_sphere s, t_point world_point, t_vect normal_
             double factor = pow(angle_reflect_camera, 200); //200 -> materila.shinies
             light.specular =  scalar_mul_color(light.intensity,  (0.9 * factor));
 			static int i;
-			if (++i == 1)
-			printf("color %f angle = %f\n", light.specular.g, factor);
-        }
+			if (++i < 4)
+			{
+			printf("\nsphere r[%f], g[%f], b[%f] angle = %f\n", s.rgb.r, s.rgb.g, s.rgb.b, factor);
+			printf("brighness %f\n", light.brightness);	
+			printf("intensity [%f], g[%f], b[%f] angle = %f\n", light.intensity.r, light.intensity.g, light.intensity.b, factor);
+			printf("efectiver r[%f], g[%f], b[%f] angle = %f\n", effective_color.r, effective_color.g, effective_color.b, factor);
+			printf("ambient r[%f], g[%f], b[%f] angle = %f\n", light.ambient.r, light.ambient.g, light.ambient.b, factor);
+			printf("specular r[%f], g[%f], b[%f] angle = %f\n", light.specular.r, light.specular.g, light.specular.b, factor);
+			printf("difusse r[%f], g[%f], b[%f] angle = %f\n", light.diffuse.r, light.diffuse.g, light.diffuse.b, angle_reflect_camera);
+		
+			}
+		}
     }
 	t_color c = add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse)));
 //	check_max_color(&c);

@@ -72,15 +72,15 @@ t_light	create_light(char *s, t_world *all)
 	s = ft_strchr(s, ' ');
 
 	new.rgb.r = (double)ft_atoi(++s) / 255;
-	new.intensity.r = new.rgb.r * new.brightness ;
+	new.intensity.r = 1 * new.brightness ;
 	while (s && *s != ',')
 		s++;
 	new.rgb.g = (double)ft_atoi(++s) / 255;
-	new.intensity.g = new.rgb.g * new.brightness;
+	new.intensity.g = 1 * new.brightness;
 	while (s && *s != ',')
 		s++;
 	new.rgb.b = (double)ft_atoi(++s) / 255;
-	new.intensity.b = new.rgb.b * new.brightness;
+	new.intensity.b = 1 * new.brightness;
 	return new;
 }
 

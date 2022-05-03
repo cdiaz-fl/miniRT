@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 10:44:18 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:18:07 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 
 t_color	shade_hit(t_world world, t_comps comps)
 {
+	t_sphere s;
+
 //	final = lighting2(light, s, world_point, normal_vect, ray.direction);
-	return (lighting2(world.light,*((t_sphere*)comps.object), comps.point, comps.normalv, comps.eyev));
+	return (lighting2(world.light,*((t_sphere*)comps.object), comps.point, comps.normalv, neg_vect(comps.eyev)));
 }
 
 t_color	color_at(t_world world, t_ray ray)

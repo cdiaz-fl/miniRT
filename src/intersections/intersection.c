@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 10:44:14 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:34:54 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_inter intersect_ray(t_ray ray, t_sphere s)
 		inter->count = 0;
 		return (NULL);
 	}*/
-	inter.point[0] = ((b * (-1) - sqrt(discriminant))  / (2 * a));
-	inter.point[1] = ((b * (-1) + sqrt(discriminant)) / (2 * a));
+	inter.point[0] = (((b * (-1)) - sqrt(discriminant))  / (2 * a));
+	inter.point[1] = (((b * (-1)) + sqrt(discriminant)) / (2 * a));
 	inter.min_point = get_minpoint(inter.point[0], inter.point[1]);
 //	printf("inter %f\n", inter.min_point);
 	if (discriminant == 0)
@@ -91,7 +91,7 @@ double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b)
 
 	//4. Calcular los parametros a, b, y c para savar el discriminant.
 	(*a) = dot_product_vect(ray_transform.direction, ray_transform.direction);
-	(*b) = 2 *  dot_product_vect(ray.direction, sphere_to_ray);
+	(*b) = 2 *  dot_product_vect(ray_transform.direction, sphere_to_ray);
 	c = dot_product_vect(sphere_to_ray, sphere_to_ray) -1;
 	return (((*b) * (*b)) - (4 * (*a) * c));
 }

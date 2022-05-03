@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 10:44:19 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:18:04 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	draw(t_mlx	*mlx)
 //	s.transform = set_transform_sp(s, translation_mtx(0, 0, 3));
 //	s.transform = set_transform_sp(s, scaling_mtx(1, 1, 2));
 //	t_mtx super_trasn
-	s.transform = set_transform_sp(s, scaling_mtx(1, 1, 1));
+	s.transform = set_transform_sp(s, scaling_mtx(1, 1, 0.8));
 	s.inverse = invert_mtx(&s.transform);
 	s.transpose = transpose_mtx(&s.inverse);
 	s.rgb = create_color(1, 0, 0);
@@ -110,7 +110,7 @@ void	draw(t_mlx	*mlx)
 	s2.transform = identity_mtx(4);
 //	s2.transform = set_transform_sp(s2, translation_mtx(1, 0.2, 1));
 	s2.inverse = invert_mtx(&s2.transform);
-	ray_origin = create_point(0, 0, -5);
+	ray_origin = create_point(0, 0, -50);
 	center_sphere = create_point(0, 0, 0);
 
 
@@ -120,6 +120,7 @@ void	draw(t_mlx	*mlx)
     light.brightness = 0.9;
    // light.intensity = create_color(1, 1, 1);
     light.intensity = create_color(1, 1, 1);
+	light.ambient  =create_color(0.1, 0.1, 0.1);
 
 	y = -1;
 	while (++y < HEIGHT -1)
@@ -128,6 +129,8 @@ void	draw(t_mlx	*mlx)
 		world_y = half - (y * pixel_size);
 		while (++x < WIDTH - 1)
 		{
+		//	if (x == 500 && y == 500)
+		//	{
 			world_x = (-1 * half) + (x * pixel_size);
 			static int i;
 			if (i < 3)
@@ -140,7 +143,7 @@ void	draw(t_mlx	*mlx)
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			//Aqui habria que calcular todas las intersecciones en una sola funcion
 			xs = intersect_ray(ray, s);
-			xs2 = intersect_ray(ray, s2);
+//			xs2 = intersect_ray(ray, s2);
 			if (xs.count > 0) 
 			{
 				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
@@ -149,7 +152,7 @@ void	draw(t_mlx	*mlx)
 			}
 			else
 				mlx->img.addr[x * WIDTH + y] = 0x000000;
-
+		//	}
 			//if (xs2.count > 0) 
 			//	mlx->img.addr[x * WIDTH + y] = 0xFF0000;
 		}

@@ -31,7 +31,7 @@ typedef struct s_amb_light
 
 typedef struct s_light
 {
-	t_color diffuse;
+/*	t_color diffuse;
     t_color ambient;
     t_color specular;
 	t_point	position;	//Position

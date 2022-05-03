@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:49:11 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/04/28 14:29:24 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:35:00 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,28 @@ t_mtx	mul_mtx(t_mtx *mtx1, t_mtx *mtx2)
 
 t_vect mul_vect_mtx(t_mtx *mtx, t_vect v)
 {
-	int		i;
-	int		j;
+	unsigned int		i;
+	unsigned int		j;
 	double	result;
 	double	tup[4];
 	double	new[4];
 
-	i = -1;
+	i = 0;
 	tup[0] = v.x;
 	tup[1] = v.y;
 	tup[2] = v.z;
 	tup[3] = 0;
-	while((unsigned int)++i < mtx->size)
+	while(i < mtx->size)
 	{
-		j = -1;
+		j = 0;
 		result = 0.0f;
-		while((unsigned int)++j < mtx->size)
+		while(j < mtx->size)
+		{
 			result += mtx->data[i][j] * tup [j];
+			j++;
+		}
 		new[i] = result;
+		i++;
 	}
 
 	return create_vect(new[0], new[1], new[2]);
@@ -66,24 +70,28 @@ t_vect mul_vect_mtx(t_mtx *mtx, t_vect v)
 
 t_point	mul_point_mtx(t_mtx *mtx, t_point p)
 {
-	int		i;
-	int		j;
+	unsigned  int		i;
+	unsigned int		j;
 	double	result;
 	double	tup[4];
 	double	new[4];
 	
-	i = -1;
+	i = 0;
 	tup[0] = p.x;
 	tup[1] = p.y;
 	tup[2] = p.z;
-	tup[3] = 1;
-	while((unsigned int)++i < mtx->size)
+	tup[3] = 1; //No se si aquí es 0 o 1
+	while(i < mtx->size )
 	{
-		j = -1;
+		j = 0;
 		result = 0.0f;
-		while((unsigned int)++j < mtx->size)
+		while (j < mtx->size)
+		{
 			result += mtx->data[i][j] * tup[j];
+			j++;
+		}
 		new[i] = result;
+		i++;
 	}
 	return create_point(new[0], new[1], new[2]);
 	
