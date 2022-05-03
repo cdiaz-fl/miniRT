@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 08:58:52 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:44:14 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_inter intersect_ray(t_ray ray, t_sphere s)
 	discriminant = discriminat_ray(ray, s, &a, &b);
 	inter.obj_type = 's';
 //	*(t_sphere*)(inter.object) = &s;
-//	printf("peta\n");
+//	printf("discriminant - >%f\n", discriminant);
 	//Es mejor tener guardados los puntos aunque sean negativos, para hacer laas reflectio y refraction.
 	//Aunque eso solo se para el bonus
 /*	if (discriminant < 0) //Si discriminat es negativo, no intersecta.
@@ -57,12 +57,14 @@ t_inter intersect_ray(t_ray ray, t_sphere s)
 	inter.point[0] = ((b * (-1) - sqrt(discriminant))  / (2 * a));
 	inter.point[1] = ((b * (-1) + sqrt(discriminant)) / (2 * a));
 	inter.min_point = get_minpoint(inter.point[0], inter.point[1]);
+//	printf("inter %f\n", inter.min_point);
 	if (discriminant == 0)
 		inter.count = 1;
 	else if (discriminant < 0)
 		inter.count = 0;
 	else
 		inter.count = 2;
+//	printf("intervount %d\n", inter.count);
 	return (inter);
 }
 

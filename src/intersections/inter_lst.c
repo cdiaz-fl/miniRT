@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 15:45:25 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:44:16 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ t_inter	*get_hit(t_inter *lst)
 	t_inter *temp;
 	t_inter *min_lst;
 	double	min;
+
 	temp = lst;
 	min_lst = lst;
-	min = min_lst->min_point;
+	min = 2147483647;
 	while (temp)
 	{
-		printf("min_hit -> %f\n", temp->min_point);
 		if (temp->min_point < min && temp->min_point >= 0)
 		{
 			min = temp->min_point;

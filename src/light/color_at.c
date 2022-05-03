@@ -6,34 +6,36 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 15:45:21 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:44:18 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-t_inter	*intersect_world(t_world *world, t_ray ray)
+t_inter	*intersect_world(t_world **world, t_ray ray, t_sphere **s)
 {
-	printf("Dentro a_light%f\n", world->a_light.rate);
+//	printf("Dentro a_light%f\n", (*world)->a_light.rate);
 	t_inter one_inter;
 	t_inter *head;
-	int i;
+	t_sphere *temp;
+
+	temp = *s;
 
 	head = NULL;
-	i = 0;
 	//Loop all the spheres
-	while (world->sphs)
+	while (temp != NULL)
 	{
-		one_inter = intersect_ray(ray, *world->sphs);
-		printf("type -> %c\n", one_inter.obj_type);
+		one_inter = intersect_ray(ray, *temp);
+//		printf("type -> %c\n", one_inter.obj_type);
 
-		(one_inter.object) = (void*)(world->sphs);
-		(one_inter.object_s) = (world->sphs);
-		printf("oner_s -> %f\n", one_inter.object_s->diameter);
-		printf("oner -> %f\n", ((t_sphere *)one_inter.object)->diameter);
+		(one_inter.object) = (void*)(temp);
+		(one_inter.object_s) = (temp);
+//		printf("oner_s -> %f\n", one_inter.object_s->diameter);
+//		printf("oner -> %f\n", ((t_sphere *)one_inter.object)->diameter);
 		add_intersection(&head,create_interlst(one_inter));
-		printf("head -> %f\n", head->object_s->diameter);
-		world->sphs = world->sphs->next;
+//		printf("head -> %f\n", head->object_s->diameter);
+		temp= temp->next;
+		// lst = &(*lst)->next;
 	}
 	//Loop planes
 /*	while (world.plns->next != NULL)
@@ -96,7 +98,7 @@ t_color	color_at(t_world world, t_ray ray)
 //	t_comps set_comps;
 	t_color final_color = create_color(0, 0, 0);
 	
-	record_inter = intersect_world(&world, ray);
+//	record_inter = intersect_world(&world, ray);
 //	closest_inter = get_hit(record_inter);
 //	set_comps = prepare_computations(closest_inter, ray);
 //	final_color = shade_hit(world, set_comps);

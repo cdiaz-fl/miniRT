@@ -264,13 +264,14 @@ void	prepare_object_transformations(t_world *world)
 			s->transform = set_transform_sp(*s, scaling_mtx(s->diameter, s->diameter, s->diameter));
 		s->inverse = invert_mtx(&s->transform);
 		s->transpose = transpose_mtx(&s->inverse);
-		print_mtx(&s->transpose);
+		print_mtx(&s->transform);
 		s = s->next;
 	}
 	world->light.ambient =  scalar_mul_color(world->a_light.rgb, world->a_light.rate);
+	world->light.intensity = create_color(world->light.rgb.r, world->light.rgb.g, world->light.rgb.b);;
 }
 
-void	prueba_default(t_world world, t_mlx *mlx)
+void	prueba_default(t_world *world, t_mlx *mlx)
 {
 	int x;
 	int	y;
@@ -288,6 +289,8 @@ void	prueba_default(t_world world, t_mlx *mlx)
 	double	pixel_size = wall_size / HEIGHT;
 	double	half = wall_size / 2;
 	
+	ray_origin = create_point(0, 0, -100);
+	
 	y = -1;
 	while (++y < HEIGHT -1)
 	{
@@ -295,24 +298,30 @@ void	prueba_default(t_world world, t_mlx *mlx)
 		world_y = half - (y * pixel_size);
 		while (++x < WIDTH - 1)
 		{
+	//		if ( x == 500 && y == 500)
+	//		{
 			world_x = (-1 * half) + (x * pixel_size);
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
+			
 			//Aqui habria que calcular todas las intersecciones en una sola funcion
 			t_inter *head_lst;
 			t_inter	*closest_inter;
-			intersect_world(&world, ray);
+			head_lst = intersect_world(&world, ray, &world->sphs);
 			closest_inter = get_hit(head_lst);
-			if (closest_inter->min_point > 0)
+//			printf("closes_inter = %f\n", closest_inter->min_point);
+			if (closest_inter->count > 0)
 			{
 				t_comps comps;
 				comps = prepare_computations(*closest_inter, ray);
 				t_color 	final_color; 
-				final_color = shade_hit(world, comps);
+				final_color = shade_hit(*world, comps);
 				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final_color);
 			}
-	
-	/*		xs = intersect_ray(ray, s);
+			head_lst = NULL;	
+			closest_inter = NULL;	
+	//		}
+			/*		xs = intersect_ray(ray, s);
 			if (xs.count > 0) 
 			{
 				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
@@ -354,7 +363,7 @@ int	main(int argc, char **argv)
 	//1. 
 	prepare_object_transformations(&all);
 	
-	//2. 
+/*	//2. 
 	head_lst = intersect_world(&all, ray);
 	printf("1. spheras -> %f\n", head_lst->object_s->diameter);
 	printf("1. sphera -> %f\n", ((t_sphere *)head_lst->object_s)->diameter);
@@ -372,16 +381,15 @@ int	main(int argc, char **argv)
 	//5. 
 	t_color 	final_color = shade_hit(all, comps);
 	printf("colosr -> r[%f], g[%f], b[%f]\n", final_color.r, final_color.g, final_color.b);
-	
-
+*/	
 	printf("Pintar\n");
+	print_values(&all);
 	t_mlx	mlx;
     mlx_utils_init(&mlx);
     mlx_event(&mlx);
-    draw(&mlx);
-//	prueba_default(all, &mlx);
-    mlx_loop(mlx.mlx);
-//	print_values(&all);
+//    draw(&mlx);
+	prueba_default(&all, &mlx);
+ 	 mlx_loop(mlx.mlx);
 	free_structures(&all);
 	close(fd);
 	return 0;

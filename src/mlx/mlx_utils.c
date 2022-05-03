@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 08:35:12 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:44:19 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,10 @@ void	draw(t_mlx	*mlx)
 //	s.transform = set_transform_sp(s, translation_mtx(0, 0, 3));
 //	s.transform = set_transform_sp(s, scaling_mtx(1, 1, 2));
 //	t_mtx super_trasn
-//	s.transform = set_transform_sp(s, scaling_mtx(0.3, 0.8, 1));
+	s.transform = set_transform_sp(s, scaling_mtx(1, 1, 1));
 	s.inverse = invert_mtx(&s.transform);
 	s.transpose = transpose_mtx(&s.inverse);
+	s.rgb = create_color(1, 0, 0);
 
 	t_sphere s2;
 	t_inter	xs2;
