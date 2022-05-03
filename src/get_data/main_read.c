@@ -378,8 +378,8 @@ int	main(int argc, char **argv)
 	t_mlx	mlx;
     mlx_utils_init(&mlx);
     mlx_event(&mlx);
-//    draw(&mlx);
-	prueba_default(all, &mlx);
+    draw(&mlx);
+//	prueba_default(all, &mlx);
     mlx_loop(mlx.mlx);
 //	print_values(&all);
 	free_structures(&all);
