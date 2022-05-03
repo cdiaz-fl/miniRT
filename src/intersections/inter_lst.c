@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 14:04:16 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:45:25 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_inter *create_interlst(t_inter temp)
 	new->min_point = temp.min_point;
 	new->count = temp.count;
 	new->obj_type = temp.obj_type;
-	//new->object = temp.object;
+	new->object_s = temp.object_s;
+	new->object = temp.object;
 	new->next = NULL;
 	return (new);
 }

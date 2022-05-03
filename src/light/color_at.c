@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 14:04:11 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:45:21 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ t_inter	*intersect_world(t_world *world, t_ray ray)
 		one_inter = intersect_ray(ray, *world->sphs);
 		printf("type -> %c\n", one_inter.obj_type);
 
-		//(t_sphere*)one_inter.object = world->sphs;
+		(one_inter.object) = (void*)(world->sphs);
 		(one_inter.object_s) = (world->sphs);
+		printf("oner_s -> %f\n", one_inter.object_s->diameter);
+		printf("oner -> %f\n", ((t_sphere *)one_inter.object)->diameter);
 		add_intersection(&head,create_interlst(one_inter));
+		printf("head -> %f\n", head->object_s->diameter);
 		world->sphs = world->sphs->next;
 	}
 	//Loop planes
@@ -59,15 +62,17 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 
 	// copy the intersection's properties, for convenience
 	comps.t = closest_inter.min_point;
-	//copy_object();
-//	comps.object = closest_inter.obj;
+	comps.object = closest_inter.object;
+	comps.obj_type = closest_inter.obj_type;
 
 	//precompute some useful values
 	comps.point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, comps.t));
 	comps.eyev = neg_vect(ray.direction);
+
 	//Hacer una funcione que calcule la normal dependiendo del tipo de objeto
 	if (comps.obj_type == 's')
 		comps.normalv =  get_normal_sphere(*(t_sphere *)comps.object, comps.point);
+	
 	if  (dot_product_vect(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
@@ -78,10 +83,11 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 	return (comps);
 }
 
-/*static t_color	shade_hit(t_world world, t_comps comps)
+t_color	shade_hit(t_world world, t_comps comps)
 {
-	return (lighting(comps.object.material, world.light, comps.point, comps.eyev, comps.normalv));
-}*/
+//	final = lighting2(light, s, world_point, normal_vect, ray.direction);
+	return (lighting2(world.light,*((t_sphere*)comps.object), comps.point, comps.normalv, comps.eyev));
+}
 
 t_color	color_at(t_world world, t_ray ray)
 {

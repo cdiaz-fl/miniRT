@@ -31,13 +31,27 @@ typedef struct s_amb_light
 
 typedef struct s_light
 {
-	t_point	pos;	//Position
-
+	t_color diffuse;
+    t_color ambient;
+    t_color specular;
+	t_point	position;	//Position
+	t_color intensity; // color = (1, 1, 1) * brightness -> blanco * brightnees
+    double      brightness;
+	
 	double	glow;	//[0.0 - 1.0]
-
 	t_color	rgb;	//[0 - 255]
 }t_light;
+/*typedef struct  s_light2
+{
+    t_color diffuse;
+    t_color ambient;
+    t_color specular;
 
+    t_point position;
+
+    t_color intensity; // color = (1, 1, 1) * brightness -> blanco * brightnees
+    double      brightness;
+}t_light2;*/
 typedef struct s_sphere
 {
 	t_point		pos;	//Centro de la esfera

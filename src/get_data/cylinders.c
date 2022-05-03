@@ -2,7 +2,7 @@
 
 static void	create_cylinders_list(t_world *all)
 {
-	all->cyls = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
+	all->cyls = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (!all->cyls)
 		perror("Error: ");  //liberar->y ->xit
 	all->cyls->next = NULL;
@@ -14,7 +14,7 @@ void	add_cylinders_list(t_world *all, t_cylinder **head)
 	t_cylinder *new;
 
  
-	new = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
+	new = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (!new)
 		perror("Error: ");  //liberar->y ->xit
 	temp = *head;
@@ -71,12 +71,12 @@ void	create_cylinders(char *s, t_world *all)
 		s++;
 	s = ft_strchr(s, ' ');
 
-	tmp->rgb.r = ft_atoi(++s);
+	tmp->rgb.r = ft_atoi(++s) / 255;
 	while (s && *s != ',')
 		s++;
-	tmp->rgb.g = ft_atoi(++s);
+	tmp->rgb.g = ft_atoi(++s) / 255;
 	while (s && *s != ',')
 		s++;
-	tmp->rgb.b = ft_atoi(++s);
+	tmp->rgb.b = ft_atoi(++s) / 255;
 	tmp->next = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 14:06:44 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 08:26:02 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	mlx_utils_init(t_mlx *mlx)
 	wall_init(mlx);
 }
 
-t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, t_light2 light)
+t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, t_light light)
 {
 	//1. Calculamos el punto donde intersecta el rayo con la espfera en el mundo real.
 	//Con el vector del rayo y el punto de interscció.
@@ -68,7 +68,7 @@ t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, 
 	t_point world_point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
 	t_vect normal_vect = get_normal_sphere(s, world_point);
 //	t_vect	ray_vect = create_vect(ray.origin, ray.direction);
-	final = lighting2( light, s, world_point, normal_vect, ray.direction);
+	final = lighting2(light, s, world_point, normal_vect, ray.direction);
 //	printf("color -> [%f] [%f] [%f]\n", final.r, final.g, final.b);
 //	}	
 
@@ -110,20 +110,16 @@ void	draw(t_mlx	*mlx)
 //	s2.transform = set_transform_sp(s2, translation_mtx(1, 0.2, 1));
 	s2.inverse = invert_mtx(&s2.transform);
 	ray_origin = create_point(0, 0, -5);
-<<<<<<< HEAD
-	center_sphere = create_point(1, 1, 1);
-=======
 	center_sphere = create_point(0, 0, 0);
 
 
 	//Create light
-	t_light2    light;
+	t_light    light;
     light.position = create_point(-10, 10, -10);
     light.brightness = 0.9;
    // light.intensity = create_color(1, 1, 1);
     light.intensity = create_color(1, 1, 1);
 
->>>>>>> mtx_transform
 	y = -1;
 	while (++y < HEIGHT -1)
 	{
