@@ -81,6 +81,13 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 
 t_color	shade_hit(t_world world, t_comps comps)
 {
+	bool shadow;
+//	shadow = is_shadowed(&world, comps.point);
+	shadow = is_shadowed(&world, comps.over_point);
+	if (shadow == true)
+	{
+		return (world.light.ambient);
+	}
 	return (lighting(world.light,*((t_sphere*)comps.object), comps.point, comps.normalv, neg_vect(comps.eyev)));
 }
 
@@ -98,6 +105,7 @@ t_color	color_at(t_world *world, t_ray ray)
 	if (closest_inter->count > 0)
 	{
 		comps = prepare_computations(*closest_inter, ray);
+		comps.over_point = add_point_vect(comps.point, scalar_mul_vect(comps.normalv, EPSILON));
 		final_color = shade_hit(*world, comps);
 		//mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final_color);
 	}

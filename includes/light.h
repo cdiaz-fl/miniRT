@@ -15,13 +15,7 @@
 # include "miniRT.h"
 #include "math.h"
 # define BLACK 0x000000
-
-/*typedef struct	s_color
-{
-	double	r;
-	double	g;
-	double	b;
-}t_color;*/
+# define EPSILON 0.00001
 
 typedef struct	s_light2
 {
@@ -56,5 +50,8 @@ t_inter	*intersect_world(t_world **world, t_ray ray, t_sphere **s);
 t_comps	prepare_computations(t_inter closest_inter, t_ray ray);
 t_color color_at(t_world *world, t_ray ray);
 t_color	shade_hit(t_world world, t_comps comps);
+
+//SHADOWS.C 
+bool    is_shadowed(t_world *world, t_point point);
 #endif
 

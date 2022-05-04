@@ -34,6 +34,7 @@ SRCS = src/errors/error_handling.c\
 	   src/light/color_operations.c\
 	   src/light/color_at.c\
 	   src/light/light.c\
+	   src/light/shadows.c\
 	   src/get_data/main_read.c\
 #	   src/get_data/main_prueba.c\
 

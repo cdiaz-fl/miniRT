@@ -88,6 +88,7 @@ typedef struct s_computations
 	void	*object;
 	double	t;
 	t_point	point;
+	t_point	over_point; //Para calcular la sombra y que no haga un self-shadowing (salen puntos negros).
 	t_vect	eyev;
 	t_vect	normalv;
 	bool	inside;
@@ -102,6 +103,6 @@ void		create_spheres(char *s, t_world *all);
 void		create_cylinders(char *s, t_world *all);
 
 //Preparar las matrices de todos los objetos para hacer el cambio de mundo
-void	prepare_object_transformations(t_world *world);
+void		prepare_object_transformations(t_world *world);
 
 #endif
