@@ -21,6 +21,7 @@ void	prepare_object_transformations(t_world *world)
 	s = *s_head;
 	while (s)
 	{
+		printf("s->diameter %f\n", s->diameter);
 		s->transform = identity_mtx(4);
 		s->transform = set_transform_sp(*s, translation_mtx(s->pos.x, s->pos.y, s->pos.z));
 		if (s->diameter != 1)

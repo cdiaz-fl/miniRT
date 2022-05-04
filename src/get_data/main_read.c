@@ -3,6 +3,9 @@
 #include	<unistd.h>	//Write
 #include	"../../includes/miniRT.h"
 
+void	add_walls(t_world *world);
+void	add_spheres_list(t_world *all, t_sphere **head);
+t_sphere	*get_last_sphere_list(t_sphere **head);
 /*void	fill_amblight_data(t_amb_light *amb, int variable, float nbr)
 {
 	if (variable == 0)
@@ -265,7 +268,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	double	pixel_size = wall_size / HEIGHT;
 	double	half = wall_size / 2;
 	
-	ray_origin = create_point(0, 0, -100);
+	ray_origin = create_point(0, 0, -50);
 	
 	y = -1;
 /*	printf("specular r[%f], g[%f], b[%f]\n", world->light.specular.r, world->light.specular.g, world->light.specular.b);
@@ -283,7 +286,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			t_color final_color = color_at(world, ray);
-			mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final_color);	
+			mlx->img.addr[y * WIDTH + x] = convert_color_to_int(final_color);	
 
 		}
 	}
@@ -299,6 +302,38 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	//4. 2. Calcular si intercepta con un objeto y cuan es el más cercano
 	//4. 3. Lanzar rayos al foco de luz para calcular las sombras
 	//4. 4. Pintar en la pantalla. 
+void	add_walls(t_world *world)
+{
+	t_sphere *floor;
+
+	add_spheres_list(world, &world->sphs);
+	floor = get_last_sphere_list(&world->sphs);
+	floor->transform = identity_mtx(4);
+	floor->transform = set_transform_sp(*floor, translation_mtx(0, -1, 0));
+//	floor->transform = set_transform_sp(*floor, y_rotatation_mtx(45));
+	floor->transform = set_transform_sp(*floor, scaling_mtx(10, 0.01, 10));
+	floor->transform = set_transform_sp(*floor, x_rotatation_mtx(-45));
+	floor->inverse = invert_mtx(&floor->transform);
+	floor->transpose = transpose_mtx(&floor->inverse);
+	floor->diameter = 1;
+	floor->rgb = create_color(1, 0.9, 0.5);
+
+		
+	t_sphere *right;
+
+	add_spheres_list(world, &world->sphs);
+	right = get_last_sphere_list(&world->sphs);
+	right->transform = identity_mtx(4);
+	right->transform = set_transform_sp(*right, translation_mtx(0, 0, 5));
+	right->transform = set_transform_sp(*right, y_rotatation_mtx(45));
+	right->transform = set_transform_sp(*right, x_rotatation_mtx(90));
+	right->transform = set_transform_sp(*right, scaling_mtx(10, 0.01, 10));
+	right->inverse = invert_mtx(&right->transform);
+	right->transpose = transpose_mtx(&right->inverse);
+	right->diameter = 1;
+	right->rgb = create_color(1, 0.5, 0.5);
+
+}
 int	main(int argc, char **argv)
 {
 	int		fd;
@@ -318,6 +353,7 @@ int	main(int argc, char **argv)
 	}
 	printf("\nPrepare objects transformations\n");
 	prepare_object_transformations(&all);
+	add_walls(&all);
 	
 	//print_values(&all);
 	t_point point = create_point(10, -10, 10);
