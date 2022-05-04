@@ -64,7 +64,6 @@ t_light	create_light(char *s, t_world *all)
 	new.position.z = ft_atof(++s, 10);
 
 	s = ft_strchr(s, ' ');
-	new.glow = ft_atof(s, 10);
 	new.brightness = ft_atof(s, 10);
 
 	while (s && *s == ' ')

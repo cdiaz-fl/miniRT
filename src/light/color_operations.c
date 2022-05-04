@@ -18,22 +18,10 @@ int	convert_color_to_int(t_color c)
   
 	int color;
 	
-//	color	= ((int)((255.999 * c.r) << 16)/255.999) + ((int)(255.999 * c.g) << 8) + ((int)(255.999 * c.b));
 	color	= ((int)(255 * c.r) << 16) + ((int)(255 * c.g) << 8) + ((int)(255 * c.b));
 	return (color);
 //	color	= (c.r << 16) + (c.g << 8) + ( c.b);
-//	int rgb = ((c.r & 0x0ff) << 16) | ((c.g & 0x0ff) << 8)| (c.b & 0x0ff);
-//	int rgb = 65536 * c.r + 256 * c.g + c.b;
 //	return (rgb);
-}
-
-void	check_color_range(t_color c)
-{
-	if (c.r < 0 || c.r > 1 || c.g < 0 || c.g > 1 || c.b < 0 || c.b > 1)
-	{
-		printf("Error color\n");
-		exit(1);
-	}
 }
 
 t_color		create_color(double red, double green, double blue)

@@ -43,7 +43,6 @@ t_inter *create_interlst(t_inter temp)
 	new->min_point = temp.min_point;
 	new->count = temp.count;
 	new->obj_type = temp.obj_type;
-	new->object_s = temp.object_s;
 	new->object = temp.object;
 	new->next = NULL;
 	return (new);

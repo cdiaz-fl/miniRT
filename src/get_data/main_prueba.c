@@ -134,7 +134,7 @@ int main()
 		t_point	world_point = create_point(0, 0, 0);
 	
 	
-		t_color final = lighting2(light, s1, world_point, normal_v, create_vect(0, 0, -1));
+		t_color final = lighting(light, s1, world_point, normal_v, create_vect(0, 0, -1));
 		printf("color -> %f %f %f\n", final.r, final.g, final.b);
 		printf("\n");
 	}

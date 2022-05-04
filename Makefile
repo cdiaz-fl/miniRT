@@ -18,6 +18,7 @@ SRCS = src/errors/error_handling.c\
 	   src/get_data/get_next_line.c\
 	   src/get_data/planes.c\
 	   src/get_data/spheres.c\
+	   src/get_data/prepare_objects.c\
 	   src/intersections/intersection.c\
 	   src/intersections/inter_lst.c\
 	   src/intersections/ray.c\
@@ -30,7 +31,7 @@ SRCS = src/errors/error_handling.c\
 	   src/maths/vect_operations2.c\
 	   src/mlx/mlx_utils.c\
 	   src/mlx/mlx_event.c\
-	   src/light/color.c\
+	   src/light/color_operations.c\
 	   src/light/color_at.c\
 	   src/light/light.c\
 	   src/get_data/main_read.c\
@@ -71,7 +72,8 @@ $(MLX_A) :
 	@echo "$(NAME): $(GREEN)Creating $(MLX_A)...$(RESET)"
 
 clean :
-	make -C lib/libft/ clean
+	@make -C lib/libft/ clean
+	@rm -rf $(OBJS)
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
 
 fclean : clean

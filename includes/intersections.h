@@ -19,8 +19,6 @@ typedef struct s_intersection
 {
 	char					obj_type; //Objeto con el que intersecta
 	void					*object;
-	t_sphere				*object_s;
-	int						id;
 	int						count;	//Cantidad de intersecciones 
 	double					point[2]; //Puntos en el que intersecta con el objeto.
 	double					min_point;
@@ -29,24 +27,9 @@ typedef struct s_intersection
 
 typedef struct s_ray
 {
-	t_point	origin; //Origin of the point
-	t_vect	direction; //Direction of the point 
+	t_point	origin; 	//Origin of the point
+	t_vect	direction; 	//Direction of the point 
 }t_ray;
-
-//Borrar, ya esta en el object.h
-/*typedef struct s_sphere
-{
-	//Ahora se asume que x, y, z = 0 y diameter = 1
-	double	x;	//El punto describe el centro de la esfera
-	double	y;
-	double	z;
-
-	double	diameter;
-
-	int	r;	//[0 - 255]
-	int	g;
-	int	b;
-}t_sphere;*/
 
 /*RAY.C*/
 /*Crear rayos*/
@@ -74,10 +57,6 @@ t_inter intersect_ray(t_ray ray, t_sphere s);
 //Como intersecta en 2 puntos, no intersa en el que esta mas cerca y no sea negativo.
 double  get_minpoint(double t1, double t2);
 
-/*Tracking Intersections*/
-//SIN HACER -> Funciones que te agura las intersecciones
-//La hacemos?
-//t_interGroup inter_group(t_inter t1, t_inter t2);
 
 /*Create a list of intersections*/
 //MALLOC

@@ -174,7 +174,7 @@ void	print_values(t_world	*all)
 	printf("\n\n--------------------   Light  ---------------------\n");
 	printf("|                                                 |\n");
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", all->light.position.x, all->light.position.y, all->light.position.z);
-	printf("|     glow = %6.2f                               |\n", all->light.glow);
+	printf("|     glow = %6.2f                               |\n", all->light.brightness);
 	printf("|     R = %6f   G = %6f    B = %6f       |\n", all->light.rgb.r, all->light.rgb.g, all->light.rgb.b);
 	printf("|     R = %6f   G = %6f    B = %6f       |\n", all->light.intensity.r, all->light.intensity.g, all->light.intensity.b);
 	printf("|                                                 |\n");
@@ -248,7 +248,7 @@ void	print_values(t_world	*all)
 	printf("---------------------------------------------------\n");*/
 }
 
-void	prepare_object_transformations(t_world *world)
+/*void	prepare_object_transformations(t_world *world)
 {
 	t_sphere **s_head;
 	t_sphere *s;
@@ -257,7 +257,6 @@ void	prepare_object_transformations(t_world *world)
 	s = *s_head;
 	while (s)
 	{
-		printf("Pre sphere %f\n", s->diameter);
 		s->transform = identity_mtx(4);
 		s->transform = set_transform_sp(*s, translation_mtx(s->pos.x, s->pos.y, s->pos.z));
 		if (s->diameter != 1)
@@ -268,7 +267,7 @@ void	prepare_object_transformations(t_world *world)
 	}
 	world->light.ambient =  scalar_mul_color(world->a_light.rgb, world->a_light.rate);
 	world->light.intensity = create_color(world->light.rgb.r, world->light.rgb.g, world->light.rgb.b);;
-}
+}*/
 
 void	prueba_default(t_world *world, t_mlx *mlx)
 {
@@ -281,8 +280,6 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	t_ray	ray;
 	t_point	ray_origin;
 	t_point	position;
-	t_inter xs;
-	t_point center_sphere;
 
 	double	wall_size = 7;
 	double	pixel_size = wall_size / HEIGHT;
@@ -291,64 +288,46 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	ray_origin = create_point(0, 0, -100);
 	
 	y = -1;
-	printf("specular r[%f], g[%f], b[%f]\n", world->light.specular.r, world->light.specular.g, world->light.specular.b);
+/*	printf("specular r[%f], g[%f], b[%f]\n", world->light.specular.r, world->light.specular.g, world->light.specular.b);
 	printf("ambient r[%f], g[%f], b[%f]\n", world->light.ambient.r, world->light.ambient.g, world->light.ambient.b);
 	printf("difuse r[%f], g[%f], b[%f]\n", world->light.diffuse.r, world->light.diffuse.g, world->light.diffuse.b);
 	printf("intensity r[%f], g[%f], b[%f]\n", world->light.intensity.r, world->light.intensity.g, world->light.intensity.b);
-	printf("spehre r[%f], g[%f], b[%f]\n", world->sphs->rgb.r, world->sphs->rgb.g, world->sphs->rgb.b);
+	printf("spehre r[%f], g[%f], b[%f]\n", world->sphs->rgb.r, world->sphs->rgb.g, world->sphs->rgb.b);*/
 	while (++y < HEIGHT -1)
 	{
 		x = -1;
 		world_y = half - (y * pixel_size);
 		while (++x < WIDTH - 1)
 		{
-		//	if ( x == 500 && y == 500)
-//		{
 			world_x = (-1 * half) + (x * pixel_size);
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
-			
-			//Aqui habria que calcular todas las intersecciones en una sola funcion
-			t_inter *head_lst;
-			t_inter	*closest_inter;
-			head_lst = intersect_world(&world, ray, &world->sphs);
-			closest_inter = get_hit(head_lst);
-//			printf("closes_inter = %f\n", closest_inter->min_point);
-			if (closest_inter->count > 0)
-			{
-				t_comps comps;
-				comps = prepare_computations(*closest_inter, ray);
-				t_color 	final_color; 
-				final_color = shade_hit(*world, comps);
-				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final_color);
-			}
-			head_lst = NULL;	
-			closest_inter = NULL;	
-//			}
-			/*		xs = intersect_ray(ray, s);
-			if (xs.count > 0) 
-			{
-				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
-				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final);
-			}
-			else
-				mlx->img.addr[x * WIDTH + y] = 0x000000;
-*/
+			t_color final_color = color_at(world, ray);
+			mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final_color);	
+
 		}
 	}
 	printf("fin\n");;
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 }
 
+//1. Recoger todos los datos que nos pasan
+//2. Preparar las matrices de trasnformación de  los objetos
+//3. Preparar la cámara
+//4. Pintar. Recorrernos toda la pantalla.
+	//4. 1. Lanzar rayos.
+	//4. 2. Calcular si intercepta con un objeto y cuan es el más cercano
+	//4. 3. Lanzar rayos al foco de luz para calcular las sombras
+	//4. 4. Pintar en la pantalla. 
 int	main(int argc, char **argv)
 {
 	int		fd;
 	char		*line;
-	t_world	all; //Hay que inicializar all
+	t_world	all; 
 
+	ft_memset(&all, 0, sizeof(t_world));
 	fd = basic_error_handling(argc, argv);
-	all.sphs = NULL;	//ft_initialize
-	//Falta incluir librería gnl
+	all.sphs = NULL;
 	while(1)
 	{
 		line = get_next_line(fd);
@@ -359,35 +338,8 @@ int	main(int argc, char **argv)
 	}
 	printf("\nPrepare objects transformations\n");
 	prepare_object_transformations(&all);
-
-/*	printf("\nCalcular interseccion world\n");
-	t_inter	*head_lst;
-	t_inter	*closest_inter;
-	t_ray ray = create_ray(create_point(0, 0, -5), create_vect(0, 0, 1));
-	
-	. 
-	
-	//2. 
-	head_lst = intersect_world(&all, ray);
-	printf("1. spheras -> %f\n", head_lst->object_s->diameter);
-	printf("1. sphera -> %f\n", ((t_sphere *)head_lst->object_s)->diameter);
-	
-	//3. 
-	closest_inter = get_hit(head_lst);
-	printf("closes -> %f\n", closest_inter->min_point);
-	
-	//4. 
-	t_comps comps;
-	comps = prepare_computations(*closest_inter, ray);
-	printf("comps -> %f\n", comps.t);
-	print_mtx(&((t_sphere *)comps.object)->transpose);
-
-	//5. 
-	t_color 	final_color = shade_hit(all, comps);
-	printf("colosr -> r[%f], g[%f], b[%f]\n", final_color.r, final_color.g, final_color.b);
-*/	 
 	printf("Pintar\n");
-	print_values(&all);
+	//print_values(&all);
 	t_mlx	mlx;
     mlx_utils_init(&mlx);
     mlx_event(&mlx);

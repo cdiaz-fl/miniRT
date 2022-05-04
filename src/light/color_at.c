@@ -26,16 +26,10 @@ t_inter	*intersect_world(t_world **world, t_ray ray, t_sphere **s)
 	while (temp != NULL)
 	{
 		one_inter = intersect_ray(ray, *temp);
-//		printf("type -> %c\n", one_inter.obj_type);
-
 		(one_inter.object) = (void*)(temp);
-		(one_inter.object_s) = (temp);
-//		printf("oner_s -> %f\n", one_inter.object_s->diameter);
-//		printf("oner -> %f\n", ((t_sphere *)one_inter.object)->diameter);
 		add_intersection(&head,create_interlst(one_inter));
-//		printf("head -> %f\n", head->object_s->diameter);
 		temp= temp->next;
-		// lst = &(*lst)->next;
+
 	}
 	//Loop planes
 /*	while (world.plns->next != NULL)
@@ -87,22 +81,25 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 
 t_color	shade_hit(t_world world, t_comps comps)
 {
-	t_sphere s;
-
-//	final = lighting2(light, s, world_point, normal_vect, ray.direction);
-	return (lighting2(world.light,*((t_sphere*)comps.object), comps.point, comps.normalv, neg_vect(comps.eyev)));
+	return (lighting(world.light,*((t_sphere*)comps.object), comps.point, comps.normalv, neg_vect(comps.eyev)));
 }
 
-t_color	color_at(t_world world, t_ray ray)
+t_color	color_at(t_world *world, t_ray ray)
 {
-	t_inter *record_inter;
-//	t_inter closest_inter;
-//	t_comps set_comps;
-	t_color final_color = create_color(0, 0, 0);
+	t_inter *head_lst;
+	t_inter *closest_inter;
+	t_comps comps;
+	t_color final_color = create_color(1, 1, 1);
 	
-//	record_inter = intersect_world(&world, ray);
-//	closest_inter = get_hit(record_inter);
-//	set_comps = prepare_computations(closest_inter, ray);
-//	final_color = shade_hit(world, set_comps);
+	head_lst = NULL;	
+	closest_inter = NULL;
+	head_lst = intersect_world(&world, ray, &world->sphs);
+	closest_inter = get_hit(head_lst);
+	if (closest_inter->count > 0)
+	{
+		comps = prepare_computations(*closest_inter, ray);
+		final_color = shade_hit(*world, comps);
+		//mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final_color);
+	}
 	return (final_color);	
 }

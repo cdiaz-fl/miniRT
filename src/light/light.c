@@ -14,35 +14,33 @@
 //reflect_vect -> Vector que refleja la luz en una superficie.
 
 #include "../../includes/miniRT.h"
-
+//1. El world point es el punto que intersecta el rayo con el objeto, del mundo real al mundo dek objeto
+//2. Calculamos el vector NORMAL en el mundo del obj, restando el punto de la interseccion con el centro de la esfere
+//3. Convertimos el vector NORMAL al mundo real.
+//4. En el libro poene la dimension w = 0, nosotros no lo tenemos que hacer.
+//5. Normalizamos el vector
 t_vect	get_normal_sphere(t_sphere s, t_point world_point)
 {
-	t_vect center_surface_distance;
-	
-	//1. Convertimos el punto en el que intersecta el rayo con el objeto, del mundo real al mundo dek objeto
-	t_point object_point = mul_point_mtx(&s.inverse, world_point);
-	//2. Calculamos el vector NORMAL en el mundo del obj, restando el punto de la interseccion con el centro de la esfere
-	t_vect object_normal = sub_point_point(object_point, create_point(0, 0, 0));
+	t_point object_point;
+	t_vect object_normal;
+	t_vect world_normal;
 
-	//3. Convertimos el vector NORMAL al mundo real.
-	t_vect world_normal = mul_vect_mtx(&s.transpose, object_normal);
-
-	//4. En el libro poene la dimension w = 0, nosotros no lo tenemos que hacer.
-	
-	//5. Normalizamos el vector
+	object_point = mul_point_mtx(&s.inverse, world_point);
+	object_normal = sub_point_point(object_point, create_point(0, 0, 0));
+	world_normal = mul_vect_mtx(&s.transpose, object_normal);
 	return (normalization_vect(world_normal));
 }
 
+//1. Calculamos el angulo entre el vector in(el de la luz), y la NORMAL
+//2. lo multiplicamos por la normal y por 2
+//3. Restar todo al vector de la luz
 t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect)
 {
-	//1. Calculamos el angulo entre el vector in(el de la luz), y la NORMAL
-	double angle = dot_product_vect(light_vect, normal_vect);
-	
-//	printf("angulo -> %f\n", angle);
-	//2. lo multiplicamos por la normal y por 2
-	t_vect temp = scalar_mul_vect(normal_vect, (angle * 2));
+	double angle;
+	t_vect temp;
 
-	//3. Restar todo al vector de la luz
+	angle = dot_product_vect(light_vect, normal_vect);
+	temp = scalar_mul_vect(normal_vect, (angle * 2));
 	return (sub_vect_vect(light_vect, temp));
 }
 
@@ -125,16 +123,19 @@ t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect)
     return (add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse))));
 }*/
 
-t_color  lighting2(t_light light,t_sphere s, t_point world_point, t_vect normal_vect, t_vect ray_vect)
+t_color  lighting(t_light light,t_sphere s, t_point world_point, t_vect normal_vect, t_vect ray_vect)
 {
   //  t_color     effective_color  = mul_color_color(create_color(1, 0.2, 1), light.intensity); //s.color -> 0, 1, 0
-    t_color     effective_color  = mul_color_color(s.rgb, light.intensity); //s.color -> 0, 1, 0
+    t_color	effective_color;
+	t_vect	light_vect;
+	double  angle_light_normal;
+	t_vect	reflected_vect;
+	double	angle_reflect_camera;
 
-    t_vect  light_vect = normalization_vect(sub_point_point(light.position, world_point));
-
+	effective_color = mul_color_color(s.rgb, light.intensity); //s.color -> 0, 1, 0
+ 	light_vect = normalization_vect(sub_point_point(light.position, world_point));
  //   light.ambient = scalar_mul_color(effective_color, 0.1); //0.9 s-> s.ambient
-
-    double  angle_light_normal = dot_product_vect(light_vect, normal_vect);
+    angle_light_normal = dot_product_vect(light_vect, normal_vect);
     if (angle_light_normal < 0)
 	{
         light.diffuse = create_color(0, 0, 0); 
@@ -144,15 +145,21 @@ t_color  lighting2(t_light light,t_sphere s, t_point world_point, t_vect normal_
     {
         light.diffuse =  scalar_mul_color(effective_color, angle_light_normal);
         light.diffuse = scalar_mul_color(light.diffuse, 0.9);
-        t_vect reflected_vect = get_reflect_vect(neg_vect(light_vect), normal_vect);
-        double angle_reflect_camera = dot_product_vect(reflected_vect, neg_vect(ray_vect));
+    	reflected_vect = get_reflect_vect(neg_vect(light_vect), normal_vect);
+     	angle_reflect_camera = dot_product_vect(reflected_vect, neg_vect(ray_vect));
         if (angle_reflect_camera <= 0)
             light.specular = create_color(0,0,0);
         else
         {
             double factor = pow(angle_reflect_camera, 200); //200 -> materila.shinies
             light.specular =  scalar_mul_color(light.intensity,  (0.9 * factor));
-			static int i;
+		}
+    }
+	return (add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse))));
+}
+
+
+		/*	static int i;
 			if (++i < 4)
 			{
 			printf("\nsphere r[%f], g[%f], b[%f] angle = %f\n", s.rgb.r, s.rgb.g, s.rgb.b, factor);
@@ -163,16 +170,7 @@ t_color  lighting2(t_light light,t_sphere s, t_point world_point, t_vect normal_
 			printf("specular r[%f], g[%f], b[%f] angle = %f\n", light.specular.r, light.specular.g, light.specular.b, factor);
 			printf("difusse r[%f], g[%f], b[%f] angle = %f\n", light.diffuse.r, light.diffuse.g, light.diffuse.b, angle_reflect_camera);
 		
-			}
-		}
-    }
-	t_color c = add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse)));
-//	check_max_color(&c);
-    return (c);
-}
-
-
-
+			}*/
 
 
 
