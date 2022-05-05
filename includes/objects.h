@@ -8,7 +8,7 @@
 
 typedef struct s_color
 {
-	double	r;	//[0 - 255]
+	double	r;	//[0 - 255 ]
 	double	g;
 	double	b;
 }t_color;

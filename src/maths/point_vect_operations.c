@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 09:52:37 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/28 13:46:58 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:37:12 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ t_vect  sub_vect_vect(t_vect v1, t_vect v2)
 	v.x = v1.x - v2.x;
 	v.y = v1.y - v2.y;
 	v.z = v1.z - v2.z;
-	/*if (v.x < 0.0001)
+/*	if (v.x < 0.0001)
 	 	v.x = 0;
 	if (v.y < 0.0001)
 	 	v.y = 0;
 	if (v.z < 0.0001)
-	 	v.z = 0;*/ 
+	 	v.z = 0;*/
 	return (v);
 }
 

@@ -125,7 +125,7 @@ void	print_values(t_world	*all)
 	printf("|                                                 |\n");
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", all->cam.pos.x, all->cam.pos.y, all->cam.pos.z);
 	printf("|    nx = %6.2f    ny = %6.2f    nz = %6.2f    |\n", all->cam.n_vec.x, all->cam.n_vec.y, all->cam.n_vec.z);
-	printf("|    FOV = %6d                                 |\n", all->cam.FOV);
+	printf("|    FOV = %6f                                 |\n", all->cam.FOV);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
@@ -233,7 +233,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	double	half = wall_size / 2;
 	
 	
-	ray_origin = create_point(0, 0, -50);
+//	ray_origin = create_point(0, 0, -500);
 	
 /*	printf("specular r[%f], g[%f], b[%f]\n", world->light.specular.r, world->light.specular.g, world->light.specular.b);
 	printf("ambient r[%f], g[%f], b[%f]\n", world->light.ambient.r, world->light.ambient.g, world->light.ambient.b);
@@ -241,10 +241,11 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	printf("intensity r[%f], g[%f], b[%f]\n", world->light.intensity.r, world->light.intensity.g, world->light.intensity.b);
 	printf("spehre r[%f], g[%f], b[%f]\n", world->sphs->rgb.r, world->sphs->rgb.g, world->sphs->rgb.b);*/
 
-	
 	set_camera(&world->cam);
-	world->cam.transform = identity_mtx(4);
-	world->cam.invert = identity_mtx(4);
+
+	t_point	origin = create_point(0, 0, 0);
+	world->cam.transform = view_transformation(world->cam.pos, origin, world->cam.n_vec);
+	world->cam.invert = invert_mtx(&world->cam.transform);
 	
 
 	printf("zaloa pixel size is %f\n", pixel_size);
@@ -255,7 +256,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	{
 		x = -1;
 		//world_y = half - (y * pixel_size);
-		printf("y es %d\n", y);
+		//printf("y es %d\n", y);
 		while (++x < WIDTH - 1)
 		{
 			/*
@@ -272,6 +273,8 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	printf("\nRay origin is %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
 	printf("Ray direction is ");
 	print_vect(ray.direction);
+	print_mtx(&world->cam.transform);
+	print_mtx(&world->cam.invert);
 			}
 
 
@@ -280,6 +283,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 
 		}
 	}
+	print_values(world);
 	printf("fin\n");;
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 }
@@ -343,7 +347,7 @@ int	main(int argc, char **argv)
 	}
 	printf("\nPrepare objects transformations\n");
 	prepare_object_transformations(&all);
-	add_walls(&all);
+//	add_walls(&all);
 	
 	//print_values(&all);
 	t_point point = create_point(10, -10, 10);

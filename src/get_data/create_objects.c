@@ -39,13 +39,13 @@ t_amb_light	create_amblight(char *s, t_world *all)
 	new.rate = ft_atof(s, 10);
 	while (s && *s != ' ')
 		s++;
-	new.rgb.r = ft_atoi(++s) / 255;
+	new.rgb.r = (double)ft_atoi(++s) / 255;
 	while (s && *s != ',')
 		s++;
-	new.rgb.g = ft_atoi(++s) / 255;
+	new.rgb.g = (double)ft_atoi(++s) / 255;
 	while (s && *s != ',')
 		s++;
-	new.rgb.b = ft_atoi(++s) / 255;
+	new.rgb.b = (double)ft_atoi(++s) / 255;
 	return	new;
 }
 
