@@ -13,6 +13,7 @@
 NAME = miniRT
 
 SRCS = src/errors/error_handling.c\
+       src/camera/camera_transform.c\
 	   src/get_data/create_objects.c\
 	   src/get_data/cylinders.c\
 	   src/get_data/get_next_line.c\
@@ -37,6 +38,7 @@ SRCS = src/errors/error_handling.c\
 	   src/light/shadows.c\
 	   src/get_data/main_read.c\
 #	   src/get_data/main_prueba.c\
+#	   src/camera/main_camera.c\
 
 OBJS = $(SRCS:.c=.o)
 

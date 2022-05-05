@@ -17,7 +17,12 @@ typedef struct s_camera
 {
 	t_point	pos;	//Position
 	t_vect	n_vec;	//Normalized Orientation Vector [-1.0 - 1.0]
-	int	FOV; 		//Field Of View [0 - 180] Sin decimales
+	double	FOV; 		//Field Of View [0 - 180] Sin decimales, lo pongo double para poder pasarlo a radianes luego
+	double	pix_s;
+	double	half_w;
+	double	half_h;
+	t_mtx	transform;
+	t_mtx	invert;
 }t_camera;
 
 typedef struct s_amb_light

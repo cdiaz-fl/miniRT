@@ -22,6 +22,7 @@
 #include "objects.h"
 #include "errors.h"
 #include "light.h"
+#include "camera.h"
 #include "../lib/libft/libft.h"
 #include "../lib/mlx/mlx.h"
 # include <stdlib.h>

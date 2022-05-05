@@ -6,43 +6,6 @@
 void	add_walls(t_world *world);
 void	add_spheres_list(t_world *all, t_sphere **head);
 t_sphere	*get_last_sphere_list(t_sphere **head);
-/*void	fill_amblight_data(t_amb_light *amb, int variable, float nbr)
-{
-	if (variable == 0)
-		amb->rate = nbr;
-	else if (variable == 1)
-		amb->r = (int)nbr;
-	else if (variable == 2)
-		amb->g = (int)nbr;
-	else if (variable == 3)
-		amb->b = (int)nbr;
-}
-
-int	create_amblight(char *line, t_world *all)
-{
-	int i;
-	int variable;
-
-	i = 0;
-	variable = 0; 
-	while (line[++i])
-	{
-		if (ft_isdigit(line[i]) || line[i] == '-')
-		{
-			fill_amblight_data(&all->a_light, variable, ft_atof(&line[i], 10));
-			variable++;
-			while (ft_isdigit(line[i]) || line[i] == '.')
-				i++;
-
-		}
-		else if (line[i] == ',' || line[i] == 32)
-			continue;
-//		else
- //			write(2, "Wrong parameters ❌\n", 21);
-
-	}
-	return (1);
-}*/
 
 int	is_float(char *s, int *i, int j, int nb)
 {
@@ -264,27 +227,54 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	t_point	ray_origin;
 	t_point	position;
 
+	
 	double	wall_size = 7;
 	double	pixel_size = wall_size / HEIGHT;
 	double	half = wall_size / 2;
 	
+	
 	ray_origin = create_point(0, 0, -50);
 	
-	y = -1;
 /*	printf("specular r[%f], g[%f], b[%f]\n", world->light.specular.r, world->light.specular.g, world->light.specular.b);
 	printf("ambient r[%f], g[%f], b[%f]\n", world->light.ambient.r, world->light.ambient.g, world->light.ambient.b);
 	printf("difuse r[%f], g[%f], b[%f]\n", world->light.diffuse.r, world->light.diffuse.g, world->light.diffuse.b);
 	printf("intensity r[%f], g[%f], b[%f]\n", world->light.intensity.r, world->light.intensity.g, world->light.intensity.b);
 	printf("spehre r[%f], g[%f], b[%f]\n", world->sphs->rgb.r, world->sphs->rgb.g, world->sphs->rgb.b);*/
+
+	
+	set_camera(&world->cam);
+	world->cam.transform = identity_mtx(4);
+	world->cam.invert = identity_mtx(4);
+	
+
+	printf("zaloa pixel size is %f\n", pixel_size);
+	printf("pixel size is %f\n", world->cam.pix_s);
+
+	y = -1;
 	while (++y < HEIGHT -1)
 	{
 		x = -1;
-		world_y = half - (y * pixel_size);
+		//world_y = half - (y * pixel_size);
+		printf("y es %d\n", y);
 		while (++x < WIDTH - 1)
 		{
+			/*
 			world_x = (-1 * half) + (x * pixel_size);
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
+			*/
+
+
+
+			ray = ray_for_pixel(&world->cam, x, y);
+			if ((x == 0 && y == 0) || (x == 500 && y == 500) || (x == 890 && y == 890))
+			{
+	printf("\nRay origin is %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
+	printf("Ray direction is ");
+	print_vect(ray.direction);
+			}
+
+
 			t_color final_color = color_at(world, ray);
 			mlx->img.addr[y * WIDTH + x] = convert_color_to_int(final_color);	
 
