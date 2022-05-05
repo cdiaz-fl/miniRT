@@ -334,7 +334,7 @@ int	main(int argc, char **argv)
 	t_world	all; //Hay que inicializar all
 
 	fd = basic_error_handling(argc, argv);
-	all.sphs = NULL;	//ft_initialize
+	all.sphs = NULL;
 	//Falta incluir librería gnl
 	while(1)
 	{
@@ -344,6 +344,8 @@ int	main(int argc, char **argv)
 		get_values(line, &all);
 		free(line);
 	}
+
+	
 	printf("\nPrepare objects transformations\n");
 
 	printf("\nCalcular interseccion world\n");
@@ -378,7 +380,7 @@ int	main(int argc, char **argv)
 	t_mlx	mlx;
     mlx_utils_init(&mlx);
     mlx_event(&mlx);
-    draw(&mlx);
+    draw(&mlx, &all);
 //	prueba_default(all, &mlx);
     mlx_loop(mlx.mlx);
 //	print_values(&all);

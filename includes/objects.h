@@ -15,9 +15,13 @@ typedef struct s_color
 
 typedef struct s_camera
 {
-	t_point	pos;	//Position
+	t_point	pos;		//Position
 	t_vect	n_vec;	//Normalized Orientation Vector [-1.0 - 1.0]
-	int	FOV; //Field Of View [0 - 180] Sin decimales
+	double	FOV; 				//Field Of View [0 - 180] Sin decimales
+	double	pix_s;	//Pixel Size
+	double	half_w;
+	double	half_h;
+	t_mtx		transform;
 }t_camera;
 
 typedef struct s_amb_light

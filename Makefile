@@ -6,34 +6,36 @@
 #    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/05/02 14:05:52 by zcanales         ###   ########.fr        #
+#    Updated: 2022/05/03 13:05:58 by cdiaz-fl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
-SRCS = src/errors/error_handling.c\
-	   src/get_data/create_objects.c\
-	   src/get_data/cylinders.c\
-	   src/get_data/get_next_line.c\
-	   src/get_data/main_read.c\
-	   src/get_data/planes.c\
-	   src/get_data/spheres.c\
-	   src/intersections/intersection.c\
-	   src/intersections/inter_lst.c\
-	   src/intersections/ray.c\
-	   src/maths/matrix1.c\
-	   src/maths/matrix2.c\
-	   src/maths/mtx_transform.c\
-	   src/maths/mtx_rotations.c\
-	   src/maths/point_vect_operations.c\
-	   src/maths/vect_operations1.c\
-	   src/maths/vect_operations2.c\
-	   src/mlx/mlx_utils.c\
-	   src/mlx/mlx_event.c\
-	   src/light/color.c\
-	   src/light/color_at.c\
-	   src/light/light.c\
+SRCS = src/errors/error_handling.c			\
+		 src/camera/camera_transform.c			\
+	   src/get_data/create_objects.c			\
+	   src/get_data/cylinders.c						\
+	   src/get_data/get_next_line.c				\
+	   src/get_data/planes.c							\
+	   src/get_data/spheres.c							\
+	   src/intersections/intersection.c		\
+	   src/intersections/inter_lst.c			\
+	   src/intersections/ray.c						\
+	   src/maths/matrix1.c								\
+	   src/maths/matrix2.c								\
+	   src/maths/mtx_transform.c					\
+	   src/maths/mtx_rotations.c					\
+	   src/maths/point_vect_operations.c	\
+	   src/maths/vect_operations1.c				\
+	   src/maths/vect_operations2.c				\
+	   src/mlx/mlx_utils.c								\
+	   src/mlx/mlx_event.c								\
+	   src/light/color.c									\
+	   src/light/color_at.c								\
+	   src/light/light.c									\
+		 src/camera/main_camera.c						
+	   #src/get_data/main_read.c					\#
 
 OBJS = $(SRCS:.c=.o)
 

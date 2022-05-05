@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:24:22 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 08:31:14 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/05 07:39:33 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #ifndef MLX_UTILS_H
 # define MLX_UTILS_H
 # include "../lib/mlx/mlx.h"
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 201
+# define HEIGHT 101
 
 typedef struct s_wall
 {
@@ -50,7 +50,7 @@ typedef struct s_mlx
 
 /*INIT*/
 void	mlx_utils_init(t_mlx *mlx);
-void	draw(t_mlx  *mlx);
+void	draw(t_mlx  *mlx, t_world *all);
 /*EVENTS*/
 void	mlx_event(t_mlx *mlx);
 

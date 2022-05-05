@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/02 15:45:21 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:24:30 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_inter	*intersect_world(t_world *world, t_ray ray)
 	//Loop all the spheres
 	while (world->sphs)
 	{
-		one_inter = intersect_ray(ray, *world->sphs);
+		one_inter = intersect_ray(ray, world->sphs[0]);
 		printf("type -> %c\n", one_inter.obj_type);
 
 		(one_inter.object) = (void*)(world->sphs);

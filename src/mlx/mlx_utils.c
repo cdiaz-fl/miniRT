@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 08:35:12 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:54:22 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,10 @@ t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, 
 	return (final);
 }
 
-
-void	draw(t_mlx	*mlx)
+void	draw(t_mlx	*mlx, t_world *all)
 {
 	int x;
 	int	y;
-	double	world_x;
-	double	 world_y;
-	double	 world_z = 7;
 
 	t_ray	ray;
 	t_point	ray_origin;
@@ -91,9 +87,6 @@ void	draw(t_mlx	*mlx)
 	t_point center_sphere;
 
 	printf("l -> %d\n", mlx->img.bpp);
-	double	wall_size = 7;
-	double	pixel_size = wall_size / HEIGHT;
-	double	half = wall_size / 2;
 	
 	t_sphere s;
 	s.transform = identity_mtx(4);
@@ -113,6 +106,10 @@ void	draw(t_mlx	*mlx)
 	center_sphere = create_point(0, 0, 0);
 
 
+
+
+
+
 	//Create light
 	t_light    light;
     light.position = create_point(-10, 10, -10);
@@ -120,39 +117,50 @@ void	draw(t_mlx	*mlx)
    // light.intensity = create_color(1, 1, 1);
     light.intensity = create_color(1, 1, 1);
 
+
+
+
+
+
+	//Setting the camera
+	set_camera(&all->cam);
+
+
+	printf("pixel size is = %f\n", all->cam.pix_s);
+	printf("half width is = %f\n", all->cam.half_w);
+	printf("half height is = %f\n", all->cam.half_h);
+
+
+
+
+
+
+
 	y = -1;
 	while (++y < HEIGHT -1)
 	{
 		x = -1;
-		world_y = half - (y * pixel_size);
 		while (++x < WIDTH - 1)
 		{
-			world_x = (-1 * half) + (x * pixel_size);
-			static int i;
-			if (i < 3)
-			{
-				printf("%d punto en la pantalla\n", i);
-				print_point(create_point(world_x, world_y, world_z));
-				i++;
-			}
-			position = create_point(world_x, world_y, world_z);
-			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
-			//Aqui habria que calcular todas las intersecciones en una sola funcion
+
+			
+			all->cam.transform = view_transformation(all->cam.pos, s.pos, all->cam.n_vec);
+			ray = ray_for_pixel(&all->cam, x, y);
 			xs = intersect_ray(ray, s);
-			xs2 = intersect_ray(ray, s2);
+
+
+
 			if (xs.count > 0) 
 			{
 				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
 				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final);
-//				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(create_color(0, 255, 0));
 			}
 			else
 				mlx->img.addr[x * WIDTH + y] = 0x000000;
 
-			//if (xs2.count > 0) 
-			//	mlx->img.addr[x * WIDTH + y] = 0xFF0000;
 		}
 	}
 	printf("fin\n");;
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
+	
 }

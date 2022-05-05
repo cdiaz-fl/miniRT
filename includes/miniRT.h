@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 10:19:36 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:05:44 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "objects.h"
 #include "errors.h"
 #include "light.h"
+#include "camera.h"
 #include "../lib/libft/libft.h"
 #include "../lib/mlx/mlx.h"
 # include <stdlib.h>
