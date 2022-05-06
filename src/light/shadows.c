@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 09:36:02 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/04 09:36:03 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:37:28 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool    is_shadowed(t_world *world, t_point point)
    direction = normalization_vect(distance_point_light);
 
    r = create_ray(point, direction);
-   head_lst = intersect_world(&world, r, &world->sphs);
+   head_lst = intersect_world(&world, r, &world->sphs, &world->plns);
    closest_inter = get_hit(head_lst);
    if (closest_inter->count > 0)
    {

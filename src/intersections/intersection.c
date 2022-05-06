@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 14:34:54 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:10:49 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ double	get_minpoint(double t1, double t2)
 		return (t1);
 }
 
-t_inter intersect_ray(t_ray ray, t_sphere s)
+t_inter intersect_ray_sph(t_ray ray, t_sphere s)
 {
 	double 		discriminant;
 	double 		a;
@@ -53,6 +53,27 @@ t_inter intersect_ray(t_ray ray, t_sphere s)
 	return (inter);
 }
 
+t_inter intersect_ray_pln(t_ray ray, t_plane p)
+{
+	t_inter		inter;
+	double		angle;
+	double		t;
+
+	inter.obj_type = 'p';
+	angle = dot_product_vect(p.n_vec, ray.direction);
+	if (angle > EPSILON)
+	{
+		inter.count = 1;
+		inter.min_point = dot_product_vect(sub_point_point(p.pos, ray.origin), p.n_vec) / angle;
+		if (inter.min_point  >= 0)
+		{
+		//	printf("devuelvo cosas\n");
+			return (inter);
+		}
+	}
+	inter.count = 0;
+	return (inter);
+}
 
 //discriminat_ray -> Calculamos el valor del dicriminat que nos dirá si el rayo intersecta con la esfera y de ser así a que distancia
 //1. Invert matrix of sphere -> Lo hacemos al principio (prepare_object_transformations(&all);),fuera del bucle para que no tarde tanto

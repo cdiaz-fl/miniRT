@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:36:40 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 15:18:04 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:07:16 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,14 @@ void	draw(t_mlx	*mlx)
 			static int i;
 			if (i < 3)
 			{
-				printf("%d punto en la pantalla\n", i);
+		//		printf("%d punto en la pantalla\n", i);
 				print_point(create_point(world_x, world_y, world_z));
 				i++;
 			}
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			//Aqui habria que calcular todas las intersecciones en una sola funcion
-			xs = intersect_ray(ray, s);
+			xs = intersect_ray_sph(ray, s);
 //			xs2 = intersect_ray(ray, s2);
 			if (xs.count > 0) 
 			{

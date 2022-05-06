@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 13:55:50 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:28:50 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b);
 //2. Con el valor de discriminat calculamos en que puntos intersecta el rayo
 //con el objeto. Devuelve dos puntos. Si tiene el mimso valor, quiere decir
 //que intersecta una única vez.
-t_inter intersect_ray(t_ray ray, t_sphere s);
+t_inter intersect_ray_sph(t_ray ray, t_sphere s);
+t_inter intersect_ray_pln(t_ray ray, t_plane p);
 
 //Como intersecta en 2 puntos, no intersa en el que esta mas cerca y no sea negativo.
 double  get_minpoint(double t1, double t2);

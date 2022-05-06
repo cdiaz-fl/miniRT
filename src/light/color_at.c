@@ -3,42 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   color_at.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 15:18:07 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:07:09 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-t_inter	*intersect_world(t_world **world, t_ray ray, t_sphere **s)
+t_inter	*intersect_world(t_world **world, t_ray ray, t_sphere **s, t_plane **p)
 {
 //	printf("Dentro a_light%f\n", (*world)->a_light.rate);
 	t_inter one_inter;
 	t_inter *head;
-	t_sphere *temp;
+	void *temp;
 
-	temp = *s;
+	temp = (void *)(*s);
 
 	head = NULL;
 	//Loop all the spheres
 	while (temp != NULL)
 	{
-		one_inter = intersect_ray(ray, *temp);
-		(one_inter.object) = (void*)(temp);
+		one_inter = intersect_ray_sph(ray, *((t_sphere *)temp));
+		(one_inter.object) = temp;
 		add_intersection(&head,create_interlst(one_inter));
-		temp= temp->next;
-
+		temp = ((t_sphere *)temp)->next;
 	}
 	//Loop planes
-/*	while (world.plns->next != NULL)
+	
+	temp = (void *)(*p);
+	
+	while (temp != NULL)
 	{
-		one_inter = interset_ray(ray, world.sphere);
-		create_interlst(one_inter);
-		add_intersection(&head, one_inter)
-		world.plns = world.plns->next;
-	}*/
+		one_inter = intersect_ray_pln(ray, *((t_plane *)temp));
+		(one_inter.object) = temp;
+		add_intersection(&head,create_interlst(one_inter));
+		temp = ((t_plane *)temp)->next;
+	}
+
 	//Loop cylindres
 /*	while (world.cyls->next != NULL)
 	{
@@ -68,6 +71,14 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 	//Hacer una funcione que calcule la normal dependiendo del tipo de objeto
 	if (comps.obj_type == 's')
 		comps.normalv =  get_normal_sphere(*(t_sphere *)comps.object, comps.point);
+	if (comps.obj_type == 'p')
+	{
+	//	printf("\033[31;1;4  HELLO ******************** \033[0m\n");
+		t_plane *temp;
+
+		temp = (t_plane *)comps.object;
+		comps.normalv = temp->n_vec;
+	}
 	
 	if  (dot_product_vect(comps.normalv, comps.eyev) < 0)
 	{
@@ -100,7 +111,7 @@ t_color	color_at(t_world *world, t_ray ray)
 	
 	head_lst = NULL;	
 	closest_inter = NULL;
-	head_lst = intersect_world(&world, ray, &world->sphs);
+	head_lst = intersect_world(&world, ray, &world->sphs, &world->plns);
 	closest_inter = get_hit(head_lst);
 	if (closest_inter->count > 0)
 	{

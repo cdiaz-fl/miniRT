@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 10:44:16 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:34:26 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_inter	*get_hit(t_inter *lst)
 	min = 2147483647;
 	while (temp)
 	{
-		if (temp->min_point < min && temp->min_point >= 0)
+		if (temp->count > 0 && temp->min_point < min && temp->min_point >= 0)
 		{
 			min = temp->min_point;
 			min_lst = temp;
