@@ -107,7 +107,7 @@ t_color	color_at(t_world *world, t_ray ray)
 		comps = prepare_computations(*closest_inter, ray);
 		comps.over_point = add_point_vect(comps.point, scalar_mul_vect(comps.normalv, EPSILON));
 		final_color = shade_hit(*world, comps);
-		//mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final_color);
+		//mlx->img.addr[y * WIDTH + x] = convert_color_to_int(final_color);
 	}
 	return (final_color);	
 }

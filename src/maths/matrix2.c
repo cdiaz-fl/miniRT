@@ -267,6 +267,7 @@ t_mtx	invert_mtx(t_mtx *mtx)
 	{
 		printf("ERROR: DET = 0. No se puede invertir\n");
 		original_det = 1;
+	//	return (identity_mtx(4));
 	}
 	new_trans = transpose_mtx(&new_original); 
 	i = 0;

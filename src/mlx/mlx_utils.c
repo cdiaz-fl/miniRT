@@ -147,14 +147,14 @@ void	draw(t_mlx	*mlx)
 			if (xs.count > 0) 
 			{
 				t_color final = ft_prueba_color(s, xs.min_point, ray, x, y, light);
-				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(final);
-//				mlx->img.addr[x * WIDTH + y] = convert_color_to_int(create_color(0, 255, 0));
+				mlx->img.addr[y * WIDTH + x] = convert_color_to_int(final);
+//				mlx->img.addr[y * WIDTH + x] = convert_color_to_int(create_color(0, 255, 0));
 			}
 			else
-				mlx->img.addr[x * WIDTH + y] = 0x000000;
+				mlx->img.addr[y * WIDTH + x] = 0x000000;
 		//	}
 			//if (xs2.count > 0) 
-			//	mlx->img.addr[x * WIDTH + y] = 0xFF0000;
+			//	mlx->img.addr[y * WIDTH + x] = 0xFF0000;
 		}
 	}
 	printf("fin\n");;

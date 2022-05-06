@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:16:10 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/05/05 14:37:11 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:57:23 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_mtx	view_transformation(t_point from, t_point to, t_vect up)
 	forward = normalization_vect(sub_point_point(to, from));
 	left = cross_product_vect(forward, up);
 	true_up = cross_product_vect(left, forward);
-	transform = create_mtx(4z;
+	transform = create_mtx(4);
 	rows[0][0] = left.x;
 	rows[0][1] = left.y;
 	rows[0][2] = left.z;
