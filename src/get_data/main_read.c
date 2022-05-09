@@ -117,8 +117,8 @@ void	print_values(t_world	*all)
 	t_plane		*p_tmp;
 	t_sphere	**s_head;
 	t_plane		**p_head;
-	t_cylinder	*c_tmp;
-	t_cylinder	**c_head;
+//	t_cylinder	*c_tmp;
+//	t_cylinder	**c_head;
 	int	i;
 
 	printf("\n\n--------------------  Camera  ---------------------\n");
@@ -190,7 +190,7 @@ void	print_values(t_world	*all)
 	printf("|     R = %6f   G = %6f    B = %6f       |\n", p_tmp->rgb.r, p_tmp->rgb.g, p_tmp->rgb.b);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
-
+/*
 	printf("\n\n--------------------  Cylinds ---------------------\n");
 	printf("|                                                 |\n");
 	c_head = &all->cyls;
@@ -214,7 +214,7 @@ void	print_values(t_world	*all)
 	printf("|     height = %6.2f                             |\n", c_tmp->height);
 	printf("|     R = %6f   G = %6f    B = %6f       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
 	printf("|                                                 |\n");
-	printf("---------------------------------------------------\n");
+	printf("---------------------------------------------------\n");*/
 }
 
 
@@ -281,7 +281,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 
 		}
 	}
-	print_values(world);
+//	print_values(world);
 	printf("fin\n");;
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 }
@@ -349,6 +349,23 @@ int	main(int argc, char **argv)
 	prepare_object_transformations(&all);
 //	add_walls(&all);
 	
+	{
+		t_cylinder c;
+
+		c.transform = identity_mtx(4);
+		c.inverse = invert_mtx(&c.transform);
+		c.transpose = transpose_mtx(&c.inverse);
+		t_inter inter = intersect_ray_cyl((create_ray(create_point(1, 0, -5), create_vect(0,0,1))), c);
+		t_inter inter2 = intersect_ray_cyl((create_ray(create_point(0, 0, -5), create_vect(0,0,1))), c);
+		t_inter inter3 = intersect_ray_cyl((create_ray(create_point(0.5, 0, -5), create_vect(0.1,1,1))), c);
+		
+		printf("1. p0 [%f], p1[%f]\n", inter.point[0], inter.point[1]);
+		printf("2. p0 [%f], p1[%f]\n", inter2.point[0], inter2.point[1]);
+		printf("3. p0 [%f], p1[%f]\n", inter3.point[0], inter3.point[1]);
+
+		print_vect(get_normal_cy(c, create_point(1, 0, 0)));
+	}
+
 	//print_values(&all);
 	t_point point = create_point(10, -10, 10);
 	bool shadow = is_shadowed(&all, point);

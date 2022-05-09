@@ -114,6 +114,7 @@ void		create_spheres(char *s, t_world *all);
 void		create_cylinders(char *s, t_world *all);
 
 //Preparar las matrices de todos los objetos para hacer el cambio de mundo
+t_vect		ft_normalization(t_vect v);
 void		prepare_object_transformations(t_world *world);
 
 #endif

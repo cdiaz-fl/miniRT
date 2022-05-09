@@ -47,8 +47,8 @@ t_ray	transform_ray(t_ray r, t_mtx transform);
 //1. Calculamos el valor de discriminant
 //Nos indica si el rayo intersecta con la esfera.
 //Si es negativo -> no hay interseccion
-double     discriminat_ray(t_ray ray, t_mtx invert, double *a, double *b);
-
+double     discriminat_ray_sp(t_ray ray, t_mtx invert, double *a, double *b);
+double     discriminat_ray_cy(t_ray ray, t_mtx invert, double *a, double *b);
 //2. Con el valor de discriminat calculamos en que puntos intersecta el rayo
 //con el objeto. Devuelve dos puntos. Si tiene el mimso valor, quiere decir
 //que intersecta una única vez.

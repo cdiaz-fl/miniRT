@@ -66,6 +66,7 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 	comps.obj_type = closest_inter.obj_type;
 
 	//precompute some useful values
+	
 	comps.point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, comps.t));
 	comps.eyev = neg_vect(ray.direction);
 
@@ -74,9 +75,15 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 		comps.normalv =  get_normal_sphere(*(t_sphere *)comps.object, comps.point);
 	if (comps.obj_type == 'p')
 	{
-		comps.normalv = ((t_plane *)comps.object)->n_vec;
-	//	comps.normalv = create_vect(0, 1, 0);
+	//	comps.normalv = ((t_plane *)comps.object)->n_vec;
+		comps.normalv = create_vect(0, 1, 0);
 	}
+	if (comps.obj_type == 'c')
+	{
+	//	printf("ENTRA2\n");
+		comps.normalv = get_normal_cy(*(t_cylinder *)comps.object, comps.point);
+	}
+
 	if  (dot_product_vect(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
@@ -98,6 +105,11 @@ t_color	shade_hit(t_world world, t_comps comps)
 		return (lighting(world.light, ((t_sphere*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
 	if (comps.obj_type == 'p')	
 		return (lighting(world.light, ((t_plane*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
+	if (comps.obj_type == 'c')
+	{
+		//printf("ENTRA\n");
+		return (lighting(world.light, ((t_cylinder*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
+	}
 	return (create_color(1, 0, 0));
 }
 
@@ -107,7 +119,7 @@ t_color	color_at(t_world *world, t_ray ray)
 	t_inter *closest_inter;
 	t_comps comps;
 	t_color final_color = create_color(1, 1, 1);
-	
+
 	head_lst = NULL;	
 	closest_inter = NULL;
 	head_lst = intersect_world(ray, &world->sphs, &world->plns, &world->cyls);

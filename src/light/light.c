@@ -31,6 +31,19 @@ t_vect	get_normal_sphere(t_sphere s, t_point world_point)
 	return (normalization_vect(world_normal));
 }
 
+t_vect	get_normal_cy(t_cylinder cy, t_point world_point)
+{
+	t_point object_point;
+	t_vect object_normal;
+	t_vect world_normal;
+
+	object_point = mul_point_mtx(&cy.inverse, world_point);
+	object_normal = create_vect(object_point.x, 0, object_point.z);
+	world_normal = mul_vect_mtx(&cy.transpose, object_normal);	
+	return (normalization_vect(world_normal));
+}
+
+
 //1. Calculamos el angulo entre el vector in(el de la luz), y la NORMAL
 //2. lo multiplicamos por la normal y por 2
 //3. Restar todo al vector de la luz

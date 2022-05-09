@@ -39,7 +39,7 @@ t_inter intersect_ray_sph(t_ray ray, t_sphere s)
 	
 	a = 0;
 	b = 0;
-	discriminant = discriminat_ray(ray, s.inverse, &a, &b);
+	discriminant = discriminat_ray_sp(ray, s.inverse, &a, &b);
 	inter.obj_type = 's';
 	inter.point[0] = (((b * (-1)) - sqrt(discriminant))  / (2 * a));
 	inter.point[1] = (((b * (-1)) + sqrt(discriminant)) / (2 * a));
@@ -60,16 +60,16 @@ t_inter intersect_ray_pln(t_ray ray, t_plane p)
 
 	inter.obj_type = 'p';
 	angle = dot_product_vect(p.n_vec, ray.direction);
-	/*t_ray ray_transform =  transform_ray(ray, p.inverse);
+	t_ray ray_transform =  transform_ray(ray, p.inverse);
 	if (ray_transform.direction.y > EPSILON)
 	{
 		inter.count = 1;
 		inter.min_point =  ray_transform.origin.y / ray_transform.direction.y * -1;
-		if (inter.min_point > 0)
-			printf("min_poin -> %f\n", inter.min_point);
+	//	if (inter.min_point > 0)
+			//printf("min_poin -> %f\n", inter.min_point);
 		return (inter);
-	}*/
-	if (angle > EPSILON)
+	}
+	/*if (angle > EPSILON)
 	{
 		inter.count = 1;
 		inter.min_point = dot_product_vect(sub_point_point(p.pos, ray.origin), p.n_vec) / angle;
@@ -78,7 +78,7 @@ t_inter intersect_ray_pln(t_ray ray, t_plane p)
 		//	printf("devuelvo cosas\n");
 			return (inter);
 		}
-	}
+	}*/
 	inter.count = 0;
 	return (inter);
 }
@@ -92,23 +92,21 @@ t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 	
 	a = 0;
 	b = 0;
-	discriminant = discriminat_ray(ray, c.inverse, &a, &b);
+	discriminant = discriminat_ray_cy(ray, c.inverse, &a, &b);
 	inter.obj_type = 'c';
 	inter.point[0] = (((b * (-1)) - sqrt(discriminant))  / (2 * a));
 	inter.point[1] = (((b * (-1)) + sqrt(discriminant)) / (2 * a));
 	inter.min_point = get_minpoint(inter.point[0], inter.point[1]);
 	if (discriminant == 0)
 		inter.count = 1;
-	else if (discriminant < 0)
+	if (discriminant < 0)
 		inter.count = 0;
 	else
 		inter.count = 2;
+	if (fabs(a) < EPSILON) //ray is parallel to the y axis.
+		inter.count = 0;
 	return (inter);
 }
-
-
-
-
 
 
 
@@ -118,7 +116,7 @@ t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 //2. Tranformamos el rayo al mundo del objeto. -> tranform_ray
 //3. Crear un vector desde el origen de la esfera (0, 0, 0) al punto al rayo. -> sphere_to_ray = sub_point_point
 //4. Calcular los parametros a, b, y c para sacar el discriminant.
-double     discriminat_ray(t_ray ray, t_mtx invert, double *a, double *b)
+double     discriminat_ray_sp(t_ray ray, t_mtx invert, double *a, double *b)
 {
 	t_vect	sphere_to_ray;
 	double	c;
@@ -129,6 +127,19 @@ double     discriminat_ray(t_ray ray, t_mtx invert, double *a, double *b)
 	(*a) = dot_product_vect(ray_transform.direction, ray_transform.direction);
 	(*b) = 2 *  dot_product_vect(ray_transform.direction, sphere_to_ray);
 	c = dot_product_vect(sphere_to_ray, sphere_to_ray) -1;
+	return (((*b) * (*b)) - (4 * (*a) * c));
+}
+
+double     discriminat_ray_cy(t_ray ray, t_mtx invert, double *a, double *b)
+{
+	double	c;
+	t_ray	ray_transform;
+	
+	ray.direction = normalization_vect(ray.direction);	//Mirar donde poner esto
+	ray_transform =  transform_ray(ray, invert);
+	(*a) = pow(ray_transform.direction.x, 2) + pow(ray_transform.direction.z, 2);
+	(*b) = (2 * ray_transform.origin.x * ray_transform.direction.x) + (2 * ray_transform.origin.z * ray_transform.direction.z);
+	c = pow(ray_transform.origin.x, 2) + pow(ray_transform.origin.z, 2) - 1;
 	return (((*b) * (*b)) - (4 * (*a) * c));
 }
 
