@@ -12,6 +12,7 @@
 
 #include "../../includes/intersections.h"
 #include <math.h>
+#include <float.h>
 //ADD una interseccion
 void	add_intersection(t_inter **head, t_inter *new)
 {
@@ -58,7 +59,7 @@ t_inter	*get_hit(t_inter *lst)
 
 	temp = lst;
 	min_lst = lst;
-	min = 2147483647;
+	min = DBL_MAX;
 	while (temp)
 	{
 		if (temp->count > 0 && temp->min_point < min && temp->min_point >= 0)

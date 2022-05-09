@@ -72,8 +72,10 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 	if (comps.obj_type == 's')
 		comps.normalv =  get_normal_sphere(*(t_sphere *)comps.object, comps.point);
 	if (comps.obj_type == 'p')
+	{
 		comps.normalv = ((t_plane *)comps.object)->n_vec;
-	
+	//	comps.normalv = create_vect(0, 1, 0);
+	}
 	if  (dot_product_vect(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
@@ -87,12 +89,10 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 t_color	shade_hit(t_world world, t_comps comps)
 {
 	bool shadow;
-//	shadow = is_shadowed(&world, comps.point);
+
 	shadow = is_shadowed(&world, comps.over_point);
 	if (shadow == true)
-	{
 		return (world.light.ambient);
-	}
 	if (comps.obj_type == 's')
 		return (lighting(world.light, ((t_sphere*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
 	if (comps.obj_type == 'p')	

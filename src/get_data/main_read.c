@@ -167,6 +167,8 @@ void	print_values(t_world	*all)
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
+	(void)p_head;
+	(void)p_tmp;
 	printf("\n\n--------------------  Planes  ---------------------\n");
 	printf("|                                                 |\n");
 	p_head = &all->plns;
@@ -226,7 +228,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	t_ray	ray;
 	t_point	ray_origin;
 	t_point	position;
-	ray_origin = create_point(0, 0, -50);
+	ray_origin = create_point(10, 10, -50);
 	
 	double	wall_size = 7;
 	double	pixel_size = wall_size / HEIGHT;

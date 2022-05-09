@@ -69,4 +69,5 @@ t_inter *get_hit(t_inter *lst);
 
 //Modificar la matriz de la esfera
 t_mtx	set_transform_sp(t_sphere s, t_mtx m);
+t_mtx	set_transform_mtx(t_mtx before, t_mtx m);
 #endif

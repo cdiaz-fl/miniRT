@@ -60,6 +60,15 @@ t_inter intersect_ray_pln(t_ray ray, t_plane p)
 
 	inter.obj_type = 'p';
 	angle = dot_product_vect(p.n_vec, ray.direction);
+	/*t_ray ray_transform =  transform_ray(ray, p.inverse);
+	if (ray_transform.direction.y > EPSILON)
+	{
+		inter.count = 1;
+		inter.min_point =  ray_transform.origin.y / ray_transform.direction.y * -1;
+		if (inter.min_point > 0)
+			printf("min_poin -> %f\n", inter.min_point);
+		return (inter);
+	}*/
 	if (angle > EPSILON)
 	{
 		inter.count = 1;
@@ -100,5 +109,13 @@ t_mtx	set_transform_sp(t_sphere s, t_mtx m)
 	t_mtx	tmp;
 	tmp = mul_mtx(&s.transform, &m);
 	free_mtx(&s.transform);
+	return (tmp);
+}
+
+t_mtx	set_transform_mtx(t_mtx before, t_mtx m)
+{
+	t_mtx	tmp;
+	tmp = mul_mtx(&before, &m);
+	free_mtx(&before);
 	return (tmp);
 }
