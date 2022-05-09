@@ -8,7 +8,7 @@ void	create_spheres_list(t_world *all)
 	all->sphs->next = NULL;
 }
 
-void	add_spheres_list(t_world *all, t_sphere **head)
+void	add_spheres_list(t_sphere **head)
 {
 	t_sphere *temp;
 	t_sphere *new;
@@ -43,7 +43,7 @@ void	create_spheres(char *s, t_world *all)
 	t_sphere	*tmp;
 
 	if (all->sphs != NULL)
-		add_spheres_list(all, &all->sphs);
+		add_spheres_list(&all->sphs);
 	if (!all->sphs)
 		create_spheres_list(all);
 	tmp = get_last_sphere_list(&all->sphs);

@@ -28,7 +28,7 @@ bool    is_shadowed(t_world *world, t_point point)
    direction = normalization_vect(distance_point_light);
 
    r = create_ray(point, direction);
-   head_lst = intersect_world(&world, r, &world->sphs, &world->plns);
+   head_lst = intersect_world(r, &world->sphs, &world->plns);
    closest_inter = get_hit(head_lst);
    if (closest_inter->count > 0)
    {

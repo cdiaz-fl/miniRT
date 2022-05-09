@@ -50,10 +50,10 @@ int	check_line_syntax(char *s)
 		//printf("p -> %c\n", s[i]);
 		if (is_float(s, &i, i - 1, 0))
 			i++;
-		else if (!no_more_char && (ft_strchr("ACL", s[i])) ||
+		else if (!no_more_char && (ft_strchr("ACL", s[i]) ||
 			(s[i] == 's' && s[++i] && s[i] == 'p') ||
 			(s[i] == 'p' && s[++i] && s[i] == 'l') ||
-			(s[i] == 'c' && s[++i] && s[i] == 'y'))
+			(s[i] == 'c' && s[++i] && s[i] == 'y')))
 			no_more_char = 1;
 	//	else if (s[i] > 32)
 	//		return 1;
@@ -74,11 +74,11 @@ void	get_values(char *line, t_world *all)
 		if (check_line_syntax(line))
 			wrong_values_handling(line, all);
 		if (line[i] == 'A' && ++out)
-			all->a_light = create_amblight(line, all);
+			all->a_light = create_amblight(line);
 		if (line[i] == 'C' && ++out)
-			all->cam = create_camera(line, all);
+			all->cam = create_camera(line);
 		else if (line[i] == 'L' && ++out)
-			all->light = create_light(line, all);
+			all->light = create_light(line);
 		else if (line[i] == 'p' && ++out)
 			create_planes(line, all);
 		else if (line[i] == 's' && ++out)
@@ -115,10 +115,10 @@ void	print_values(t_world	*all)
 {
 	t_sphere	*tmp;
 	t_plane		*p_tmp;
-	t_cylinder	*c_tmp;
 	t_sphere	**s_head;
 	t_plane		**p_head;
-	t_cylinder	**c_head;
+//	t_cylinder	*c_tmp;
+//	t_cylinder	**c_head;
 	int	i;
 
 	printf("\n\n--------------------  Camera  ---------------------\n");
@@ -159,14 +159,14 @@ void	print_values(t_world	*all)
 		printf("|     R = %6f   G = %6f    B = %6f       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
 		tmp = tmp->next;
 	}
-/*	printf("|                                                 |\n");
+	printf("|                                                 |\n");
 	printf("|      Number = %d                                 |\n", i);
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", tmp->pos.x, tmp->pos.y, tmp->pos.z);
 	printf("|     diam = %6.2f                               |\n", tmp->diameter);
 	printf("|     R = %6f   G = %6f    B = %6f       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
-*//*
+
 	printf("\n\n--------------------  Planes  ---------------------\n");
 	printf("|                                                 |\n");
 	p_head = &all->plns;
@@ -188,7 +188,7 @@ void	print_values(t_world	*all)
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
-	printf("\n\n--------------------  Cylinds ---------------------\n");
+/*	printf("\n\n--------------------  Cylinds ---------------------\n");
 	printf("|                                                 |\n");
 	c_head = &all->cyls;
 	c_tmp = *c_head;
@@ -202,8 +202,8 @@ void	print_values(t_world	*all)
 		printf("|     height = %6.2f                             |\n", c_tmp->height);
 		printf("|     R = %6f   G = %6f    B = %6f       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
 		c_tmp = c_tmp->next;
-	}*/
-/*	printf("|                                                 |\n");
+	}
+	printf("|                                                 |\n");
 	printf("|      Number = %d                                 |\n", i);
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", c_tmp->pos.x, c_tmp->pos.y, c_tmp->pos.z);
 	printf("|     nx = %6.2f    ny = %6.2f    nz = %6.2f   |\n", c_tmp->n_vec.x, c_tmp->n_vec.y, c_tmp->n_vec.z);
@@ -226,7 +226,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	t_ray	ray;
 	t_point	ray_origin;
 	t_point	position;
-
+	ray_origin = create_point(0, 0, -50);
 	
 	double	wall_size = 7;
 	double	pixel_size = wall_size / HEIGHT;
@@ -255,29 +255,24 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	while (++y < HEIGHT -1)
 	{
 		x = -1;
-		//world_y = half - (y * pixel_size);
+		world_y = half - (y * pixel_size);
 		//printf("y es %d\n", y);
 		while (++x < WIDTH - 1)
 		{
-			/*
+			
 			world_x = (-1 * half) + (x * pixel_size);
 			position = create_point(world_x, world_y, world_z);
 			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
-			*/
-
-
-
-			ray = ray_for_pixel(&world->cam, x, y);
+			
+			/*ray = ray_for_pixel(&world->cam, x, y);
 			if ((x == 0 && y == 0) || (x == 500 && y == 500) || (x == 890 && y == 890))
 			{
-	printf("\nRay origin is %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
-	printf("Ray direction is ");
-	print_vect(ray.direction);
-	print_mtx(&world->cam.transform);
-	print_mtx(&world->cam.invert);
-			}
-
-
+				printf("\nRay origin is %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
+				printf("Ray direction is ");
+				print_vect(ray.direction);
+				print_mtx(&world->cam.transform);
+				print_mtx(&world->cam.invert);
+			}*/
 			t_color final_color = color_at(world, ray);
 			mlx->img.addr[y * WIDTH + x] = convert_color_to_int(final_color);	
 

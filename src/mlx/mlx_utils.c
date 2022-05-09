@@ -68,7 +68,7 @@ t_color ft_prueba_color(t_sphere s, double min_point, t_ray ray,  int x, int y, 
 	t_point world_point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, min_point));
 	t_vect normal_vect = get_normal_sphere(s, world_point);
 //	t_vect	ray_vect = create_vect(ray.origin, ray.direction);
-	final = lighting(light, s, world_point, normal_vect, ray.direction);
+	final = lighting(light, s.rgb, world_point, normal_vect, ray.direction);
 //	printf("color -> [%f] [%f] [%f]\n", final.r, final.g, final.b);
 //	}	
 
@@ -106,7 +106,7 @@ void	draw(t_mlx	*mlx)
 	s.rgb = create_color(1, 0, 0);
 
 	t_sphere s2;
-	t_inter	xs2;
+	//t_inter	xs2;
 	s2.transform = identity_mtx(4);
 //	s2.transform = set_transform_sp(s2, translation_mtx(1, 0.2, 1));
 	s2.inverse = invert_mtx(&s2.transform);

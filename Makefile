@@ -53,7 +53,7 @@ MLX_A = lib/mlx/libmlx.a
 LIB_A = lib/libft/libft.a
 
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SEG_FLAGS = -g3 -fsanitize=address
 MLX_FLAGS = -L./lib/mlx -framework OpenGL -framework AppKit $(SEG_FLAGS) #-lmlx 
 

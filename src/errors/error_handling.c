@@ -2,6 +2,7 @@
 
 void	wrong_values_handling(char *line, t_world *all)
 {
+	(void)all;
 	write(2, "\e[1;31mError\n", 1);
  	write(2, "Wrong values ❌\n", 20);
 	printf("FINA\n");

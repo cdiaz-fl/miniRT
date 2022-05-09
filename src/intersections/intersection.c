@@ -57,7 +57,6 @@ t_inter intersect_ray_pln(t_ray ray, t_plane p)
 {
 	t_inter		inter;
 	double		angle;
-	double		t;
 
 	inter.obj_type = 'p';
 	angle = dot_product_vect(p.n_vec, ray.direction);
@@ -84,7 +83,6 @@ double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b)
 {
 	t_vect	sphere_to_ray;
 	double	c;
-	t_mtx	inverted_matrix;
 	t_ray	ray_transform;
 
 	ray_transform =  transform_ray(ray, s.inverse);

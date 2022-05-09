@@ -8,7 +8,7 @@ static void	create_planes_list(t_world *all)
 	all->plns->next = NULL;
 }
 
-static void	add_planes_list(t_world *all, t_plane **head)
+static void	add_planes_list(t_plane **head)
 {
 	t_plane *temp;
 	t_plane *new;
@@ -40,7 +40,7 @@ void	create_planes(char *s, t_world *all)
 	t_plane	*tmp;
 
 	if (all->plns != NULL)
-		add_planes_list(all, &all->plns);
+		add_planes_list(&all->plns);
 	if (!all->plns)
 		create_planes_list(all);
 	tmp = get_last_plane_list(&all->plns);

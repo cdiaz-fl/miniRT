@@ -100,9 +100,9 @@ typedef struct s_computations
 }t_comps;
 
 /*Create_objects.c, cylinders.c, planes.c, shperes.c*/
-t_camera	create_camera(char *s, t_world *all);
-t_amb_light	create_amblight(char *s, t_world *all);
-t_light		create_light(char *s, t_world *all);
+t_camera	create_camera(char *s);
+t_amb_light	create_amblight(char *s);
+t_light		create_light(char *s);
 void		create_planes(char *s, t_world *all);
 void		create_spheres(char *s, t_world *all);
 void		create_cylinders(char *s, t_world *all);

@@ -12,7 +12,7 @@
 
 #include "../../includes/miniRT.h"
 
-t_inter	*intersect_world(t_world **world, t_ray ray, t_sphere **s, t_plane **p)
+t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p)
 {
 //	printf("Dentro a_light%f\n", (*world)->a_light.rate);
 	t_inter one_inter;
@@ -72,13 +72,7 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 	if (comps.obj_type == 's')
 		comps.normalv =  get_normal_sphere(*(t_sphere *)comps.object, comps.point);
 	if (comps.obj_type == 'p')
-	{
-	//	printf("\033[31;1;4  HELLO ******************** \033[0m\n");
-		t_plane *temp;
-
-		temp = (t_plane *)comps.object;
-		comps.normalv = temp->n_vec;
-	}
+		comps.normalv = ((t_plane *)comps.object)->n_vec;
 	
 	if  (dot_product_vect(comps.normalv, comps.eyev) < 0)
 	{
@@ -99,7 +93,11 @@ t_color	shade_hit(t_world world, t_comps comps)
 	{
 		return (world.light.ambient);
 	}
-	return (lighting(world.light,*((t_sphere*)comps.object), comps.point, comps.normalv, neg_vect(comps.eyev)));
+	if (comps.obj_type == 's')
+		return (lighting(world.light, ((t_sphere*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
+	if (comps.obj_type == 'p')	
+		return (lighting(world.light, ((t_plane*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
+	return (create_color(1, 0, 0));
 }
 
 t_color	color_at(t_world *world, t_ray ray)
@@ -111,7 +109,7 @@ t_color	color_at(t_world *world, t_ray ray)
 	
 	head_lst = NULL;	
 	closest_inter = NULL;
-	head_lst = intersect_world(&world, ray, &world->sphs, &world->plns);
+	head_lst = intersect_world(ray, &world->sphs, &world->plns);
 	closest_inter = get_hit(head_lst);
 	if (closest_inter->count > 0)
 	{

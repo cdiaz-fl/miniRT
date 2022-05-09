@@ -46,11 +46,12 @@ t_vect  normalization_vect(t_vect v1)
 	return (v);
 }
 
-t_vect  transform_vect(t_vect v, double **matrix)
+/*t_vect  transform_vect(t_vect v, double **matrix)
 {
 	//Multiplicar un vecto por una matrix
 	t_vect	new;
 
 	//new = mul_vect_mtx(v, matrix);
 	return (new);
-}
+
+}*/

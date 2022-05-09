@@ -123,7 +123,7 @@ t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect)
     return (add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse))));
 }*/
 
-t_color  lighting(t_light light,t_sphere s, t_point world_point, t_vect normal_vect, t_vect ray_vect)
+t_color  lighting(t_light light,t_color color, t_point world_point, t_vect normal_vect, t_vect ray_vect)
 {
   //  t_color     effective_color  = mul_color_color(create_color(1, 0.2, 1), light.intensity); //s.color -> 0, 1, 0
     t_color	effective_color;
@@ -132,7 +132,7 @@ t_color  lighting(t_light light,t_sphere s, t_point world_point, t_vect normal_v
 	t_vect	reflected_vect;
 	double	angle_reflect_camera;
 
-	effective_color = mul_color_color(s.rgb, light.intensity); //s.color -> 0, 1, 0
+	effective_color = mul_color_color(color, light.intensity); //s.color -> 0, 1, 0
  	light_vect = normalization_vect(sub_point_point(light.position, world_point));
  //   light.ambient = scalar_mul_color(effective_color, 0.1); //0.9 s-> s.ambient
     angle_light_normal = dot_product_vect(light_vect, normal_vect);

@@ -108,7 +108,7 @@ t_ray	ray_for_pixel(t_camera *cam, double px, double py)
 	double	yoffset;
 	t_point	world_pt;
 	t_point	pixel_pt;
-	t_mtx		invert;
+	//t_mtx		invert;
 
 	xoffset = (px + 0.5) * cam->pix_s;
 	yoffset = (py + 0.5) * cam->pix_s;

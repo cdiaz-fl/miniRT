@@ -8,7 +8,7 @@ static void	create_cylinders_list(t_world *all)
 	all->cyls->next = NULL;
 }
 
-void	add_cylinders_list(t_world *all, t_cylinder **head)
+void	add_cylinders_list(t_cylinder **head)
 {
 	t_cylinder *temp;
 	t_cylinder *new;
@@ -39,7 +39,7 @@ void	create_cylinders(char *s, t_world *all)
 	t_cylinder	*tmp;
 
 	if (all->cyls != NULL)
-		add_cylinders_list(all, &all->cyls);
+		add_cylinders_list( &all->cyls);
 	if (!all->cyls)
 		create_cylinders_list(all);
 	tmp = get_last_cylinder_list(&all->cyls);
