@@ -105,6 +105,20 @@ t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 		inter.count = 2;
 	if (fabs(a) < EPSILON) //ray is parallel to the y axis.
 		inter.count = 0;
+	double temp;
+	if (inter.point[0] > inter.point[1])
+	{
+		temp = inter.point[0];
+		inter.point[0] = inter.point[1];
+		inter.point[1] = temp;
+	}
+	//Esta parte es para cortar el cilindro, lo hacemo mañana
+	/*double y0 = ray.origin.y + inter.point[0] * ray.direction.y;
+	if (c.min > y0 || y0 > c.max)
+		inter.count = 0;
+	double y1 = ray.origin.y + inter.point[1] * ray.direction.y;
+	if (c.min > y1 || y1 > c.max) 
+		inter.count = 0;*/
 	return (inter);
 }
 

@@ -152,6 +152,9 @@ void	prepare_object_transformations(t_world *world)
 		c->transform = set_transform_mtx(c->transform, scaling_mtx(c->diameter, c->diameter, c->diameter));
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
+		//Calcular el min y max para cortar el cilindro. Lo hacemos mañana
+		/*c->min =  -1 * c->height / 2 - c->pos.y; 
+		c->max = c->height / 2 + c->pos.y;*/  
 		c = c->next;
 	}
 }
