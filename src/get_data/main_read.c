@@ -337,6 +337,8 @@ int	main(int argc, char **argv)
 	ft_memset(&all, 0, sizeof(t_world));
 	fd = basic_error_handling(argc, argv);
 	all.sphs = NULL;
+	all.plns = NULL;
+	all.cyls = NULL;
 	while(1)
 	{
 		line = get_next_line(fd);
