@@ -6,13 +6,13 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/06 15:07:09 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:10:55 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p)
+t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p, t_cylinder **c)
 {
 //	printf("Dentro a_light%f\n", (*world)->a_light.rate);
 	t_inter one_inter;
@@ -43,13 +43,14 @@ t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p)
 	}
 
 	//Loop cylindres
-/*	while (world.cyls->next != NULL)
+	temp = (void *)(*c);
+	while (temp != NULL)
 	{
-		one_inter = interset_ray(ray, world.cyls);
-		create_interlst(one_inter);
-		add_intersection(&head, one_inter)
-		world.cyls = world.cyls->next;
-	}*/
+		one_inter = intersect_ray_cyl(ray, *((t_cylinder *)temp));
+		(one_inter.object) = temp;
+		add_intersection(&head,create_interlst(one_inter));
+		temp = ((t_cylinder *)temp)->next;
+	}
 	return (head);	
 }
 
@@ -109,7 +110,7 @@ t_color	color_at(t_world *world, t_ray ray)
 	
 	head_lst = NULL;	
 	closest_inter = NULL;
-	head_lst = intersect_world(ray, &world->sphs, &world->plns);
+	head_lst = intersect_world(ray, &world->sphs, &world->plns, &world->cyls);
 	closest_inter = get_hit(head_lst);
 	if (closest_inter->count > 0)
 	{

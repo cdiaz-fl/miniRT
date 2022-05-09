@@ -117,8 +117,8 @@ void	print_values(t_world	*all)
 	t_plane		*p_tmp;
 	t_sphere	**s_head;
 	t_plane		**p_head;
-//	t_cylinder	*c_tmp;
-//	t_cylinder	**c_head;
+	t_cylinder	*c_tmp;
+	t_cylinder	**c_head;
 	int	i;
 
 	printf("\n\n--------------------  Camera  ---------------------\n");
@@ -169,6 +169,7 @@ void	print_values(t_world	*all)
 
 	(void)p_head;
 	(void)p_tmp;
+
 	printf("\n\n--------------------  Planes  ---------------------\n");
 	printf("|                                                 |\n");
 	p_head = &all->plns;
@@ -190,7 +191,7 @@ void	print_values(t_world	*all)
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
-/*	printf("\n\n--------------------  Cylinds ---------------------\n");
+	printf("\n\n--------------------  Cylinds ---------------------\n");
 	printf("|                                                 |\n");
 	c_head = &all->cyls;
 	c_tmp = *c_head;
@@ -213,7 +214,7 @@ void	print_values(t_world	*all)
 	printf("|     height = %6.2f                             |\n", c_tmp->height);
 	printf("|     R = %6f   G = %6f    B = %6f       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
 	printf("|                                                 |\n");
-	printf("---------------------------------------------------\n");*/
+	printf("---------------------------------------------------\n");
 }
 
 

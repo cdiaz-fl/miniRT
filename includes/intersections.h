@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:56:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/06 14:28:50 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:31:59 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ t_ray	transform_ray(t_ray r, t_mtx transform);
 //1. Calculamos el valor de discriminant
 //Nos indica si el rayo intersecta con la esfera.
 //Si es negativo -> no hay interseccion
-double     discriminat_ray(t_ray ray, t_sphere s, double *a, double *b);
+double     discriminat_ray(t_ray ray, t_mtx invert, double *a, double *b);
 
 //2. Con el valor de discriminat calculamos en que puntos intersecta el rayo
 //con el objeto. Devuelve dos puntos. Si tiene el mimso valor, quiere decir
 //que intersecta una única vez.
 t_inter intersect_ray_sph(t_ray ray, t_sphere s);
 t_inter intersect_ray_pln(t_ray ray, t_plane p);
+t_inter intersect_ray_cyl(t_ray ray, t_cylinder c);
 
 //Como intersecta en 2 puntos, no intersa en el que esta mas cerca y no sea negativo.
 double  get_minpoint(double t1, double t2);

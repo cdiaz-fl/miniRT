@@ -76,6 +76,10 @@ typedef struct s_cylinder
 	double	height;
 
 	t_color	rgb;	//[0 - 255]
+
+	t_mtx	transform;	//Por defecto es la identity matrix
+	t_mtx	inverse;	//Inversa de la trasnformada
+	t_mtx	transpose;	//Traspuesta de la inversa
 	struct s_cylinder	*next;
 }t_cylinder;
 

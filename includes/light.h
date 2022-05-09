@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:44:32 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/06 14:21:00 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:10:21 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect);
 t_color  lighting(t_light light,t_color color, t_point world_point, t_vect normal_vect, t_vect ray_vect);
 
 //COLOR_AT -> Agrupar todas las funciones para calcular el color en un punto
-t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p);
+t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p, t_cylinder **c);
 t_comps	prepare_computations(t_inter closest_inter, t_ray ray);
 t_color color_at(t_world *world, t_ray ray);
 t_color	shade_hit(t_world world, t_comps comps);
