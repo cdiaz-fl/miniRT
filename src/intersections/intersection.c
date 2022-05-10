@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/10 12:53:57 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:03:15 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static bool	is_inside_tops_cy(t_ray ray, double t)
 	return false;
 }
 
-static void	intersect_tops_cy(t_inter *inter, t_ray ray, t_cylinder c)
+static void	intersect_tops_cy(t_inter *inter, t_ray ray, t_cylinder c, int i)
 {
 	double	t;
 
@@ -105,16 +105,14 @@ static void	intersect_tops_cy(t_inter *inter, t_ray ray, t_cylinder c)
 	if (is_inside_tops_cy(ray, t))
 	{
 		inter->count++;
-	//	inter->point[0] = t;
-		inter->point[1] = t;
+		inter->point[i] = t;
 		
 	}
 	t = (c.max - ray.origin.y) / ray.direction.y;
 	if (is_inside_tops_cy(ray, t))
 	{
 		inter->count++;
-	//	inter->point[0] = t;
-		inter->point[1] = t;
+		inter->point[i] = t;
 	}
 }
 
@@ -152,14 +150,14 @@ t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 	if (y0 <= c.min || y0 >= c.max)
 	{
 		inter.count = 0;
-		intersect_tops_cy(&inter, ray, c);
+		intersect_tops_cy(&inter, ray, c, 0);
 	//	return (inter);
 	}
 	double y1 = ray.origin.y + inter.point[1] * ray.direction.y;
 	if (y1 <= c.min || y1 >= c.max) 
 	{	
 		inter.count = 0;
-		intersect_tops_cy(&inter, ray, c);
+		intersect_tops_cy(&inter, ray, c, 1);
 	//	return inter;
 	}
 

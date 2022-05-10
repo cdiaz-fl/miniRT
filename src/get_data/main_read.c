@@ -224,12 +224,12 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	int	y;
 	double	world_x;
 	double	 world_y;
-	double	 world_z = 10;
+//	double	 world_z = 10;
 
 	t_ray	ray;
-	t_point	ray_origin;
-	t_point	position;
-	ray_origin = create_point(10, 10, -50);
+//	t_point	ray_origin;
+//	t_point	position;
+//	ray_origin = create_point(0, 0, -50);
 	
 	double	wall_size = 7;
 	double	pixel_size = wall_size / HEIGHT;
@@ -264,10 +264,10 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 		{
 			
 			world_x = (-1 * half) + (x * pixel_size);
-			position = create_point(world_x, world_y, world_z);
-			ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
+		//	position = create_point(world_x, world_y, world_z);
+		//	ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			
-			/*ray = ray_for_pixel(&world->cam, x, y);
+			ray = ray_for_pixel(&world->cam, x, y);
 			if ((x == 0 && y == 0) || (x == 500 && y == 500) || (x == 890 && y == 890))
 			{
 				printf("\nRay origin is %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
@@ -275,7 +275,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 				print_vect(ray.direction);
 				print_mtx(&world->cam.transform);
 				print_mtx(&world->cam.invert);
-			}*/
+			}
 			t_color final_color = color_at(world, ray);
 			mlx->img.addr[y * WIDTH + x] = convert_color_to_int(final_color);	
 
