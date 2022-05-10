@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_objects.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:58:39 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/04 08:59:02 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/10 08:42:01 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,8 @@ void	prepare_object_transformations(t_world *world)
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
 		//Calcular el min y max para cortar el cilindro. Lo hacemos mañana
-		/*c->min =  -1 * c->height / 2 - c->pos.y; 
-		c->max = c->height / 2 + c->pos.y;*/  
+		c->min = c->pos.y - c->height / 2; 
+		c->max = c->height / 2 + c->pos.y; 
 		c = c->next;
 	}
 }

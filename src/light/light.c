@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:43:51 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/03 15:18:06 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:36:24 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,17 @@ t_vect	get_normal_cy(t_cylinder cy, t_point world_point)
 	t_point object_point;
 	t_vect object_normal;
 	t_vect world_normal;
+	double	dist;
 
+//	dist = pow(world_point.x, 2) + pow(world_point.z, 2);
 	object_point = mul_point_mtx(&cy.inverse, world_point);
-	object_normal = create_vect(object_point.x, 0, object_point.z);
+	dist = pow(object_point.x, 2) + pow(object_point.z, 2);
+	if (dist < 1 && object_point.y <= (cy.min + EPSILON))
+		object_normal = create_vect(0, -1, 0);
+	else if (dist < 1 && object_point.y >= (cy.max - EPSILON))
+		object_normal = create_vect(0, 1, 0);
+	else
+		object_normal = create_vect(object_point.x, 0, object_point.z);
 	world_normal = mul_vect_mtx(&cy.transpose, object_normal);	
 	return (normalization_vect(world_normal));
 }

@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/09 10:27:36 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:53:57 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,41 @@ t_inter intersect_ray_pln(t_ray ray, t_plane p)
 	return (inter);
 }
 
+static bool	is_inside_tops_cy(t_ray ray, double t)
+{
+	double	x;
+	double	z;
+
+	x = ray.origin.x + t * ray.direction.x;
+	z = ray.origin.z + t * ray.direction.z;
+	if ((pow(x, 2) + pow(z, 2)) <= 1)
+		return true;
+	return false;
+}
+
+static void	intersect_tops_cy(t_inter *inter, t_ray ray, t_cylinder c)
+{
+	double	t;
+
+	if (fabs(ray.direction.y) < EPSILON)
+		return ;
+	t = (c.min - ray.origin.y) / ray.direction.y;
+	if (is_inside_tops_cy(ray, t))
+	{
+		inter->count++;
+	//	inter->point[0] = t;
+		inter->point[1] = t;
+		
+	}
+	t = (c.max - ray.origin.y) / ray.direction.y;
+	if (is_inside_tops_cy(ray, t))
+	{
+		inter->count++;
+	//	inter->point[0] = t;
+		inter->point[1] = t;
+	}
+}
+
 t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 {
 	double 		discriminant;
@@ -96,7 +131,6 @@ t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 	inter.obj_type = 'c';
 	inter.point[0] = (((b * (-1)) - sqrt(discriminant))  / (2 * a));
 	inter.point[1] = (((b * (-1)) + sqrt(discriminant)) / (2 * a));
-	inter.min_point = get_minpoint(inter.point[0], inter.point[1]);
 	if (discriminant == 0)
 		inter.count = 1;
 	if (discriminant < 0)
@@ -106,19 +140,33 @@ t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 	if (fabs(a) < EPSILON) //ray is parallel to the y axis.
 		inter.count = 0;
 	double temp;
-	if (inter.point[0] > inter.point[1])
+	if (inter.point[0] > inter.point[1] && inter.point[0] > 0)
 	{
 		temp = inter.point[0];
 		inter.point[0] = inter.point[1];
 		inter.point[1] = temp;
 	}
 	//Esta parte es para cortar el cilindro, lo hacemo mañana
-	/*double y0 = ray.origin.y + inter.point[0] * ray.direction.y;
-	if (c.min > y0 || y0 > c.max)
+	ray =  transform_ray(ray, c.inverse);
+	double y0 = ray.origin.y + inter.point[0] * ray.direction.y;
+	if (y0 <= c.min || y0 >= c.max)
+	{
 		inter.count = 0;
+		intersect_tops_cy(&inter, ray, c);
+	//	return (inter);
+	}
 	double y1 = ray.origin.y + inter.point[1] * ray.direction.y;
-	if (c.min > y1 || y1 > c.max) 
-		inter.count = 0;*/
+	if (y1 <= c.min || y1 >= c.max) 
+	{	
+		inter.count = 0;
+		intersect_tops_cy(&inter, ray, c);
+	//	return inter;
+	}
+
+	//Calcular los hit points en las tapas
+	//intersect_tops_cy(&inter, ray, c);
+	inter.min_point = get_minpoint(inter.point[0], inter.point[1]);
+
 	return (inter);
 }
 
