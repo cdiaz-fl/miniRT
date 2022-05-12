@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/10 13:03:15 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/12 11:33:52 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static void	intersect_tops_cy(t_inter *inter, t_ray ray, t_cylinder c, int i)
 {
 	double	t;
 
+
 	if (fabs(ray.direction.y) < EPSILON)
 		return ;
 	t = (c.min - ray.origin.y) / ray.direction.y;
@@ -111,6 +112,7 @@ static void	intersect_tops_cy(t_inter *inter, t_ray ray, t_cylinder c, int i)
 	t = (c.max - ray.origin.y) / ray.direction.y;
 	if (is_inside_tops_cy(ray, t))
 	{
+		printf("Entra\n");
 		inter->count++;
 		inter->point[i] = t;
 	}
@@ -135,28 +137,41 @@ t_inter intersect_ray_cyl(t_ray ray, t_cylinder c)
 		inter.count = 0;
 	else
 		inter.count = 2;
+	printf("inter->count %d\n", inter.count);
 	if (fabs(a) < EPSILON) //ray is parallel to the y axis.
+	{
 		inter.count = 0;
+		intersect_tops_cy(&inter, ray, c, 0);
+		if (inter.point[0] < 0)
+			inter.count = 0;
+		inter.point[1] = inter.point[0];
+		return (inter);
+	}
+	/*
 	double temp;
-	if (inter.point[0] > inter.point[1] && inter.point[0] > 0)
+	if (inter.point[0] > inter.point[1])
 	{
 		temp = inter.point[0];
 		inter.point[0] = inter.point[1];
 		inter.point[1] = temp;
-	}
+	}*/
 	//Esta parte es para cortar el cilindro, lo hacemo mañana
+	//ray.direction = normalization_vect(ray.direction);
 	ray =  transform_ray(ray, c.inverse);
 	double y0 = ray.origin.y + inter.point[0] * ray.direction.y;
+	double y1 = ray.origin.y + inter.point[1] * ray.direction.y;
+	printf("t0 -> %f, t1 -> %f\n", inter.point[0], inter.point[1]);
+	printf("y0 -> %f, y1 -> %f\n", y0, y1);
 	if (y0 <= c.min || y0 >= c.max)
 	{
 		inter.count = 0;
 		intersect_tops_cy(&inter, ray, c, 0);
 	//	return (inter);
 	}
-	double y1 = ray.origin.y + inter.point[1] * ray.direction.y;
 	if (y1 <= c.min || y1 >= c.max) 
 	{	
 		inter.count = 0;
+		printf("DESPUES t0 -> %f, t1 -> %f\n", inter.point[0], inter.point[1]);
 		intersect_tops_cy(&inter, ray, c, 1);
 	//	return inter;
 	}

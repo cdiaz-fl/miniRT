@@ -245,9 +245,11 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	printf("spehre r[%f], g[%f], b[%f]\n", world->sphs->rgb.r, world->sphs->rgb.g, world->sphs->rgb.b);*/
 
 	set_camera(&world->cam);
-
-	t_point	origin = create_point(0, 0, 0);
-	world->cam.transform = view_transformation(world->cam.pos, origin, world->cam.n_vec);
+	t_point	to;
+	to.z = world->cam.pos.z + 1;
+	to.x = world->cam.pos.x + (world->cam.n_vec.x / world->cam.n_vec.z);
+	to.y = world->cam.pos.y + (world->cam.n_vec.y / world->cam.n_vec.z);
+	world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 1, 0));
 	world->cam.invert = invert_mtx(&world->cam.transform);
 	
 
@@ -294,38 +296,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	//4. 2. Calcular si intercepta con un objeto y cuan es el más cercano
 	//4. 3. Lanzar rayos al foco de luz para calcular las sombras
 	//4. 4. Pintar en la pantalla. 
-void	add_walls(t_world *world)
-{
-	t_sphere *floor;
 
-	add_spheres_list(world, &world->sphs);
-	floor = get_last_sphere_list(&world->sphs);
-	floor->transform = identity_mtx(4);
-	floor->transform = set_transform_sp(*floor, translation_mtx(0, -1, 0));
-//	floor->transform = set_transform_sp(*floor, y_rotatation_mtx(45));
-	floor->transform = set_transform_sp(*floor, scaling_mtx(10, 0.01, 10));
-	floor->transform = set_transform_sp(*floor, x_rotatation_mtx(-45));
-	floor->inverse = invert_mtx(&floor->transform);
-	floor->transpose = transpose_mtx(&floor->inverse);
-	floor->diameter = 1;
-	floor->rgb = create_color(1, 0.9, 0.5);
-
-		
-	t_sphere *right;
-
-	add_spheres_list(world, &world->sphs);
-	right = get_last_sphere_list(&world->sphs);
-	right->transform = identity_mtx(4);
-	right->transform = set_transform_sp(*right, translation_mtx(0, 0, 5));
-	right->transform = set_transform_sp(*right, y_rotatation_mtx(45));
-	right->transform = set_transform_sp(*right, x_rotatation_mtx(90));
-	right->transform = set_transform_sp(*right, scaling_mtx(10, 0.01, 10));
-	right->inverse = invert_mtx(&right->transform);
-	right->transpose = transpose_mtx(&right->inverse);
-	right->diameter = 1;
-	right->rgb = create_color(1, 0.5, 0.5);
-
-}
 int	main(int argc, char **argv)
 {
 	int		fd;
@@ -352,18 +323,29 @@ int	main(int argc, char **argv)
 	{
 		t_cylinder c;
 
+		c.min = 1;
+		c.max = 2;
+		c.pos.x = 0;
+		c.pos.y = 1.5;
+		c.pos.z = 0;
 		c.transform = identity_mtx(4);
 		c.inverse = invert_mtx(&c.transform);
 		c.transpose = transpose_mtx(&c.inverse);
-		t_inter inter = intersect_ray_cyl((create_ray(create_point(1, 0, -5), create_vect(0,0,1))), c);
-		t_inter inter2 = intersect_ray_cyl((create_ray(create_point(0, 0, -5), create_vect(0,0,1))), c);
-		t_inter inter3 = intersect_ray_cyl((create_ray(create_point(0.5, 0, -5), create_vect(0.1,1,1))), c);
+	//	t_inter inter = intersect_ray_cyl((create_ray(create_point(0, 1, 0), create_vect(0,-1,0))), c);
+	//	printf("1. p0 [%f], p1[%f], coount = %d\n", inter.point[0], inter.point[1], inter.count);
 		
-		printf("1. p0 [%f], p1[%f]\n", inter.point[0], inter.point[1]);
-		printf("2. p0 [%f], p1[%f]\n", inter2.point[0], inter2.point[1]);
-		printf("3. p0 [%f], p1[%f]\n", inter3.point[0], inter3.point[1]);
+		t_inter inter2 = intersect_ray_cyl((create_ray(create_point(0, 3, -2), create_vect(0,-1,2))), c);
+		printf("2. p0 [%f], p1[%f], c = %d\n", inter2.point[0], inter2.point[1], inter2.count);
+	/*	t_inter inter3 = intersect_ray_cyl((create_ray(create_point(0, 4, -2), create_vect(0,-1,1))), c);
+		t_inter inter4 = intersect_ray_cyl((create_ray(create_point(0, 0, -2), create_vect(0,1,2))), c);
+		t_inter inter5 = intersect_ray_cyl((create_ray(create_point(0, -1, -2), create_vect(0,1,1))), c);
+		
+		printf("3. p0 [%f], p1[%f], c = %d\n", inter3.point[0], inter3.point[1], inter3.count);
+		printf("4. p0 [%f], p1[%f], c = %d\n", inter4.point[0], inter4.point[1], inter4.count);
+		printf("5. p0 [%f], p1[%f], c = %d\n", inter5.point[0], inter5.point[1], inter5.count);*/
 
 		print_vect(get_normal_cy(c, create_point(1, 0, 0)));
+		return 0;
 	}
 
 	//print_values(&all);
