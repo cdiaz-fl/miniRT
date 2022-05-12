@@ -77,6 +77,8 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 	{
 	//	comps.normalv = ((t_plane *)comps.object)->n_vec;
 		comps.normalv = create_vect(0, 1, 0);
+		comps.normalv = mul_vect_mtx(&((t_plane *)comps.object)->transpose, comps.normalv);
+		comps.normalv =  normalization_vect(comps.normalv);
 	}
 	if (comps.obj_type == 'c')
 	{

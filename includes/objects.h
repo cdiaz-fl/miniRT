@@ -59,6 +59,7 @@ typedef struct s_plane
 {
 	t_mtx	transform;	//Por defecto es la identity matrix
 	t_mtx	inverse;	//Inversa de la trasnformada
+	t_mtx	transpose;	//Traspuesta de la inversa
 	t_point	pos;	//Position
 	t_vect	n_vec;	//Normalized Orientation Vector //[-1.0 - 1.0]
 	t_color	rgb;	//[0 - 255]

@@ -122,10 +122,13 @@ void	prepare_object_transformations(t_world *world)
 		print_vect(p->n_vec);
 		p->transform = identity_mtx(4);
 		p->transform = set_transform_mtx(p->transform, translation_mtx(p->pos.x, p->pos.y, p->pos.z));
+/*		p->transform = set_transform_mtx(p->transform, x_rotatation_mtx(angle_x));
+		p->transform = set_transform_mtx(p->transform, y_rotatation_mtx(angle_y));
+		p->transform = set_transform_mtx(p->transform, z_rotatation_mtx(angle_z));*/
 		p->transform = set_transform_mtx(p->transform, x_rotatation_mtx(angle_x));
 		p->transform = set_transform_mtx(p->transform, y_rotatation_mtx(angle_y));
-		p->transform = set_transform_mtx(p->transform, z_rotatation_mtx(angle_z));
 		p->inverse = invert_mtx(&p->transform);
+		p->transpose = transpose_mtx(&p->inverse);
 		print_mtx(&p->transform);
 		print_mtx(&p->inverse);
 		//s->transpose = transpose_mtx(&s->inverse);
@@ -148,7 +151,7 @@ void	prepare_object_transformations(t_world *world)
 		c->transform = set_transform_mtx(c->transform, translation_mtx(c->pos.x, c->pos.y, c->pos.z));
 		c->transform = set_transform_mtx(c->transform, x_rotatation_mtx(angle_x));
 		c->transform = set_transform_mtx(c->transform, y_rotatation_mtx(angle_y));
-		c->transform = set_transform_mtx(c->transform, z_rotatation_mtx(angle_z));
+//		c->transform = set_transform_mtx(c->transform, z_rotatation_mtx(angle_z));
 		c->transform = set_transform_mtx(c->transform, scaling_mtx(c->diameter, c->diameter, c->diameter));
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
