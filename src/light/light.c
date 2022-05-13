@@ -31,6 +31,16 @@ t_vect	get_normal_sphere(t_sphere s, t_point world_point)
 	return (normalization_vect(world_normal));
 }
 
+t_vect	get_normal_pl(t_plane pl)
+{	
+	t_vect object_normal;
+	t_vect world_normal;
+
+	object_normal = create_vect(0, 1, 0);	
+	world_normal = mul_vect_mtx(&pl.transpose, object_normal);
+	return (normalization_vect(world_normal));
+}
+
 t_vect	get_normal_cy(t_cylinder cy, t_point world_point)
 {
 	t_point object_point;
@@ -38,7 +48,6 @@ t_vect	get_normal_cy(t_cylinder cy, t_point world_point)
 	t_vect world_normal;
 	double	dist;
 
-//	dist = pow(world_point.x, 2) + pow(world_point.z, 2);
 	object_point = mul_point_mtx(&cy.inverse, world_point);
 	dist = pow(object_point.x, 2) + pow(object_point.z, 2);
 	if (dist < 1 && object_point.y <= (cy.min + EPSILON))
@@ -50,7 +59,6 @@ t_vect	get_normal_cy(t_cylinder cy, t_point world_point)
 	world_normal = mul_vect_mtx(&cy.transpose, object_normal);	
 	return (normalization_vect(world_normal));
 }
-
 
 //1. Calculamos el angulo entre el vector in(el de la luz), y la NORMAL
 //2. lo multiplicamos por la normal y por 2
@@ -98,55 +106,16 @@ t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect)
 //		Color del objeto -> La suma de;
 //		light.ambient (Depende light.intensity, material.color, material.ambient)
 //
-/*t_vect	lighting(t_light light, void *material, t_point world_point, t_vect normal_vect, t_vect ray_vect)
-{
 	//1. Calculamos el color de la superficie con el brillo de la luz.
-	t_color 	effective_color  = scalar_mul_color(material.color, light.intensity);
-	
-	
 	//2. Calcular la dirección de la fuente de luz.
-	//Lo tendriamos que haber calculado para calcular el reflect_vect. Se podria guardar en la estrucutra de la luz.
-	t_vect	light_vect = normalization_vect(sub_point_point(light.position, world_point));
-
 	//3. Calcular el color teniendo en cuenta el effectie color y la luz ambiental
-	//QUITAR?
-	t_color ambient_color = scalar_mul_color(effective_color, material.ambient);
-
 	//4. Calculamos la diffusion y specular [0, 1]
 	//	4. 1. Angulo entre el vector de la luz y la normal.
-	//	Lo tenemos calculado para calcular el reflect_vect. Se podria guardar en la estrucutra de la luz.
 	//	IF 4. 2. Si el angulo en menos a cero, estamos al otro lado de la superficie.
-	double	angle_light_normal = dot_product_vect(light_vect, normal_vect);
-		t_vect
-	if (angle_light_normal < 0)
-	{
-		light.diffuse = create_color(0, 0, 0); //Donde guardamos esto???
-		light.specular = create_color(0, 0 ,0);
-		}
-	else
-	{
 		//ELSE 4. 3. DIFFUSION //Material difusse no nos lo dan!!!
-		light.diffuse =  scalar_mul_color(effective_color, angle_light_normal);
-		//QUITAR?
-		//light.diffuse = scalar_mul_color(light.diffuse, material.diffuse);
 		//4. 4 SPECULAR
-        t_vect reflected_vect = get_reflect_vect(neg_vect(light_vect), normal_vect);
-        double angle_reflect_camera = dot_product_vect(reflected_vect, neg_vect(ray_vect));
-		if (angle_reflect_camera <= 0)
-            light.specular = create_color(0,0,0);
-		else
-		{
-			//QUITAR?
-			double factor = pow(angle_reflect_camera, material.shininess);
-            light.specular =  scalar_mul_color(light.intensity,   materia.specular* factor);
-		}
-	}
-    return (add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse))));
-}*/
-
 t_color  lighting(t_light light,t_color color, t_point world_point, t_vect normal_vect, t_vect ray_vect)
 {
-  //  t_color     effective_color  = mul_color_color(create_color(1, 0.2, 1), light.intensity); //s.color -> 0, 1, 0
     t_color	effective_color;
 	t_vect	light_vect;
 	double  angle_light_normal;
@@ -155,7 +124,6 @@ t_color  lighting(t_light light,t_color color, t_point world_point, t_vect norma
 
 	effective_color = mul_color_color(color, light.intensity); //s.color -> 0, 1, 0
  	light_vect = normalization_vect(sub_point_point(light.position, world_point));
- //   light.ambient = scalar_mul_color(effective_color, 0.1); //0.9 s-> s.ambient
     angle_light_normal = dot_product_vect(light_vect, normal_vect);
     if (angle_light_normal < 0)
 	{
@@ -171,52 +139,10 @@ t_color  lighting(t_light light,t_color color, t_point world_point, t_vect norma
         if (angle_reflect_camera <= 0)
             light.specular = create_color(0,0,0);
         else
-        {
-            double factor = pow(angle_reflect_camera, 200); //200 -> materila.shinies
-            light.specular =  scalar_mul_color(light.intensity,  (0.9 * factor));
+		{
+        //    double factor = pow(angle_reflect_camera, 200); //200 -> materila.shinies
+            light.specular =  scalar_mul_color(light.intensity,  (0.9 * pow(angle_reflect_camera, 200)));
 		}
     }
 	return (add_color_color(light.specular, (add_color_color(light.ambient, light.diffuse))));
 }
-
-
-		/*	static int i;
-			if (++i < 4)
-			{
-			printf("\nsphere r[%f], g[%f], b[%f] angle = %f\n", s.rgb.r, s.rgb.g, s.rgb.b, factor);
-			printf("brighness %f\n", light.brightness);	
-			printf("intensity [%f], g[%f], b[%f] angle = %f\n", light.intensity.r, light.intensity.g, light.intensity.b, factor);
-			printf("efectiver r[%f], g[%f], b[%f] angle = %f\n", effective_color.r, effective_color.g, effective_color.b, factor);
-			printf("ambient r[%f], g[%f], b[%f] angle = %f\n", light.ambient.r, light.ambient.g, light.ambient.b, factor);
-			printf("specular r[%f], g[%f], b[%f] angle = %f\n", light.specular.r, light.specular.g, light.specular.b, factor);
-			printf("difusse r[%f], g[%f], b[%f] angle = %f\n", light.diffuse.r, light.diffuse.g, light.diffuse.b, angle_reflect_camera);
-		
-			}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

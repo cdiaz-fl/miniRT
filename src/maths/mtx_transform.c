@@ -47,3 +47,11 @@ t_mtx	shearing_mtx(double shear_arr[6])
 	mtx.data[2][1] = shear_arr[4];
 	return (mtx);
 }
+
+t_mtx	set_transform_mtx(t_mtx before, t_mtx m)
+{
+	t_mtx	tmp;
+	tmp = mul_mtx(&before, &m);
+	free_mtx(&before);
+	return (tmp);
+}

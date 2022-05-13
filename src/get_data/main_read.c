@@ -3,10 +3,6 @@
 #include	<unistd.h>	//Write
 #include	"../../includes/miniRT.h"
 
-void	add_walls(t_world *world);
-void	add_spheres_list(t_world *all, t_sphere **head);
-t_sphere	*get_last_sphere_list(t_sphere **head);
-
 int	is_float(char *s, int *i, int j, int nb)
 {
 	int	sign;
@@ -93,23 +89,6 @@ void	get_values(char *line, t_world *all)
 }
 
 
-static int	basic_error_handling(int argc, char **argv)
-{
-	int	fd;
-
-	if (argc != 2 && write(2, "\e[1;31mError\n", 13))
-	{
- 		write(2, "Wrong parameters ❌\n", 21);
-		exit (1);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1 && write(2, "\e[1;31mError\n", 13))
-	{
- 		write(2, "Invalid file ❌\n", 17);
-		exit (1);
-	}
-	return fd;
-}
 
 void	print_values(t_world	*all)
 {
@@ -218,14 +197,13 @@ void	print_values(t_world	*all)
 }
 
 
-void	prueba_default(t_world *world, t_mlx *mlx)
+void	ray_tracing(t_world *world, t_mlx *mlx)
 {
 	int x;
 	int	y;
 	double	world_x;
 	double	 world_y;
 //	double	 world_z = 10;
-
 	t_ray	ray;
 //	t_point	ray_origin;
 //	t_point	position;
@@ -237,13 +215,6 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	
 	
 //	ray_origin = create_point(0, 0, -500);
-	
-/*	printf("specular r[%f], g[%f], b[%f]\n", world->light.specular.r, world->light.specular.g, world->light.specular.b);
-	printf("ambient r[%f], g[%f], b[%f]\n", world->light.ambient.r, world->light.ambient.g, world->light.ambient.b);
-	printf("difuse r[%f], g[%f], b[%f]\n", world->light.diffuse.r, world->light.diffuse.g, world->light.diffuse.b);
-	printf("intensity r[%f], g[%f], b[%f]\n", world->light.intensity.r, world->light.intensity.g, world->light.intensity.b);
-	printf("spehre r[%f], g[%f], b[%f]\n", world->sphs->rgb.r, world->sphs->rgb.g, world->sphs->rgb.b);*/
-
 	set_camera(&world->cam);
 	t_point	to;
 	to.z = world->cam.pos.z + 1;
@@ -251,9 +222,7 @@ void	prueba_default(t_world *world, t_mlx *mlx)
 	to.y = world->cam.pos.y + (world->cam.n_vec.y / world->cam.n_vec.z);
 	world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 1, 0));
 	world->cam.invert = invert_mtx(&world->cam.transform);
-	
 
-	printf("zaloa pixel size is %f\n", pixel_size);
 	printf("pixel size is %f\n", world->cam.pix_s);
 
 	y = -1;
@@ -344,22 +313,15 @@ int	main(int argc, char **argv)
 		printf("4. p0 [%f], p1[%f], c = %d\n", inter4.point[0], inter4.point[1], inter4.count);
 		printf("5. p0 [%f], p1[%f], c = %d\n", inter5.point[0], inter5.point[1], inter5.count);*/
 
-		print_vect(get_normal_cy(c, create_point(1, 0, 0)));
-		return 0;
+	//	return 0;
 	}
-
-	//print_values(&all);
-	t_point point = create_point(10, -10, 10);
-	bool shadow = is_shadowed(&all, point);
-	printf("shadows -> %d\n", shadow);
 
 	t_mlx	mlx;
 	printf("Pintar\n");
     mlx_utils_init(&mlx);
     mlx_event(&mlx);
-//    draw(&mlx);
-	prueba_default(&all, &mlx);
- 	 mlx_loop(mlx.mlx);
+	ray_tracing(&all, &mlx);
+ 	mlx_loop(mlx.mlx);
 	free_structures(&all);
 	close(fd);
 	return 0;

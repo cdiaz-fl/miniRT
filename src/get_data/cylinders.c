@@ -51,8 +51,6 @@ void	create_cylinders(char *s, t_world *all)
 	tmp->pos.y = ft_atof(++s, 10);
 	s = ft_strchr(s, ',');
 	tmp->pos.z = ft_atof(++s, 10);
-
-
 	s = ft_strchr(s, ' ');
 	tmp->n_vec.x = ft_atof(++s, 10);
 	s = ft_strchr(s, ',');
@@ -60,17 +58,14 @@ void	create_cylinders(char *s, t_world *all)
 	s = ft_strchr(s, ',');
 	tmp->n_vec.z = ft_atof(++s, 10);
 	s = ft_strchr(s, ' ');
-
 	tmp->diameter = ft_atof(s, 10);
 	while (s && *s == ' ')
 		s++;
 	s = ft_strchr(s, ' ');
-
 	tmp->height = ft_atof(s, 10);
 	while (s && *s == ' ')
 		s++;
 	s = ft_strchr(s, ' ');
-
 	tmp->rgb.r = ft_atoi(++s) / 255;
 	while (s && *s != ',')
 		s++;

@@ -12,7 +12,8 @@
 
 NAME = miniRT
 
-SRCS = src/errors/error_handling.c\
+SRCS = src/errors_and_frees/error_handling.c\
+	   src/errors_and_frees/free.c\
        src/camera/camera_transform.c\
 	   src/get_data/create_objects.c\
 	   src/get_data/cylinders.c\
@@ -20,8 +21,10 @@ SRCS = src/errors/error_handling.c\
 	   src/get_data/planes.c\
 	   src/get_data/spheres.c\
 	   src/get_data/prepare_objects.c\
-	   src/intersections/intersection.c\
-	   src/intersections/inter_lst.c\
+	   src/get_data/normalization.c\
+	   src/intersections/intersection_sphere_plane.c\
+	   src/intersections/intersect_cylinder.c\
+	   src/intersections/intersect_utils.c\
 	   src/intersections/ray.c\
 	   src/maths/matrix1.c\
 	   src/maths/matrix2.c\
@@ -38,7 +41,6 @@ SRCS = src/errors/error_handling.c\
 	   src/light/shadows.c\
 	   src/get_data/main_read.c\
 #	   src/camera/main_camera.c\
-#	   src/get_data/main_prueba.c\
 
 OBJS = $(SRCS:.c=.o)
 

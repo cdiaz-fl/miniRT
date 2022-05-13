@@ -71,3 +71,20 @@ t_inter	*get_hit(t_inter *lst)
 	}
 	return (min_lst);
 }
+
+double	get_minpoint(double t1, double t2)
+{
+	if (t1 < 0 || t2 < 0)
+	{
+		if (t1 > 0)
+			return (t1);
+		else if (t2 > 0)
+			return (t2);
+		else
+			return (t1);
+	}
+	if (t1 > t2)
+		return (t2);
+	else
+		return (t1);
+}

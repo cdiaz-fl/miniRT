@@ -19,6 +19,8 @@
 t_mtx	translation_mtx(double x, double y, double z);
 t_mtx	scaling_mtx(double x, double y, double z);
 t_mtx	shearing_mtx(double shear_arr[6]);
+t_mtx	set_transform_mtx(t_mtx before, t_mtx m);
+
 //mtx_rotations.c
 t_mtx	x_rotatation_mtx(double grade);
 t_mtx	y_rotatation_mtx(double grade);

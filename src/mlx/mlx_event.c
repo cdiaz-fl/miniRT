@@ -28,8 +28,6 @@ static int  key_press_exit(int keycode, t_mlx *mlx)
 //		mlx_destroy_window(mlx->mlx, mlx->win);
 		exit(0);
 	}
-	if (keycode == 49)
-		write(1, "Change camera\n", 15);
 	return (0);
 }
 

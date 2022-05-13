@@ -41,6 +41,7 @@ void	check_max_color(t_color *c);
 
 //LIGHT.c -> Calcular color teniendo en cuanta la luz
 t_vect  get_normal_sphere(t_sphere s, t_point world_point);
+t_vect	get_normal_pl(t_plane pl);
 t_vect	get_normal_cy(t_cylinder cy, t_point world_point);
 t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect);
 //t_color	lighting(t_light light, t_point world_point, t_vect normal_vect, t_vect ray_vect);

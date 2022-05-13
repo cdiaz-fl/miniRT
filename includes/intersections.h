@@ -34,10 +34,8 @@ typedef struct s_ray
 /*RAY.C*/
 /*Crear rayos*/
 t_ray	create_ray(t_point p, t_vect v);
-
 //Calcular la posicion de un punto determinado del rayo en el plano 3d.
 t_point position_ray(t_ray ray, double move);
-
 //Trasnformar un rayo
 t_ray	transform_ray(t_ray r, t_mtx transform);
 
@@ -56,19 +54,15 @@ t_inter intersect_ray_sph(t_ray ray, t_sphere s);
 t_inter intersect_ray_pln(t_ray ray, t_plane p);
 t_inter intersect_ray_cyl(t_ray ray, t_cylinder c);
 
-//Como intersecta en 2 puntos, no intersa en el que esta mas cerca y no sea negativo.
-double  get_minpoint(double t1, double t2);
 
 
+/*INTERSECTION_UTIILS.c*/
 /*Create a list of intersections*/
-//MALLOC
 t_inter	*create_interlst(t_inter temp);
 void		add_intersection(t_inter **head, t_inter *new);
-
+//Como intersecta en 2 puntos, no intersa en el que esta mas cerca y no sea negativo.
+double  get_minpoint(double t1, double t2);
 /*Identifying Hits*/
 t_inter *get_hit(t_inter *lst);
 
-//Modificar la matriz de la esfera
-t_mtx	set_transform_sp(t_sphere s, t_mtx m);
-t_mtx	set_transform_mtx(t_mtx before, t_mtx m);
 #endif

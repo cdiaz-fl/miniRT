@@ -50,7 +50,6 @@ typedef struct s_mlx
 
 /*INIT*/
 void	mlx_utils_init(t_mlx *mlx);
-void	draw(t_mlx  *mlx);
 /*EVENTS*/
 void	mlx_event(t_mlx *mlx);
 
