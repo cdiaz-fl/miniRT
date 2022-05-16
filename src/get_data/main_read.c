@@ -287,34 +287,6 @@ int	main(int argc, char **argv)
 	}
 	printf("\nPrepare objects transformations\n");
 	prepare_object_transformations(&all);
-//	add_walls(&all);
-	
-	{
-		t_cylinder c;
-
-		c.min = 1;
-		c.max = 2;
-		c.pos.x = 0;
-		c.pos.y = 1.5;
-		c.pos.z = 0;
-		c.transform = identity_mtx(4);
-		c.inverse = invert_mtx(&c.transform);
-		c.transpose = transpose_mtx(&c.inverse);
-	//	t_inter inter = intersect_ray_cyl((create_ray(create_point(0, 1, 0), create_vect(0,-1,0))), c);
-	//	printf("1. p0 [%f], p1[%f], coount = %d\n", inter.point[0], inter.point[1], inter.count);
-		
-		t_inter inter2 = intersect_ray_cyl((create_ray(create_point(0, 3, -2), create_vect(0,-1,2))), c);
-		printf("2. p0 [%f], p1[%f], c = %d\n", inter2.point[0], inter2.point[1], inter2.count);
-	/*	t_inter inter3 = intersect_ray_cyl((create_ray(create_point(0, 4, -2), create_vect(0,-1,1))), c);
-		t_inter inter4 = intersect_ray_cyl((create_ray(create_point(0, 0, -2), create_vect(0,1,2))), c);
-		t_inter inter5 = intersect_ray_cyl((create_ray(create_point(0, -1, -2), create_vect(0,1,1))), c);
-		
-		printf("3. p0 [%f], p1[%f], c = %d\n", inter3.point[0], inter3.point[1], inter3.count);
-		printf("4. p0 [%f], p1[%f], c = %d\n", inter4.point[0], inter4.point[1], inter4.count);
-		printf("5. p0 [%f], p1[%f], c = %d\n", inter5.point[0], inter5.point[1], inter5.count);*/
-
-	//	return 0;
-	}
 
 	t_mlx	mlx;
 	printf("Pintar\n");

@@ -77,5 +77,6 @@ t_vect	ft_normalization(t_vect v)
 		normal.z -= 0.5;
 		normal = scalar_mul_vect(normal, 2);
 	}
+//	normal = scalar_div_vect(normal, magnitude_vect(normal));
 	return (normal);
 }
