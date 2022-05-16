@@ -49,7 +49,7 @@ t_mtx			normal_rotation_matrix(t_vect normal, char c)
 	rotation.data[0][0] = vals[0] + (pow(axis.x, 2) * vals[2]);
 	rotation.data[0][1] = (axis.x * axis.y * vals[2]) - (axis.z * vals[1]);
 	rotation.data[0][2] = (axis.x * axis.z * vals[2]) + (axis.y * vals[1]);
-	rotation.data[1][0] = (axis.y * axis.z * vals[2]) + (axis.z * vals[1]);
+	rotation.data[1][0] = (axis.y * axis.x * vals[2]) + (axis.z * vals[1]);
 	rotation.data[1][1] = vals[0] + (pow(axis.y, 2) * vals[2]);
 	rotation.data[1][2] = (axis.y * axis.z * vals[2]) - (axis.x * vals[1]);
 	rotation.data[2][0] = (axis.z * axis.x * vals[2]) - (axis.y * vals[1]);
