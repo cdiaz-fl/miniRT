@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:58:39 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/12 09:08:49 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/17 09:41:32 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void prepare_planes_transformation(t_world *world)
 		double angle_y = 90 * p->n_vec.y - 90;
 		double angle_z =  90 * p->n_vec.z - 0;
 		printf("angle: x(%f), y(%f), z(%f)\n", angle_x, angle_y, angle_z);
-		p->transform = identity_mtx(4);
+
 		p->transform = set_transform_mtx(p->transform, translation_mtx(p->pos.x, p->pos.y, p->pos.z));
 		p->transform = set_transform_mtx(p->transform, x_rotatation_mtx(angle_x));
 		p->transform = set_transform_mtx(p->transform, y_rotatation_mtx(angle_y));

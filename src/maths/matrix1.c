@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 12:21:06 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/05/03 14:34:57 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/17 09:49:13 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	free_mtx(t_mtx *mtx)
 {
 	unsigned int i;
 
+	if (!mtx->size)
+		return ;
 	i = 0;
 	while(i < mtx->size)
 	{

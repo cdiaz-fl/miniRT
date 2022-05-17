@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/05/05 13:30:16 by zcanales         ###   ########.fr        #
+#    Updated: 2022/05/17 11:01:08 by cdiaz-fl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRCS = src/errors_and_frees/error_handling.c\
 	   src/light/light.c\
 	   src/light/shadows.c\
 	   src/get_data/main_read.c\
+		 src/debug/debug.c\
+		src/get_data/getters.c\
 #	   src/camera/main_camera.c\
 
 OBJS = $(SRCS:.c=.o)

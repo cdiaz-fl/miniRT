@@ -2,7 +2,7 @@
 #ifndef ERRORS_H
 # define ERRORS_H
 
-void	wrong_values_handling(char *line, t_world *all);
+void	wrong_values_handling(char **line, t_world *all, int fd);
 int	    basic_error_handling(int argc, char **argv);
 
 void	free_structures(t_world  *w);

@@ -6,7 +6,7 @@
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 10:19:36 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/15 12:44:15 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+
+#include	"debug.h"
 
 #endif

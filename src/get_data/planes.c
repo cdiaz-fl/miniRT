@@ -6,6 +6,9 @@ static void	create_planes_list(t_world *all)
 	if (!all->plns)
 		perror("Error: ");  //liberar->y ->xit
 	all->plns->next = NULL;
+	all->plns->transform = identity_mtx(4);
+	all->plns->inverse = identity_mtx(4);
+	all->plns->transpose = identity_mtx(4);
 }
 
 static void	add_planes_list(t_plane **head)
@@ -35,40 +38,50 @@ t_plane	*get_last_plane_list(t_plane **head)
 	return temp;
 }
 
-void	create_planes(char *s, t_world *all)
+void	create_planes(char *s, t_world *all, int fd)
 {
 	t_plane	*tmp;
+	char	**val;
+	double	*data[9];
 
 	if (all->plns != NULL)
 		add_planes_list(&all->plns);
 	if (!all->plns)
 		create_planes_list(all);
 	tmp = get_last_plane_list(&all->plns);
-	s += 2;
-	while (s && *s == ' ')
-		s++;
-	tmp->pos.x = ft_atof(s, 10);
-	s = ft_strchr(s, ',');
-	tmp->pos.y = ft_atof(++s, 10);
-	s = ft_strchr(s, ',');
-	tmp->pos.z = ft_atof(++s, 10);
-	
-	printf("line es %s \n", s);
-	s = ft_strchr(s, ' ');
-	tmp->n_vec.x = ft_atof(++s, 10);
-	s = ft_strchr(s, ',');
-	tmp->n_vec.y = ft_atof(++s, 10);
-	s = ft_strchr(s, ',');
-	tmp->n_vec.z = ft_atof(++s, 10);
-	printf("line2 es %s \n", s);
-	s = ft_strchr(s, ' ');
- 
-	tmp->rgb.r = ft_atoi(++s);
-	while (s && *s != ',')
-		s++;
-	tmp->rgb.g = ft_atoi(++s);
-	while (s && *s != ',')
-		s++;
-	tmp->rgb.b = ft_atoi(++s);
+	val = ft_split(s, ' ');
+	data[0] = &tmp->pos.x;
+	data[1] = &tmp->pos.y;
+	data[2] = &tmp->pos.z;
+	data[3] = &tmp->n_vec.x;
+	data[4] = &tmp->n_vec.y;
+	data[5] = &tmp->n_vec.z;
+	data[6] = &tmp->rgb.r;
+	data[7] = &tmp->rgb.g;
+	data[8] = &tmp->rgb.b;
+	tmp->transform = identity_mtx(4);
+	tmp->inverse = identity_mtx(4);
+	tmp->transpose = identity_mtx(4);
+	if (ft_get_2d_size(val) < 4 || extract_values(val, data, "pl"))
+	{
+		free_2d_array(val);
+		wrong_values_handling(&s, all, fd);
+	}
 	tmp->next = NULL;
+	free(val);
 }
+
+/*
+	s += 2;
+	while (s && (*s == ' ' || *s == '	'))
+		s++;
+	printf("antes pos = [%s]\n", s);
+	get_pos(tmp, &s, 'p', s);
+	printf("después pos = [%s]\n", s);
+	printf("antes vec = [%s]\n", s);
+	get_n_vec(tmp, &s, 'p', s);
+	while (s && *s != ' ' && *s != '	')
+		s++;
+	printf("después vec = [%s]\n", s);
+	get_rgb((void *)tmp, s, 'p');
+*/

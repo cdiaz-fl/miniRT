@@ -112,9 +112,15 @@ typedef struct s_computations
 t_camera	create_camera(char *s);
 t_amb_light	create_amblight(char *s);
 t_light		create_light(char *s);
-void		create_planes(char *s, t_world *all);
-void		create_spheres(char *s, t_world *all);
-void		create_cylinders(char *s, t_world *all);
+void		create_planes(char *s, t_world *all, int fd);
+void		create_spheres(char *s, t_world *all, int fd);
+void		create_cylinders(char *s, t_world *all, int fd);
+int			extract_values(char **val, double **data, char *type);
+
+
+void		free_2d_array(char **s);
+size_t		ft_get_2d_size(char **s);
+
 
 //Preparar las matrices de todos los objetos para hacer el cambio de mundo
 t_vect		ft_normalization(t_vect v);
