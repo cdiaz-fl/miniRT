@@ -48,7 +48,7 @@ t_mtx			normal_rotation_matrix(t_vect normal)
 	rotation.data[0][0] = vals[0] + (pow(axis.x, 2) * vals[2]);
 	rotation.data[0][1] = (axis.x * axis.y * vals[2]) - (axis.z * vals[1]);
 	rotation.data[0][2] = (axis.x * axis.z * vals[2]) + (axis.y * vals[1]);
-	rotation.data[1][0] = (axis.y * axis.z * vals[2]) + (axis.z * vals[1]);
+	rotation.data[1][0] = (axis.y * axis.x * vals[2]) + (axis.z * vals[1]);
 	rotation.data[1][1] = vals[0] + (pow(axis.y, 2) * vals[2]);
 	rotation.data[1][2] = (axis.y * axis.z * vals[2]) - (axis.x * vals[1]);
 	rotation.data[2][0] = (axis.z * axis.x * vals[2]) - (axis.y * vals[1]);
@@ -99,7 +99,13 @@ static void prepare_cylinder_transformation(t_world *world)
 		double angle_z =  90 * c->n_vec.z ;
 		printf("angle: x(%f), y(%f), z(%f)\n", angle_x, angle_y, angle_z);
 		c->transform = identity_mtx(4);
+		print_mtx(&c->transform);
 		c->transform = set_transform_mtx(c->transform, translation_mtx(c->pos.x, c->pos.y, c->pos.z));
+		print_mtx(&c->transform);
+		//c->n_vec.x *= -1;
+		c->transform = set_transform_mtx(c->transform, normal_rotation_matrix(c->n_vec));
+		c->transform = set_transform_mtx(c->transform, scaling_mtx(c->diameter * 0.5, c->height * 0.5, c->diameter * 0.5));
+		print_mtx(&c->transform);
 		//t_mtx *m;
 		//m = mul_mtx_mtx(x_rotatation_mtx(angle_x), y_rotatation_mtx(angle_y));
 		//m = mul_mtx_mtx(m, z_rotatation_mtx(angle_y));
@@ -107,9 +113,6 @@ static void prepare_cylinder_transformation(t_world *world)
 	//	c->transform = set_transform_mtx(c->transform, x_rotatation_mtx(angle_x));
 		//c->transform = set_transform_mtx(c->transform, y_rotatation_mtx(angle_y));
 	//	c->transform = set_transform_mtx(c->transform, z_rotatation_mtx(angle_z));
-		c->transform = set_transform_mtx(c->transform, normal_rotation_matrix(c->n_vec));
-	
-		c->transform = set_transform_mtx(c->transform, scaling_mtx(c->diameter, c->diameter, c->diameter));
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
 		c->min = c->pos.y - c->height / 2; 

@@ -222,6 +222,9 @@ void	ray_tracing(t_world *world, t_mlx *mlx)
 	to.y = world->cam.pos.y + (world->cam.n_vec.y / world->cam.n_vec.z);
 	world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 1, 0));
 	world->cam.invert = invert_mtx(&world->cam.transform);
+//	world->cam.transform = view_transformation(world->cam.pos, add_point_vect(world->cam.pos, world->cam.n_vec),
+//	 cross_product_vect(cross_product_vect(world->cam.n_vec, create_vect(0,1,0)), world->cam.n_vec));
+//	world->cam.invert = invert_mtx(&world->cam.transform);
 
 	printf("pixel size is %f\n", world->cam.pix_s);
 
@@ -239,14 +242,14 @@ void	ray_tracing(t_world *world, t_mlx *mlx)
 		//	ray = create_ray(ray_origin, normalization_vect(sub_point_point(position, ray_origin)));
 			
 			ray = ray_for_pixel(&world->cam, x, y);
-			if ((x == 0 && y == 0) || (x == 500 && y == 500) || (x == 890 && y == 890))
+		/*	if ((x == 0 && y == 0) || (x == 500 && y == 500) || (x == 890 && y == 890))
 			{
 				printf("\nRay origin is %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
 				printf("Ray direction is ");
 				print_vect(ray.direction);
 				print_mtx(&world->cam.transform);
 				print_mtx(&world->cam.invert);
-			}
+			}*/
 			t_color final_color = color_at(world, ray);
 			mlx->img.addr[y * WIDTH + x] = convert_color_to_int(final_color);	
 
