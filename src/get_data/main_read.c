@@ -184,14 +184,14 @@ int	main(int argc, char **argv)
 		free(line);
 	}
 
-	prepare_object_transformations(&all);
+/*	prepare_object_transformations(&all);
 	t_mlx	mlx;
   mlx_utils_init(&mlx);
   mlx_event(&mlx);
 	ray_tracing(&all, &mlx);
 	
+ 	mlx_loop(mlx.mlx);*/
 	print_values(&all);
- 	mlx_loop(mlx.mlx);
 	free_structures(&all);
 	close(fd);
 	return 0;

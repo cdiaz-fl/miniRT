@@ -41,6 +41,7 @@ size_t	ft_get_2d_size(char **s)
 	}
 	return (i);
 }
+
 int	extract_values(char **val, double **data, char *type)
 {
 	int	i;

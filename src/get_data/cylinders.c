@@ -38,13 +38,34 @@ void	add_cylinders_list(t_cylinder **head)
 void	create_cylinders(char *s, t_world *all, int fd)
 {
 	t_cylinder	*tmp;
-	char		**val;
-	double		*data[11];
+	char 		**dd;
+	char		**s_temp;
 
 	add_cylinders_list(&all->cyls);	//Lo que antes se hacia en 2 funciones lo he unido todo en esta.
 	tmp = get_last_cylinder_list(&all->cyls);
-	if (check_character(s, ',') != 7)
+	if (check_character(s, ',') != 7 || check_character(s, ' ') < 6)
 		wrong_values_handling(&s, all, fd, 4);
+	dd = ft_split(s, ',');
+	tmp->pos.x = ft_atof(&dd[0][2], 10);
+	tmp->pos.y = ft_atof(dd[1], 10);
+	tmp->pos.z = ft_atof(dd[2], 10);
+	s_temp = ft_split(dd[2], ' ');
+	tmp->n_vec.x = ft_atof(s_temp[1], 10);
+	free_2d_array(s_temp);
+	tmp->n_vec.y = ft_atof(dd[3], 10);
+	tmp->n_vec.z = ft_atof(dd[4], 10);	
+	s_temp = ft_split(dd[4], ' ');
+	tmp->diameter = ft_atof(s_temp[1], 10);
+	tmp->height = ft_atof(s_temp[2], 10);
+	tmp->rgb.r = ft_atof(s_temp[3], 10) / 255;	
+	free_2d_array(s_temp);
+	tmp->rgb.g = ft_atof(dd[5], 10) / 255;	
+	tmp->rgb.b = ft_atof(dd[6], 10) / 255;
+	if (check_ranges((void *)tmp, 'c'))
+		wrong_values_handling(&s, all, fd, 3);
+	free_2d_array(dd);
+	/*char		**val;
+	double		*data[11];
 	val = ft_split(s, ' ');
 	data[0] = &tmp->pos.x;
 	data[1] = &tmp->pos.y;
@@ -62,8 +83,9 @@ void	create_cylinders(char *s, t_world *all, int fd)
 		free_2d_array(val);	//Podemos no liberar esto y nos ahorramos 3 lineas
 		wrong_values_handling(&s, all, fd, 4);
 	}
-	tmp->next = NULL;
 	free_2d_array(val);
+	tmp->next = NULL;
+	*/
 }
 
 /*
