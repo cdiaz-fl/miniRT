@@ -24,6 +24,18 @@ void	free_inter_lst(t_inter *head)
 	}
 }
 
+void	free_2d_array(char **s)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	i = -1;
+	while (s[++i])
+		free(s[i]);
+	free(s);
+}
+
 static void	free_spheres(t_world *w)
 {
 	t_sphere	*temp_s;
@@ -39,7 +51,6 @@ static void	free_spheres(t_world *w)
 		temp_s = w->sphs;
 	}
 }
-
 static void	free_planes(t_world *w)
 {
 	t_plane	*temp_p;

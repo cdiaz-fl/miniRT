@@ -1,32 +1,25 @@
 #include "../../includes/miniRT.h"
 
-void	create_spheres_list(t_world *all)
-{
-	all->sphs = (t_sphere *)malloc(sizeof(t_sphere));
-	if (!all->sphs)
-		perror("Error: ");  //liberar->y ->xit
-	all->sphs->next = NULL;
-	all->sphs->transform = identity_mtx(4);
-	all->sphs->inverse = identity_mtx(4);
-	all->sphs->transpose = identity_mtx(4);
-}
-
 void	add_spheres_list(t_sphere **head)
 {
 	t_sphere *temp;
 	t_sphere *new;
 
-
-
 	new = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!new)
 		perror("Error: ");  //liberar->y ->xit
+	new->next = NULL;
+	new->transform = identity_mtx(4);
+	new->inverse = identity_mtx(4);
+	new->transpose = identity_mtx(4); 
+	if (*head == NULL)
+	{
+		*head = new;
+		return ;
+	}
 	temp = *head;
 	while (temp->next != NULL)
-	{
-	//	printf("add\n");
 		temp = temp->next;
-	}
 	temp->next = new;
 	new->next = NULL;
 }
@@ -47,12 +40,10 @@ void	create_spheres(char *s, t_world *all, int fd)
 	char		**val;
 	double		*data[7];
 
-	if (all->sphs != NULL)
-		add_spheres_list(&all->sphs);
-	if (!all->sphs)
-		create_spheres_list(all);
+	add_spheres_list(&all->sphs);
 	tmp = get_last_sphere_list(&all->sphs);
-
+	if (check_character(s, ',') != 5)
+		wrong_values_handling(&s, all, fd, 2);
 	val = ft_split(s, ' ');
 	data[0] = &tmp->pos.x;
 	data[1] = &tmp->pos.y;
@@ -61,17 +52,17 @@ void	create_spheres(char *s, t_world *all, int fd)
 	data[4] = &tmp->rgb.r;
 	data[5] = &tmp->rgb.g;
 	data[6] = &tmp->rgb.b;
-
-	tmp->transform = identity_mtx(4);
-	tmp->inverse = identity_mtx(4);
-	tmp->transpose = identity_mtx(4);
-	if (ft_get_2d_size(val) < 4 || extract_values(val, data, "sp"))
+	if (ft_get_2d_size(val) < 4 || extract_values(val, data, "sp") || check_ranges((void *)tmp, 's'))
 	{
 		free_2d_array(val);
-		wrong_values_handling(&s, all, fd);
+		wrong_values_handling(&s, all, fd, 2);
 	}
+	//A ver si lo pueedo poner dentro de check_ranges.Luego lo miro
+	tmp->rgb.r /= 255;
+	tmp->rgb.g /= 255;
+	tmp->rgb.b /= 255;
 	tmp->next = NULL;
-	free(val);
+	free_2d_array(val);
 }
 
 /*

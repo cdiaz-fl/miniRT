@@ -36,22 +36,33 @@ int	check_format(char *s)
 {
 	int	i;
 	int	j;
+	int point;
 
 	i = -1;
 	while (s[++i])
 	{
+		point = 0;
 		j = i;
 		if (s[i] == '+' || s[i] == '-' || s[i] == '.')
 		{
 			while (s[++j] && !ft_isdigit(s[j]))
+			{
 				if (s[j] != ' ')
 					return (1);
+			}
 		}
 		else if (s[i] == ',')
 		{
 			while (s[++j] && !ft_isdigit(s[j]) && s[j] != '+' && s[j] != '-')
-				if (s[j] != ' ')
-					return (1);
+			{
+				if (s[j] != ' ' || (s[j] == '.' && ++point))
+				{
+					if (point > 1 || s[j] != ' ')
+						return (1);
+				}
+			}
+			if (s[i + 1] == '\0') //Si estamos en la última línea y acaba en coma y no hay una línea vacía en el .rt hay que mirarlo. //Tambien se mira en get_data_utils/check_character En uno de los dos se puede quitar.
+				return (1);
 		}
 	}
 	return (0);
@@ -68,8 +79,10 @@ int	check_line_syntax(char *s)
 		return (1);
 	while (s[++i])
 	{
-		printf("vueltaaaaaaa     %c\n", s[i]);
-		if (!ft_isalpha(s[i]) && is_float(s, &i, i - 1, 0))
+		printf("vueltaaaaaaa     %d\n", s[i]);
+		if (s[i] == '\n')
+			break;
+		if ((!ft_isalpha(s[i]) && is_float(s, &i, i - 1, 0)) || s[i] == ' ') //Si nos meten muchos espacio al final de la linea
 			i++;
 		else if (!no_more_char && (ft_strchr("ACL", s[i])
 				|| (s[i] == 's' && s[++i] && s[i] == 'p' && s[++i] && s[i] == ' ')
@@ -78,6 +91,8 @@ int	check_line_syntax(char *s)
 			no_more_char = 1;
 		else
 			return (1);
+		if (s[i] == '\0') //Lo he puesto porque cuando el .rt no acaba con una línea vacía peta
+			break;
 	}
 	return 0;
 }
@@ -86,25 +101,30 @@ static void	get_values(char **line, t_world *all, int fd)
 {
 	int	i;
 	int	out;
+	char *s;
 
 	out = 0;
 	i = -1;
-	while(*line[++i] && line[i][0] != '\n')
+	s = ft_strtrim(*line, " ");
+	printf("len -> %zu\n", ft_strlen(s));
+	printf("1. Esto igual se puede quitar lo habia hecho para quitar  los espacio por si nos meten lineas vacias solo de esapcios o tabuladores ->%s\n", s); //Pero funciona si esto.
+//	s = ft_strdup(*line);
+	while(s[++i] && s[0] != '\n')
 	{
-		if (check_line_syntax(*line))
-			wrong_values_handling(line, all, fd);
-		if (*line[i] == 'A' && ++out)
-			all->a_light = create_amblight(*line);
-		if (*line[i] == 'C' && ++out)
-			all->cam = create_camera(*line);
-		else if (*line[i] == 'L' && ++out)
-			all->light = create_light(*line);
-		else if (*line[i] == 'p' && ++out)
-			create_planes(*line, all, fd);
-		else if (*line[i] == 's' && ++out)
-			create_spheres(*line, all, fd);
-		else if (*line[i] == 'c' && ++out)
-			create_cylinders(*line, all, fd);
+		if (check_line_syntax(s))
+			wrong_values_handling(&s, all, fd, 1);
+		if (s[i] == 'A' && ++out)
+			all->a_light = create_amblight(s, all, fd);
+		if (s[i] == 'C' && ++out)
+			all->cam = create_camera(s, all, fd);
+		else if (s[i] == 'L' && ++out)
+			all->light = create_light(s, all, fd);
+		else if (s[i] == 'p' && ++out)
+			create_planes(s, all, fd);
+		else if (s[i] == 's' && ++out)
+			create_spheres(s, all, fd);
+		else if (s[i] == 'c' && ++out)
+			create_cylinders(s, all, fd);
 		if (out)
 			break ;
 	}
@@ -163,15 +183,15 @@ int	main(int argc, char **argv)
 		get_values(&line, &all, fd);
 		free(line);
 	}
-	/*
+
 	prepare_object_transformations(&all);
 	t_mlx	mlx;
   mlx_utils_init(&mlx);
   mlx_event(&mlx);
 	ray_tracing(&all, &mlx);
- 	mlx_loop(mlx.mlx);
-	*/
+	
 	print_values(&all);
+ 	mlx_loop(mlx.mlx);
 	free_structures(&all);
 	close(fd);
 	return 0;

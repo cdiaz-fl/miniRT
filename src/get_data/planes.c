@@ -1,26 +1,23 @@
 #include "../../includes/miniRT.h"
 
-static void	create_planes_list(t_world *all)
-{
-	all->plns = (t_plane *)malloc(sizeof(t_plane));
-	if (!all->plns)
-		perror("Error: ");  //liberar->y ->xit
-	all->plns->next = NULL;
-	all->plns->transform = identity_mtx(4);
-	all->plns->inverse = identity_mtx(4);
-	all->plns->transpose = identity_mtx(4);
-}
 
 static void	add_planes_list(t_plane **head)
 {
 	t_plane *temp;
 	t_plane *new;
 
-
-
 	new = (t_plane *)malloc(sizeof(t_plane));
 	if (!new)
-		perror("Error: ");  //liberar->y ->xit
+		perror("Error: ");
+	new->next = NULL;
+	new->transform = identity_mtx(4);
+	new->inverse = identity_mtx(4);
+	new->transpose = identity_mtx(4); 
+	if (*head == NULL)
+	{
+		*head = new;
+		return ;
+	}
 	temp = *head;
 	while (temp->next != NULL)
 		temp = temp->next;
@@ -38,17 +35,18 @@ t_plane	*get_last_plane_list(t_plane **head)
 	return temp;
 }
 
+
+
 void	create_planes(char *s, t_world *all, int fd)
 {
 	t_plane	*tmp;
 	char	**val;
 	double	*data[9];
 
-	if (all->plns != NULL)
-		add_planes_list(&all->plns);
-	if (!all->plns)
-		create_planes_list(all);
+	add_planes_list(&all->plns);
 	tmp = get_last_plane_list(&all->plns);
+	if (check_character(s, ',') != 7)
+		wrong_values_handling(&s, all, fd, 3);
 	val = ft_split(s, ' ');
 	data[0] = &tmp->pos.x;
 	data[1] = &tmp->pos.y;
@@ -59,14 +57,15 @@ void	create_planes(char *s, t_world *all, int fd)
 	data[6] = &tmp->rgb.r;
 	data[7] = &tmp->rgb.g;
 	data[8] = &tmp->rgb.b;
-	tmp->transform = identity_mtx(4);
-	tmp->inverse = identity_mtx(4);
-	tmp->transpose = identity_mtx(4);
-	if (ft_get_2d_size(val) < 4 || extract_values(val, data, "pl"))
+	if (ft_get_2d_size(val) < 3 || extract_values(val, data, "pl") || check_ranges((void *)tmp, 'p'))
 	{
 		free_2d_array(val);
-		wrong_values_handling(&s, all, fd);
+		wrong_values_handling(&s, all, fd, 3);
 	}
+	//A ver si lo pueedo poner dentro de check_ranges.Luego lo miro
+	tmp->rgb.r /= 255;
+	tmp->rgb.g /= 255;
+	tmp->rgb.b /= 255;
 	tmp->next = NULL;
 	free(val);
 }

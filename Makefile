@@ -17,6 +17,7 @@ SRCS = src/errors_and_frees/error_handling.c\
        src/camera/camera_transform.c\
 	   src/get_data/create_objects.c\
 	   src/get_data/cylinders.c\
+	   src/get_data/get_data_utils.c\
 	   src/get_data/get_next_line.c\
 	   src/get_data/planes.c\
 	   src/get_data/spheres.c\
