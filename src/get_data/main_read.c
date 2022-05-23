@@ -96,8 +96,8 @@ void	print_values(t_world	*all)
 	t_plane		*p_tmp;
 	t_sphere	**s_head;
 	t_plane		**p_head;
-//	t_cylinder	*c_tmp;
-//	t_cylinder	**c_head;
+	t_cylinder	*c_tmp;
+	t_cylinder	**c_head;
 	int	i;
 
 	printf("\n\n--------------------  Camera  ---------------------\n");
@@ -130,7 +130,7 @@ void	print_values(t_world	*all)
 	s_head = &all->sphs;
 	tmp = *s_head;
 	i = 0;
-	while (++i && tmp->next != NULL)
+	while (++i && tmp != NULL)
 	{
 		printf("|      Number = %6d                                   |\n", i);
 		printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", tmp->pos.x, tmp->pos.y, tmp->pos.z);
@@ -138,12 +138,6 @@ void	print_values(t_world	*all)
 		printf("|     R = %6f   G = %6f    B = %6f       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
 		tmp = tmp->next;
 	}
-	printf("|                                                 |\n");
-	printf("|      Number = %d                                 |\n", i);
-	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", tmp->pos.x, tmp->pos.y, tmp->pos.z);
-	printf("|     diam = %6.2f                               |\n", tmp->diameter);
-	printf("|     R = %6f   G = %6f    B = %6f       |\n", tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
-	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 
 	(void)p_head;
@@ -154,7 +148,7 @@ void	print_values(t_world	*all)
 	p_head = &all->plns;
 	p_tmp = *p_head;
 	i = 0;
-	while (++i && p_tmp->next != NULL)
+	while (++i && p_tmp != NULL)
 	{
 		printf("|    Number = %6d                                    |\n", i);
 		printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", p_tmp->pos.x, p_tmp->pos.y, p_tmp->pos.z);
@@ -162,20 +156,14 @@ void	print_values(t_world	*all)
 		printf("|     R = %6f   G = %6f    B = %6f       |\n", p_tmp->rgb.r, p_tmp->rgb.g, p_tmp->rgb.b);
 		p_tmp = p_tmp->next;
 	}
-	printf("|                                                 |\n");
-	printf("|      Number = %d                                 |\n", i);
-	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", p_tmp->pos.x, p_tmp->pos.y, p_tmp->pos.z);
-	printf("|     nx = %6.2f    ny = %6.2f    nz = %6.2f   |\n", p_tmp->n_vec.x, p_tmp->n_vec.y, p_tmp->n_vec.z);
-	printf("|     R = %6f   G = %6f    B = %6f       |\n", p_tmp->rgb.r, p_tmp->rgb.g, p_tmp->rgb.b);
-	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
-/*
+
 	printf("\n\n--------------------  Cylinds ---------------------\n");
 	printf("|                                                 |\n");
 	c_head = &all->cyls;
 	c_tmp = *c_head;
 	i = 0;
-	while (++i && c_tmp->next != NULL)
+	while (++i && c_tmp != NULL)
 	{
 		printf("|     Number = %6d                                    |\n", i);
 		printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", c_tmp->pos.x, c_tmp->pos.y, c_tmp->pos.z);
@@ -185,15 +173,7 @@ void	print_values(t_world	*all)
 		printf("|     R = %6f   G = %6f    B = %6f       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
 		c_tmp = c_tmp->next;
 	}
-	printf("|                                                 |\n");
-	printf("|      Number = %d                                 |\n", i);
-	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", c_tmp->pos.x, c_tmp->pos.y, c_tmp->pos.z);
-	printf("|     nx = %6.2f    ny = %6.2f    nz = %6.2f   |\n", c_tmp->n_vec.x, c_tmp->n_vec.y, c_tmp->n_vec.z);
-	printf("|     diam = %6.2f                               |\n", c_tmp->diameter);
-	printf("|     height = %6.2f                             |\n", c_tmp->height);
-	printf("|     R = %6f   G = %6f    B = %6f       |\n", c_tmp->rgb.r, c_tmp->rgb.g, c_tmp->rgb.b);
-	printf("|                                                 |\n");
-	printf("---------------------------------------------------\n");*/
+	printf("---------------------------------------------------\n");
 }
 
 
@@ -220,7 +200,10 @@ void	ray_tracing(t_world *world, t_mlx *mlx)
 	to.z = world->cam.pos.z + 1;
 	to.x = world->cam.pos.x + (world->cam.n_vec.x / world->cam.n_vec.z);
 	to.y = world->cam.pos.y + (world->cam.n_vec.y / world->cam.n_vec.z);
-	world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 1, 0));
+	if (world->cam.n_vec.x == 0 && world->cam.n_vec.y == 1 && world->cam.n_vec.z == 0)
+		world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 0, 1));
+	else
+		world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 1, 0));
 	world->cam.invert = invert_mtx(&world->cam.transform);
 //	world->cam.transform = view_transformation(world->cam.pos, add_point_vect(world->cam.pos, world->cam.n_vec),
 //	 cross_product_vect(cross_product_vect(world->cam.n_vec, create_vect(0,1,0)), world->cam.n_vec));
@@ -289,6 +272,7 @@ int	main(int argc, char **argv)
 		free(line);
 	}
 	printf("\nPrepare objects transformations\n");
+	//print_values(&all);
 	prepare_object_transformations(&all);
 
 	t_mlx	mlx;

@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:58:39 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/12 09:08:49 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:55:39 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void prepare_spheres_transformation(t_world *world)
 	}
 }
 
-t_mtx			normal_rotation_matrix(t_vect normal)
+t_mtx			normal_rotation_matrix(t_vect normal, char c)
 {
 	double		angle;
 	double		vals[3];
@@ -40,6 +40,7 @@ t_mtx			normal_rotation_matrix(t_vect normal)
 	t_mtx	rotation;
 
 	rotation = create_mtx(4);
+
 	angle = acos(dot_product_vect(normal, create_vect(0, 1, 0)));
 	axis = cross_product_vect(normal, create_vect(0, 1, 0));
 	vals[0] = cos(angle);
@@ -55,6 +56,39 @@ t_mtx			normal_rotation_matrix(t_vect normal)
 	rotation.data[2][1] = (axis.z * axis.y * vals[2]) + (axis.x * vals[1]);
 	rotation.data[2][2] = vals[0] + (pow(axis.z, 2) * vals[2]);
 	rotation.data[3][3] = 1;
+
+//	rotation.data[0][0] *= -1;
+//	rotation.data[1][1] *= -1;
+//	rotation.data[2][2] *= -1;
+
+	rotation.data[3][0] = 0;
+	rotation.data[3][1] = 0;
+	rotation.data[3][2] = 0;
+	rotation.data[0][3] = 0;
+	rotation.data[1][3] = 0;
+	rotation.data[2][3] = 0;
+	printf("rotationnn\n");
+	int i = -1;
+	while (++i < 4)
+	{
+		int j = -1;
+		while (++j < 4)
+			if (rotation.data[i][j] == -0)
+				rotation.data[i][j] = 0;
+	}
+	//print_mtx(&rotation);
+	t_mtx	scale;
+	if (c == 'c')
+	{
+		scale = scaling_mtx(-1.0, 1.0, -1.0);
+		rotation = mul_mtx(&scale, &rotation);
+	}
+	if (c == 'z')
+	{
+		//printf("--------------------------------------------------------------------\n");
+		scale = scaling_mtx(1.0, -1.0, 1.0);
+		rotation = mul_mtx(&rotation, &scale);
+	}
 	return (rotation);
 }
 static void prepare_planes_transformation(t_world *world)
@@ -73,7 +107,7 @@ static void prepare_planes_transformation(t_world *world)
 		//double angle_z =  90 * p->n_vec.z - 0;
 		p->transform = identity_mtx(4);
 		p->transform = set_transform_mtx(p->transform, translation_mtx(p->pos.x, p->pos.y, p->pos.z));
-		p->transform = set_transform_mtx(p->transform, normal_rotation_matrix(p->n_vec));
+		p->transform = set_transform_mtx(p->transform, normal_rotation_matrix(p->n_vec, 'p'));
 	/*	p->transform = set_transform_mtx(p->transform, x_rotatation_mtx(angle_x));
 		p->transform = set_transform_mtx(p->transform, y_rotatation_mtx(angle_y));
 		p->transform = set_transform_mtx(p->transform, z_rotatation_mtx(angle_z));*/
@@ -86,18 +120,29 @@ static void prepare_cylinder_transformation(t_world *world)
 {
 	t_cylinder **c_head;
 	t_cylinder *c;
+	char		ch;
 	
 	c_head = &world->cyls;
 	c = *c_head;
+	ch = 'c';
 	while (c)
 	{
+		
+		if (c->n_vec.y < 0.0 && c->n_vec.z != 0.0)
+		{
+			ch = 'z';
+			c->n_vec.y *= -1;
+		}
 		c->n_vec = normalization_vect(c->n_vec);
-		print_vect(c->n_vec);
+		//printf("normalizationnnn \n");
+		//print_vect(c->n_vec);
 		//double angle = dot_product_vect(c->n_vec, create_vect(0,1,0)) * 90;
+		/*
 		double angle_x =  90 * c->n_vec.x ;
 		double angle_y = 90 * c->n_vec.y ;
 		double angle_z =  90 * c->n_vec.z ;
-		printf("angle: x(%f), y(%f), z(%f)\n", angle_x, angle_y, angle_z);
+		*/
+		//printf("angle: x(%f), y(%f), z(%f)\n", angle_x, angle_y, angle_z);
 		c->transform = identity_mtx(4);
 		print_mtx(&c->transform);
 		c->transform = set_transform_mtx(c->transform, translation_mtx(c->pos.x, c->pos.y, c->pos.z));
