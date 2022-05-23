@@ -41,7 +41,7 @@ SRCS = src/errors_and_frees/error_handling.c\
 	   src/light/shadows.c\
 	   src/get_data/main_read.c\
 		 src/debug/debug.c\
-		src/get_data/getters.c\
+	#	src/get_data/getters.c\
 #	   src/camera/main_camera.c\
 
 OBJS = $(SRCS:.c=.o)
