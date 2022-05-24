@@ -26,6 +26,7 @@ t_mtx	view_transformation(t_point from, t_point to, t_vect up)
 
 	forward = normalization_vect(sub_point_point(to, from));
 	left = cross_product_vect(forward, up);
+	//left = cross_product_vect(forward, normalization_vect(up));
 	true_up = cross_product_vect(left, forward);
 	transform = create_mtx(4);
 	rows[0][0] = left.x;
@@ -60,7 +61,7 @@ t_mtx	view_transformation(t_point from, t_point to, t_vect up)
 	init_mtx(&transform, rows[1], 1);
 	init_mtx(&transform, rows[2], 2);
 	init_mtx(&transform, rows[3], 3);
-	print_mtx(&transform);
+	//print_mtx(&transform);
 	translation = identity_mtx(4);
 	if (from.x == 0)
 		translation.data[0][3] = from.x;
@@ -74,7 +75,7 @@ t_mtx	view_transformation(t_point from, t_point to, t_vect up)
 		translation.data[2][3] = from.z;
 	else
 		translation.data[2][3] = from.z * -1;
-	print_mtx(&translation);
+	//print_mtx(&translation);
 	transform = mul_mtx(&transform, &translation);
 	return	transform;
 }

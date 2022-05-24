@@ -147,6 +147,10 @@ void	ray_tracing(t_world *world, t_mlx *mlx)
 	to.z = world->cam.pos.z + 1;
 	to.x = world->cam.pos.x + (world->cam.n_vec.x / world->cam.n_vec.z);
 	to.y = world->cam.pos.y + (world->cam.n_vec.y / world->cam.n_vec.z);
+	if (world->cam.n_vec.x == 0 && world->cam.n_vec.y == 1 && world->cam.n_vec.z == 0)
+		world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 0, 1));
+	else
+		world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 1, 0));
 	world->cam.transform = view_transformation(world->cam.pos, to, create_vect(0, 1, 0));
 	world->cam.invert = invert_mtx(&world->cam.transform);
 
@@ -183,14 +187,33 @@ int	main(int argc, char **argv)
 		get_values(&line, &all, fd);
 		free(line);
 	}
+/*	{
+		t_vect v = create_vect(0, 1, 0);
+		t_mtx m1 = identity_mtx(4);
+		t_mtx m2;
+		t_mtx m3;
+		m2 = set_transform_mtx(m1, x_rotatation_mtx(-45));
+		print_mtx(&m2);
+		t_vect v2 = mul_vect_mtx(&m2, v);
+		printf("-------------\n");
+		print_vect(v2);
+		printf("-------------\n");
+		m3 = set_transform_mtx(identity_mtx(4), y_rotatation_mtx(90));
+	//	m3 = set_transform_mtx(identity_mtx(4), z_rotatation_mtx(-90));
+		print_mtx(&m3);
+		t_mtx m4 = mul_mtx(&m3, &m2);
+		print_mtx(&m4);
+		v = mul_vect_mtx(&m4, v);
+		print_vect(v);
+	}*/
 
-/*	prepare_object_transformations(&all);
+	prepare_object_transformations(&all);
 	t_mlx	mlx;
   mlx_utils_init(&mlx);
   mlx_event(&mlx);
 	ray_tracing(&all, &mlx);
 	
- 	mlx_loop(mlx.mlx);*/
+ 	mlx_loop(mlx.mlx);
 	print_values(&all);
 	free_structures(&all);
 	close(fd);

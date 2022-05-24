@@ -38,6 +38,7 @@ t_mtx			normal_rotation_matrix(t_vect normal, char c)
 	t_vect		axis;
 	t_mtx	rotation;
 
+	
 	rotation = create_mtx(4);
 
 	angle = acos(dot_product_vect(normal, create_vect(0, 1, 0)));
@@ -76,7 +77,7 @@ t_mtx			normal_rotation_matrix(t_vect normal, char c)
 				rotation.data[i][j] = 0;
 	}
 	//print_mtx(&rotation);
-	t_mtx	scale;
+/*	t_mtx	scale;
 	if (c == 'c')
 	{
 		scale = scaling_mtx(-1.0, 1.0, -1.0);
@@ -87,7 +88,8 @@ t_mtx			normal_rotation_matrix(t_vect normal, char c)
 		//printf("--------------------------------------------------------------------\n");
 		scale = scaling_mtx(1.0, -1.0, 1.0);
 		rotation = mul_mtx(&rotation, &scale);
-	}
+	}*/
+	(void)c;
 	return (rotation);
 }
 static void prepare_planes_transformation(t_world *world)
@@ -100,15 +102,17 @@ static void prepare_planes_transformation(t_world *world)
 	{
 		//double	angle = dot_product_vect(p->n_vec, create_vect(0, 1, 0));
 		p->n_vec = normalization_vect(p->n_vec);
-		/*double angle_x =  90 * p->n_vec.x - 0;
+		double angle_x =  90 * p->n_vec.x - 0;
 		double angle_y = 90 * p->n_vec.y - 90;
 		double angle_z =  90 * p->n_vec.z - 0;
-		printf("angle: x(%f), y(%f), z(%f)\n", angle_x, angle_y, angle_z);*/
 		p->transform = set_transform_mtx(p->transform, translation_mtx(p->pos.x, p->pos.y, p->pos.z));
 		p->transform = set_transform_mtx(p->transform, normal_rotation_matrix(p->n_vec, 'p'));
-	/*	p->transform = set_transform_mtx(p->transform, x_rotatation_mtx(angle_x));
-		p->transform = set_transform_mtx(p->transform, y_rotatation_mtx(angle_y));
-		p->transform = set_transform_mtx(p->transform, z_rotatation_mtx(angle_z));*/
+	//	p->transform = set_transform_mtx(p->transform, x_rotatation_mtx(-45));
+	//	p->transform = set_transform_mtx(p->transform, y_rotatation_mtx(90));
+		//p->transform = set_transform_mtx(p->transform, z_rotatation_mtx(angle_z));
+		(void)angle_x;
+		(void)angle_y;
+		(void)angle_z;
 		p->inverse = invert_mtx(&p->transform);
 		p->transpose = transpose_mtx(&p->inverse);
 		p = p->next;
@@ -124,16 +128,25 @@ static void prepare_cylinder_transformation(t_world *world)
 	c = *c_head;
 	while (c)
 	{
-		c->n_vec = ft_normalization(c->n_vec);
-		double angle_x =  90 * c->n_vec.x - 90;
-		double angle_y = 90 * c->n_vec.y - 0;
-		double angle_z =  90 * c->n_vec.z - 90;
-		c->transform = identity_mtx(4);
+		double angle_x;
+		double angle_y = 0;
+		double angle_z;
+		(void)angle_x;
+		(void)angle_y;
+		(void)angle_z;
 		c->transform = set_transform_mtx(c->transform, translation_mtx(c->pos.x, c->pos.y, c->pos.z));
-		c->transform = set_transform_mtx(c->transform, x_rotatation_mtx(angle_x));
-		c->transform = set_transform_mtx(c->transform, y_rotatation_mtx(angle_y));
+	//	c->transform = set_transform_mtx(c->transform, normal_rotation_matrix(c->n_vec, 'c'));
+		c->n_vec = normalization_vect(c->n_vec);
+		print_vect(c->n_vec);
+		if (c->n_vec.y > 0)
+			angle_x = asin(c->n_vec.z) * 180 / M_PI;
+		else
+			angle_x = 180 - (asin(c->n_vec.z) * 180 / M_PI);
+		angle_z = asin(c->n_vec.x) * 180 / M_PI;	
+		printf("angle: x(%f), y(%f), z(%f)\n", angle_x, angle_y, angle_z);
 		c->transform = set_transform_mtx(c->transform, z_rotatation_mtx(angle_z));
-		c->transform = set_transform_mtx(c->transform, scaling_mtx(c->diameter, c->diameter, c->diameter));
+		c->transform = set_transform_mtx(c->transform, x_rotatation_mtx(angle_x));
+		c->transform = set_transform_mtx(c->transform, scaling_mtx(c->diameter * 0.5, c->height * 0.5, c->diameter * 0.5));
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
 		c->min = c->pos.y - c->height / 2; 
