@@ -45,7 +45,9 @@ t_vect	get_normal_pl(t_plane pl);
 t_vect	get_normal_cy(t_cylinder cy, t_point world_point);
 t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect);
 //t_color	lighting(t_light light, t_point world_point, t_vect normal_vect, t_vect ray_vect);
-t_color  lighting(t_light light,t_color color, t_point world_point, t_vect normal_vect, t_vect ray_vect);
+//t_color  lighting(t_light light,t_color color, t_point world_point, t_vect normal_vect, t_vect ray_vect);
+t_color  lighting(t_light light,t_color color, t_point world_point,
+			t_vect normal_vect[2]);
 
 //COLOR_AT -> Agrupar todas las funciones para calcular el color en un punto
 t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p, t_cylinder **c);
@@ -55,5 +57,8 @@ t_color	shade_hit(t_world world, t_comps comps);
 
 //SHADOWS.C 
 bool    is_shadowed(t_world *world, t_point point);
+
+//SPECULAR
+t_color	specular_bonus(t_vect reflected_vect, t_vect ray_vect, t_color intensity);
 #endif
 

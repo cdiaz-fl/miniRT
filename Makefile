@@ -40,8 +40,10 @@ SRCS = src/errors_and_frees/error_handling.c\
 	   src/mlx/mlx_utils.c\
 	   src/mlx/mlx_event.c\
 	   src/light/color_operations.c\
+	   src/light/color_operations2.c\
 	   src/light/color_at.c\
 	   src/light/light.c\
+	   src/light/light_specular.c\
 	   src/light/shadows.c\
 	   src/get_data/main_read.c\
 		 src/debug/debug.c\
