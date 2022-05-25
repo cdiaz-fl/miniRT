@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter_lst.c                                        :+:      :+:    :+:   */
+/*   intersect_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/06 14:34:26 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:48:55 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 //ADD una interseccion
 void	add_intersection(t_inter **head, t_inter *new)
 {
-	t_inter *temp;
-	
+	t_inter	*temp;
+
 	if (!*head)
 	{
 		*head = new;
-		return;
+		return ;
 	}
 	temp = *head;
 	while (temp->next != NULL)
@@ -30,13 +30,11 @@ void	add_intersection(t_inter **head, t_inter *new)
 	new->next = NULL;
 }
 
-//Una rayo puede intersectar con mas de un objeto.
-//Por eso creamos una lista de todas los puntos en los que intersecta.
-t_inter *create_interlst(t_inter temp)
+t_inter	*create_interlst(t_inter temp)
 {
-	t_inter *new;
+	t_inter	*new;
 
-	new = (t_inter*)malloc(sizeof(t_inter));
+	new = (t_inter *)malloc(sizeof(t_inter));
 	if (!new)
 		return (NULL);
 	new->point[0] = temp.point[0];
@@ -49,12 +47,10 @@ t_inter *create_interlst(t_inter temp)
 	return (new);
 }
 
-//De todos los puento en los que intersecta el rayo con los objetos, solo nos interesa el punto max pequeños 
-//siempre que sea positivo
 t_inter	*get_hit(t_inter *lst)
 {
-	t_inter *temp;
-	t_inter *min_lst;
+	t_inter	*temp;
+	t_inter	*min_lst;
 	double	min;
 
 	temp = lst;

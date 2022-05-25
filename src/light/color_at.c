@@ -6,44 +6,48 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/12 09:11:04 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:50:18 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+#include "../../includes/miniRT.h"
+
+void	intersect_world_aux(t_inter *one_inter, t_inter **head, void *temp)
+{
+	(one_inter->object) = temp;
+	add_intersection(head, create_interlst(*one_inter));
+}
 
 t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p, t_cylinder **c)
 {
-	t_inter one_inter;
-	t_inter *head;
-	void *temp;
+	t_inter	one_inter;
+	t_inter	*head;
+	void	*temp;
 
 	temp = (void *)(*s);
 	head = NULL;
 	while (temp != NULL)
 	{
 		one_inter = intersect_ray_sph(ray, *((t_sphere *)temp));
-		(one_inter.object) = temp;
-		add_intersection(&head,create_interlst(one_inter));
+		intersect_world_aux(&one_inter, &head, temp);
 		temp = ((t_sphere *)temp)->next;
 	}
 	temp = (void *)(*p);
 	while (temp != NULL)
 	{
 		one_inter = intersect_ray_pln(ray, *((t_plane *)temp));
-		(one_inter.object) = temp;
-		add_intersection(&head,create_interlst(one_inter));
+		intersect_world_aux(&one_inter, &head, temp);
 		temp = ((t_plane *)temp)->next;
 	}
 	temp = (void *)(*c);
 	while (temp != NULL)
 	{
 		one_inter = intersect_ray_cyl(ray, *((t_cylinder *)temp));
-		(one_inter.object) = temp;
-		add_intersection(&head,create_interlst(one_inter));
+		intersect_world_aux(&one_inter, &head, temp);
 		temp = ((t_cylinder *)temp)->next;
 	}
-	return (head);	
+	return (head);
 }
 
 //1. instantiate a data structure for storing some precomputed values
@@ -57,15 +61,18 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 	comps.t = closest_inter.min_point;
 	comps.object = closest_inter.object;
 	comps.obj_type = closest_inter.obj_type;
-	comps.point = add_point_vect(ray.origin, scalar_mul_vect(ray.direction, comps.t));
+	comps.point = add_point_vect(ray.origin,
+			scalar_mul_vect(ray.direction, comps.t));
 	comps.eyev = neg_vect(ray.direction);
 	if (comps.obj_type == 's')
-		comps.normalv =  get_normal_sphere(*(t_sphere *)comps.object, comps.point);
+		comps.normalv = get_normal_sphere(*(t_sphere *)comps.object,
+				comps.point);
 	if (comps.obj_type == 'p')
-		comps.normalv =  get_normal_pl(*(t_plane *)comps.object);
+		comps.normalv = get_normal_pl(*(t_plane *)comps.object);
 	if (comps.obj_type == 'c')
-		comps.normalv = get_normal_cy(*(t_cylinder *)comps.object, comps.point);
-	if  (dot_product_vect(comps.normalv, comps.eyev) < 0)
+		comps.normalv = get_normal_cy(*(t_cylinder *)comps.object,
+				comps.point);
+	if (dot_product_vect(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
 		comps.normalv = neg_vect(comps.normalv);
@@ -77,38 +84,45 @@ t_comps	prepare_computations(t_inter closest_inter, t_ray ray)
 
 t_color	shade_hit(t_world world, t_comps comps)
 {
-	bool shadow;
+	bool	shadow;
+	t_vect	vect[2];
 
+	vect[0] = comps.normalv;
+	vect[1] = neg_vect(comps.eyev);
 	shadow = is_shadowed(&world, comps.over_point);
 	if (shadow == true)
 		return (world.light.ambient);
 	if (comps.obj_type == 's')
-		return (lighting(world.light, ((t_sphere*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
-	if (comps.obj_type == 'p')	
-		return (lighting(world.light, ((t_plane*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
+		return (lighting(world.light, ((t_sphere *)comps.object)->rgb,
+				comps.point, vect));
+	if (comps.obj_type == 'p')
+		return (lighting(world.light, ((t_plane *)comps.object)->rgb,
+				comps.point, vect));
 	if (comps.obj_type == 'c')
-		return (lighting(world.light, ((t_cylinder*)comps.object)->rgb, comps.point, comps.normalv, neg_vect(comps.eyev)));
+		return (lighting(world.light, ((t_cylinder *)comps.object)->rgb,
+				comps.point, vect));
 	return (create_color(1, 0, 0));
 }
 
 t_color	color_at(t_world *world, t_ray ray)
 {
-	t_inter *head_lst;
-	t_inter *closest_inter;
-	t_comps comps;
-	t_color final_color;
+	t_inter	*head_lst;
+	t_inter	*closest_inter;
+	t_comps	comps;
+	t_color	final_color;
 
-	final_color = create_color(0, 0, 0); 
-	head_lst = NULL;	
+	final_color = create_color(0, 0, 0);
+	head_lst = NULL;
 	closest_inter = NULL;
 	head_lst = intersect_world(ray, &world->sphs, &world->plns, &world->cyls);
 	closest_inter = get_hit(head_lst);
 	if (closest_inter->count > 0)
 	{
 		comps = prepare_computations(*closest_inter, ray);
-		comps.over_point = add_point_vect(comps.point, scalar_mul_vect(comps.normalv, EPSILON));
+		comps.over_point = add_point_vect(comps.point,
+				scalar_mul_vect(comps.normalv, EPSILON));
 		final_color = shade_hit(*world, comps);
 	}
 	free_inter_lst(head_lst);
-	return (final_color);	
+	return (final_color);
 }

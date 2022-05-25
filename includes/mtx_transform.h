@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mtx_transform.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:12:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/04/27 11:29:14 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:18:56 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MTX_TRANSFORM
-# define MTX_TRANSFORM
+#ifndef MTX_TRANSFORM_H
+# define MTX_TRANSFORM_H
+
 # define M_PI   3.14159265358979323846264338327950288
 # include "matrix.h" 
 

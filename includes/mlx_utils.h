@@ -6,10 +6,9 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:24:22 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/10 10:37:11 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:19:42 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MLX_UTILS_H
 # define MLX_UTILS_H
@@ -27,7 +26,6 @@ typedef struct s_wall
 
 typedef struct s_img
 {
-	//DATA
 	void	*img;
 	int		*addr;
 	int		bpp;
@@ -38,19 +36,13 @@ typedef struct s_img
 
 typedef struct s_mlx
 {
-	void    *mlx;
-	void    *win;
-	
-	//IMAGE
+	void	*mlx;
+	void	*win;
 	t_img	img;
-
-	//WALL
 	t_wall	wall;
 }t_mlx;
 
-/*INIT*/
 void	mlx_utils_init(t_mlx *mlx);
-/*EVENTS*/
 void	mlx_event(t_mlx *mlx);
 
 #endif

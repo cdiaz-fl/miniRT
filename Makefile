@@ -6,7 +6,7 @@
 #    By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/05/25 12:52:24 by cdiaz-fl         ###   ########.fr        #
+#    Updated: 2022/05/25 17:41:56 by cdiaz-fl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = miniRT
 
 SRCS =	src/errors_and_frees/error_handling.c\
 		src/errors_and_frees/free.c\
+		src/errors_and_frees/free2.c\
 		src/camera/camera_transform.c\
 		src/camera/camera_set.c\
 		src/get_data/create_objects.c\
