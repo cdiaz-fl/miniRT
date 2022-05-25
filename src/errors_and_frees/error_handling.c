@@ -13,19 +13,20 @@
 #include	"../../includes/miniRT.h"
 #include	<fcntl.h>	//Open
 
+
 void	wrong_values_handling(char **line, t_world *all, int fd, int error)
 {
 //	(void)all;
 	write(2, "\e[1;31mError\n", 13);
 	if (error == 1)
 		write(2, "Wrong values: Unexpected char ❌\n", 33);
-	else if (error ==  2)
+	else if (error == 2)
 		write(2, "Wrong values: Sphere problem ❌\n", 32);
-	else if (error ==  3)
+	else if (error == 3)
 		write(2, "Wrong values: Plane problem ❌\n", 31);
-	else if (error == 4) 
+	else if (error == 4)
 		write(2, "Wrong values: Cylinder problem ❌\n", 34);
-	else 
+	else
 		write(2, "Wrong values: Camera/Light/Ambient problem ❌\n", 46);
 	free_structures(all);
 	(void)line;
@@ -51,3 +52,12 @@ int	basic_error_handling(int argc, char **argv)
 	}
 	return (fd);
 }
+
+void status_error(int err, char *str)
+{
+	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
+	exit(err);
+}
+

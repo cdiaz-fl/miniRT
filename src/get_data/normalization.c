@@ -11,24 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-/*    % Automated normalization
-    if minVec >= 0
-        % Normalize between 0 and 1
-        vecN = (vec - minVec)./( maxVec - minVec );
-        vecD = minVec + vecN.*(maxVec - minVec);
-    elseif maxVec <= 0
-        % Normalize between -1 and 0
-        vecN = (vec - maxVec)./( maxVec - minVec );
-        vecD = maxVec + vecN.*(maxVec - minVec);
-    else
-        % Normalize between -1 and 1
-        vecN = ((vec-minVec)./(maxVec-minVec) - 0.5 ) *2;
-        vecD = (vecN./2+0.5) * (maxVec-minVec) + minVec;
-    end*/
+
 static double	min_normalization(t_vect v)
 {
-	double min = 0;
-	
+	double	min;
+
+	min = 0;
 	if (v.x <= v.y)
 		min = v.x;
 	else
@@ -40,8 +28,9 @@ static double	min_normalization(t_vect v)
 
 static double	max_normalization(t_vect v)
 {
-	double max = 0;
+	double	max;
 
+	max = 0;
 	if (v.x >= v.y)
 		max = v.x;
 	else
@@ -53,10 +42,10 @@ static double	max_normalization(t_vect v)
 
 t_vect	ft_normalization(t_vect v)
 {
-	t_vect normal;
+	t_vect	normal;
 	double	range;
-	double min;
-	double max;
+	double	min;
+	double	max;
 
 	min = min_normalization(v);
 	max = max_normalization(v);

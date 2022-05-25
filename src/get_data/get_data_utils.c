@@ -105,7 +105,7 @@ int    check_range_vect(t_vect v)
 
 int  check_range_color(t_color c)
 {
-    if (c.r > 255 || c.g > 255 || c.b > 255)
+    if (c.r > 1 || c.g > 1 || c.b > 1)
 		return (1);
 	if (c.r < 0 || c.g < 0 || c.b < 0)
 		return (1);

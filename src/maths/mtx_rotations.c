@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/miniRT.h"
 
-t_mtx x_rotatation_mtx(double grade)
+t_mtx	x_rotatation_mtx(double grade)
 {
 	t_mtx	mtx;
 
-	mtx = identity_mtx(4); //Añadir la matriz identity
+	mtx = identity_mtx(4);
 	mtx.data[1][1] = cos((grade * M_PI) / 180);
 	mtx.data[1][2] = sin((grade * M_PI) / 180) * (-1);
 	mtx.data[2][1] = sin((grade * M_PI) / 180);
@@ -25,11 +24,11 @@ t_mtx x_rotatation_mtx(double grade)
 	return (mtx);
 }
 
-t_mtx y_rotatation_mtx(double grade)
+t_mtx	y_rotatation_mtx(double grade)
 {
 	t_mtx	mtx;
 
-	mtx = identity_mtx(4); //Añadir la matriz identity
+	mtx = identity_mtx(4);
 	mtx.data[0][0] = cos((grade * M_PI) / 180);
 	mtx.data[0][2] = sin((grade * M_PI) / 180);
 	mtx.data[2][0] = sin((grade * M_PI) / 180) * (-1);
@@ -41,7 +40,7 @@ t_mtx	z_rotatation_mtx(double grade)
 {
 	t_mtx	mtx;
 
-	mtx = identity_mtx(4); //Añadir la matriz identity
+	mtx = identity_mtx(4);
 	mtx.data[0][0] = cos((grade * M_PI) / 180);
 	mtx.data[0][1] = sin((grade * M_PI) / 180) * (-1);
 	mtx.data[1][0] = sin((grade * M_PI) / 180);

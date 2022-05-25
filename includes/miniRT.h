@@ -28,7 +28,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-
+#include <errno.h>
 #include	"debug.h"
-
+#include <string.h>
 #endif

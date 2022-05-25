@@ -29,9 +29,12 @@ SRCS = src/errors_and_frees/error_handling.c\
 	   src/intersections/ray.c\
 	   src/maths/matrix1.c\
 	   src/maths/matrix2.c\
+	   src/maths/mtx_operations.c\
+	   src/maths/mtx_cofactor.c\
 	   src/maths/mtx_transform.c\
 	   src/maths/mtx_rotations.c\
 	   src/maths/point_vect_operations.c\
+	   src/maths/point_vect_create.c\
 	   src/maths/vect_operations1.c\
 	   src/maths/vect_operations2.c\
 	   src/mlx/mlx_utils.c\

@@ -51,6 +51,7 @@ static void	free_spheres(t_world *w)
 		temp_s = w->sphs;
 	}
 }
+
 static void	free_planes(t_world *w)
 {
 	t_plane	*temp_p;
@@ -67,7 +68,7 @@ static void	free_planes(t_world *w)
 	}
 }
 
-static void free_cylinders(t_world *w)
+static void	free_cylinders(t_world *w)
 {
 	t_cylinder	*temp_c;
 

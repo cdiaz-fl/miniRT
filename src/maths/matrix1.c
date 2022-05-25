@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../../includes/matrix.h"
-#include	<stdio.h>
-#include	<stdlib.h>
+#include "../../includes/miniRT.h"
 
 t_mtx	create_mtx(unsigned int size)
 {
@@ -20,30 +18,20 @@ t_mtx	create_mtx(unsigned int size)
 	int			i;
 
 	if (size < 2)
-	{
-		perror("Error: "); //este perror hay que quitar
-		//función de salida
-	}
+		status_error(1, "Invalid size");
 	mtx.data = malloc(sizeof(double *) * size);
 	if (!mtx.data)
-	{
-		perror("Error: ");
-		//función de salida
-	}
+		status_error(errno, strerror(errno));
 	i = -1;
-	while((unsigned int)++i < size)
+	while ((unsigned int)++i < size)
 	{
-			mtx.data[i] = malloc(sizeof(double) * size);
-			if (!mtx.data[i]) //Falta liberar aquí cosas
-			{
-				perror("Error: ");
-				//función de salida
-			}
+		mtx.data[i] = malloc(sizeof(double) * size);
+		if (!mtx.data[i])
+			status_error(errno, strerror(errno));
 	}
 	mtx.size = size;
-	return mtx;
+	return (mtx);
 }
-
 
 t_mtx	identity_mtx(unsigned int size)
 {
@@ -52,10 +40,7 @@ t_mtx	identity_mtx(unsigned int size)
 	int		j;
 
 	if (size < 2)
-	{
-		perror("Error: ");
-		//función de salida
-	}
+		status_error(1, "Invalid size");
 	mtx = create_mtx(size);
 	i = -1;
 	while ((unsigned int)++i < size)
@@ -69,7 +54,7 @@ t_mtx	identity_mtx(unsigned int size)
 				mtx.data[i][j] = 0.0;
 		}
 	}
-	return mtx;
+	return (mtx);
 }
 
 void	print_mtx(t_mtx *mtx)
@@ -79,10 +64,10 @@ void	print_mtx(t_mtx *mtx)
 
 	i = 0;
 	printf("---MATRIX----------\n");
-	while(i < mtx->size)
+	while (i < mtx->size)
 	{
 		j = 0;
-		while(j < mtx->size)
+		while (j < mtx->size)
 		{
 			printf("[ %.5f ]  ", mtx->data[i][j]);
 			j++;
@@ -94,7 +79,7 @@ void	print_mtx(t_mtx *mtx)
 
 void	init_mtx(t_mtx *mtx, double *v, unsigned int row)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < mtx->size)
@@ -107,12 +92,12 @@ void	init_mtx(t_mtx *mtx, double *v, unsigned int row)
 
 void	free_mtx(t_mtx *mtx)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	if (!mtx->size)
 		return ;
 	i = 0;
-	while(i < mtx->size)
+	while (i < mtx->size)
 	{
 		free(mtx->data[i]);
 		i++;
