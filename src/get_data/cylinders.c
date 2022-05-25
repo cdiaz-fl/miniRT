@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 08:50:13 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 08:50:15 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:51:21 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,28 @@ void	add_cylinders_list(t_cylinder **head)
 	new->next = NULL;
 }
 
+static void	cylinder_aux(char **dd, t_cylinder *tmp, char **s_temp)
+{
+	tmp->pos.x = ft_atof(&dd[0][2], 10);
+	tmp->pos.y = ft_atof(dd[1], 10);
+	tmp->pos.z = ft_atof(dd[2], 10);
+	tmp->n_vec.x = ft_atof(s_temp[1], 10);
+}
+
 void	create_cylinders(char *s, t_world *all, int fd)
 {
 	t_cylinder	*tmp;
 	char		**dd;
 	char		**s_temp;
 
+	dd = NULL;
 	add_cylinders_list(&all->cyls);
 	tmp = get_last_cylinder_list(&all->cyls);
 	if (check_character(s, ',') != 7 || check_character(s, ' ') < 6)
 		wrong_values_handling(&s, all, fd, 4);
 	dd = ft_split(s, ',');
-	tmp->pos.x = ft_atof(&dd[0][2], 10);
-	tmp->pos.y = ft_atof(dd[1], 10);
-	tmp->pos.z = ft_atof(dd[2], 10);
 	s_temp = ft_split(dd[2], ' ');
-	tmp->n_vec.x = ft_atof(s_temp[1], 10);
+	cylinder_aux(dd, tmp, s_temp);
 	free_2d_array(s_temp);
 	tmp->n_vec.y = ft_atof(dd[3], 10);
 	tmp->n_vec.z = ft_atof(dd[4], 10);

@@ -120,12 +120,14 @@ void		create_cylinders(char *s, t_world *all, int fd);
 
 //Get_data_utils.c
 size_t		ft_get_2d_size(char **s);
-int			extract_values(char **val, double **data, char *type);
+int			extract_values(char **val, double **data, char *type, int i);
 void 		get_cordinate_data(char **s, double **data, char *obj);
 int  		check_range_vector(t_vect v);
 int  		check_range_color(t_color c);
 int 		check_ranges(void *tmp, char obj);
 int			check_character(char *s, char c);
+int			is_float(char *s, int *i, int j, int nb);
+
 
 //Preparar las matrices de todos los objetos para hacer el cambio de mundo
 t_vect		ft_normalization(t_vect v);

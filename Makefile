@@ -6,45 +6,47 @@
 #    By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/05/17 11:01:08 by cdiaz-fl         ###   ########.fr        #
+#    Updated: 2022/05/25 12:52:24 by cdiaz-fl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
-SRCS = src/errors_and_frees/error_handling.c\
-	   src/errors_and_frees/free.c\
-       src/camera/camera_transform.c\
-	   src/get_data/create_objects.c\
-	   src/get_data/cylinders.c\
-	   src/get_data/get_data_utils.c\
-	   src/get_data/get_next_line.c\
-	   src/get_data/planes.c\
-	   src/get_data/spheres.c\
-	   src/get_data/prepare_objects.c\
-	   src/get_data/normalization.c\
-	   src/intersections/intersection_sphere_plane.c\
-	   src/intersections/intersect_cylinder.c\
-	   src/intersections/intersect_utils.c\
-	   src/intersections/ray.c\
-	   src/maths/matrix1.c\
-	   src/maths/matrix2.c\
-	   src/maths/mtx_operations.c\
-	   src/maths/mtx_cofactor.c\
-	   src/maths/mtx_transform.c\
-	   src/maths/mtx_rotations.c\
-	   src/maths/point_vect_operations.c\
-	   src/maths/point_vect_create.c\
-	   src/maths/vect_operations1.c\
-	   src/maths/vect_operations2.c\
-	   src/mlx/mlx_utils.c\
-	   src/mlx/mlx_event.c\
-	   src/light/color_operations.c\
-	   src/light/color_at.c\
-	   src/light/light.c\
-	   src/light/shadows.c\
-	   src/get_data/main_read.c\
-		 src/debug/debug.c\
+SRCS =	src/errors_and_frees/error_handling.c\
+		src/errors_and_frees/free.c\
+		src/camera/camera_transform.c\
+		src/camera/camera_set.c\
+		src/get_data/create_objects.c\
+		src/get_data/cylinders.c\
+		src/get_data/get_data_utils.c\
+		src/get_data/get_data_utils2.c\
+		src/get_data/get_next_line.c\
+		src/get_data/planes.c\
+		src/get_data/spheres.c\
+		src/get_data/prepare_objects.c\
+		src/get_data/normalization.c\
+		src/intersections/intersection_sphere_plane.c\
+		src/intersections/intersect_cylinder.c\
+		src/intersections/intersect_utils.c\
+		src/intersections/ray.c\
+		src/maths/matrix1.c\
+		src/maths/matrix2.c\
+		src/maths/mtx_operations.c\
+		src/maths/mtx_cofactor.c\
+		src/maths/mtx_transform.c\
+		src/maths/mtx_rotations.c\
+		src/maths/point_vect_operations.c\
+		src/maths/point_vect_create.c\
+		src/maths/vect_operations1.c\
+		src/maths/vect_operations2.c\
+		src/mlx/mlx_utils.c\
+		src/mlx/mlx_event.c\
+		src/light/color_operations.c\
+		src/light/color_at.c\
+		src/light/light.c\
+		src/light/shadows.c\
+		src/get_data/main_read.c\
+		src/debug/debug.c\
 	#	src/get_data/getters.c\
 #	   src/camera/main_camera.c\
 
