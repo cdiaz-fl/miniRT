@@ -96,8 +96,9 @@ t_color	color_at(t_world *world, t_ray ray)
 	t_inter *head_lst;
 	t_inter *closest_inter;
 	t_comps comps;
-	t_color final_color = create_color(1, 1, 1);
+	t_color final_color;
 
+	final_color = create_color(0, 0, 0); 
 	head_lst = NULL;	
 	closest_inter = NULL;
 	head_lst = intersect_world(ray, &world->sphs, &world->plns, &world->cyls);
