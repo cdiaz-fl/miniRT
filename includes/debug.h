@@ -14,5 +14,5 @@
 # define DEBUG_H
 
 void	print_values(t_world	*all);
-
+void	print_color(t_color c);
 #endif

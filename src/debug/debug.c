@@ -12,7 +12,10 @@
 
 #include	"../../includes/miniRT.h"
 #include	"../../includes/debug.h"
-
+void	print_color(t_color c)
+{
+	printf("Color r[%f] g[%f] b[%f]\n", c.r, c.g, c.b);
+}
 void	print_values(t_world	*all)
 {
 	t_sphere	*tmp;

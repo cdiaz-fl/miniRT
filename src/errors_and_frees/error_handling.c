@@ -35,10 +35,17 @@ void	wrong_values_handling(char **line, t_world *all, int fd, int error)
 int	basic_error_handling(int argc, char **argv)
 {
 	int	fd;
+	int	len;
 
 	if (argc != 2 && write(2, "\e[1;31mError\n", 13))
 	{
 		write(2, "Wrong parameters ❌\n", 21);
+		exit (1);
+	}
+	len = ft_strlen(argv[1]);
+	if (len < 4 || ft_strncmp(&argv[1][len - 3], ".rt", 3))
+	{
+		write(2, "Invalid file ❌\n", 17);
 		exit (1);
 	}
 	fd = open(argv[1], O_RDONLY);

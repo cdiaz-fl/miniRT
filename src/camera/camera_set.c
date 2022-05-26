@@ -17,9 +17,12 @@ void	camera_config(t_world *world)
 	t_point	to;
 
 	set_camera(&world->cam);
-	to.z = world->cam.pos.z + 1;
-	to.x = world->cam.pos.x + (world->cam.n_vec.x / world->cam.n_vec.z);
-	to.y = world->cam.pos.y + (world->cam.n_vec.y / world->cam.n_vec.z);
+	print_vect(world->cam.n_vec);
+	print_vect(normalization_vect(world->cam.n_vec));
+	world->cam.n_vec = normalization_vect(world->cam.n_vec);
+	to.x = world->cam.pos.x + world->cam.n_vec.x;
+	to.y = world->cam.pos.y + world->cam.n_vec.y;
+	to.z = world->cam.pos.z + world->cam.n_vec.z;
 	if (world->cam.n_vec.x == 0 && world->cam.n_vec.y == 1
 		&& world->cam.n_vec.z == 0)
 		world->cam.transform

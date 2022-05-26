@@ -37,6 +37,8 @@ t_camera	create_camera(char *s, t_world *all, int fd)
 	free_2d_array(dd);
 	if (check_ranges((void *)&new, 'C') || new.fov > 180 || new.fov < 0)
 		wrong_values_handling(&s, all, fd, 5);
+	if (!new.n_vec.x && !new.n_vec.y && !new.n_vec.z)
+		wrong_values_handling(&s, all, fd, 5);
 	return (new);
 }
 
@@ -73,7 +75,7 @@ t_light	create_light(char *s, t_world *all, int fd)
 	char		**s_temp;
 
 	if ((++nbr_light != 1) || check_character(s, ',') != 3
-		|| check_character(s, ' ') < 4)
+		|| check_character(s, ' ') < 3)
 		wrong_values_handling(&s, all, fd, 5);
 	dd = ft_split(s, ',');
 	new.position.x = ft_atof(&dd[0][1], 10);
@@ -89,7 +91,8 @@ t_light	create_light(char *s, t_world *all, int fd)
 	new.intensity.g = 1 * new.brightness;
 	new.intensity.b = 1 * new.brightness;
 	free_2d_array(dd);
-	if (check_ranges((void *)&new, 'L'))
+	if (check_ranges((void *)&new, 'L') || new.brightness > 1
+		|| new.brightness < 0)
 		wrong_values_handling(&s, all, fd, 5);
 	return (new);
 }

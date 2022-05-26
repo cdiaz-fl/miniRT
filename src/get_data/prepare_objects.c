@@ -26,7 +26,8 @@ static void	prepare_spheres_transformation(t_world *world)
 				translation_mtx(s->pos.x, s->pos.y, s->pos.z));
 		if (s->diameter != 1)
 			s->transform = set_transform_mtx(s->transform,
-					scaling_mtx(s->diameter, s->diameter, s->diameter));
+					scaling_mtx(s->diameter * 0.5, s->diameter * 0.5,
+						s->diameter * 0.5));
 		s->inverse = invert_mtx(&s->transform);
 		s->transpose = transpose_mtx(&s->inverse);
 		s = s->next;
@@ -112,6 +113,4 @@ void	prepare_object_transformations(t_world *world)
 	prepare_cylinder_trans(world, 0, 0);
 	world->light.ambient = scalar_mul_color(world->a_light.rgb,
 			world->a_light.rate);
-	world->light.intensity = create_color(world->light.rgb.r,
-			world->light.rgb.g, world->light.rgb.b);
 }

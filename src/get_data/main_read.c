@@ -48,8 +48,8 @@ int	check_line_syntax(char *s)
 
 	if (s[0] == 'A' || s[0] == 'C' || s[0] == 'L')
 		i = 0;
-	else if (ft_strncmp("sp ", s, 3) || ft_strncmp("pl ", s, 3)
-		|| ft_strncmp("cy ", s, 3))
+	else if (!ft_strncmp("sp ", s, 3) || !ft_strncmp("pl ", s, 3)
+		|| !ft_strncmp("cy ", s, 3))
 		i = 2;
 	else if (s[0] == '\n')
 		i = -1;

@@ -85,9 +85,6 @@ t_light	create_light(char *s, t_world *all, int fd)
 	free_2d_array(s_temp);
 	new.rgb.g = (double)ft_atoi(dd[3]) / 255;
 	new.rgb.b = (double)ft_atoi(dd[4]) / 255;
-	new.intensity.r = 1 * new.brightness;
-	new.intensity.g = 1 * new.brightness;
-	new.intensity.b = 1 * new.brightness;
 	free_2d_array(dd);
 	if (check_ranges((void *)&new, 'L'))
 		wrong_values_handling(&s, all, fd, 5);
