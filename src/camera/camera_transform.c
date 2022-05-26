@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera_transform.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdiaz-fl <cdiaz-fl@student.42urduli>       +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:16:10 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/05/06 10:57:23 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/26 08:39:58 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	set_camera(t_camera *cam)
 	double		half_view;
 	double		aspect_ratio;
 
-	half_view = tan((cam->FOV * (M_PI / 180)) / 2);
+	half_view = tan((cam->fov * (M_PI / 180)) / 2);
 	aspect_ratio = (double)WIDTH / (double)HEIGHT;
 	if (aspect_ratio >= 1)
 	{

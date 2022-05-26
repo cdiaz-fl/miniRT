@@ -6,14 +6,14 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:03:52 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 14:48:55 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/26 08:38:49 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/intersections.h"
 #include <math.h>
 #include <float.h>
-//ADD una interseccion
+
 void	add_intersection(t_inter **head, t_inter *new)
 {
 	t_inter	*temp;

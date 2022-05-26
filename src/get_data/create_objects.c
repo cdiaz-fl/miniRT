@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 08:44:51 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 08:44:52 by zcanales         ###   ########.fr       */
+/*   Updated: 2022/05/26 08:39:58 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ t_camera	create_camera(char *s, t_world *all, int fd)
 	free_2d_array(s_temp);
 	s_temp = ft_split(dd[4], ' ');
 	new.n_vec.z = ft_atof(dd[4], 10);
-	new.FOV = ft_atoi(s_temp[1]);
+	new.fov = ft_atoi(s_temp[1]);
 	free_2d_array(s_temp);
 	free_2d_array(dd);
-	if (check_ranges((void *)&new, 'C') || new.FOV > 180 || new.FOV < 0)
+	if (check_ranges((void *)&new, 'C') || new.fov > 180 || new.fov < 0)
 		wrong_values_handling(&s, all, fd, 5);
 	return (new);
 }

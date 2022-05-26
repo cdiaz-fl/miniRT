@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:44:32 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 17:44:52 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:51:42 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,4 @@ bool    is_shadowed(t_world *world, t_point point);
 
 //SPECULAR
 t_color	specular_bonus(t_vect reflected_vect, t_vect ray_vect, t_color intensity);
-#endif
-
 #endif

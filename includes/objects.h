@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 09:32:06 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 17:12:53 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/26 08:39:37 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_camera
 {
 	t_point	pos;
 	t_vect	n_vec;
-	double	FOV;
+	double	fov;
 	double	pix_s;
 	double	half_w;
 	double	half_h;

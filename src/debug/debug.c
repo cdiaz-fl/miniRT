@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 12:37:38 by cdiaz-fl          #+#    #+#             */
-/*   Updated: 2022/05/15 17:42:51 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/26 08:39:58 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_values(t_world	*all)
 	printf("|                                                 |\n");
 	printf("|     x = %6.2f     y = %6.2f     z = %6.2f    |\n", all->cam.pos.x, all->cam.pos.y, all->cam.pos.z);
 	printf("|    nx = %6.2f    ny = %6.2f    nz = %6.2f    |\n", all->cam.n_vec.x, all->cam.n_vec.y, all->cam.n_vec.z);
-	printf("|    FOV = %6f                                 |\n", all->cam.FOV);
+	printf("|    fov = %6f                                 |\n", all->cam.fov);
 	printf("|                                                 |\n");
 	printf("---------------------------------------------------\n");
 

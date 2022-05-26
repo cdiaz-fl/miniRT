@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:15:10 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 17:50:18 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:51:23 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_inter	*intersect_world(t_ray ray, t_sphere **s, t_plane **p, t_cylinder **c)
 	temp = (void *)(*c);
 	while (temp != NULL)
 	{
-		one_inter = intersect_ray_cyl(ray, *((t_cylinder *)temp));
+		one_inter = intersect_ray_cyl(ray, *((t_cylinder *)temp), 0, 0);
 		intersect_world_aux(&one_inter, &head, temp);
 		temp = ((t_cylinder *)temp)->next;
 	}
