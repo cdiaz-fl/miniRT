@@ -19,7 +19,7 @@ double	ft_atof(char *s, float base)
 	double	sum;
 	double	rest;
 	double	neg;
-	int	i;
+	int		i;
 
 	sum = 0.0;
 	rest = 0.0;
@@ -42,51 +42,3 @@ double	ft_atof(char *s, float base)
 	}
 	return ((sum + rest) * neg);
 }
-
-/*
- *
- *REVISAR LOS NEGATIVOS
- *
-float	ft_atof(char *s)
-{
-	int first;
-	int decimal;
-	int	i;
-	int	len;
-
-	len = 0;
-	first = ft_atoi(&s[0]);
-	i = -1;
-	decimal = 0;
-	while (s[++i])
-	{
-		if (s[i] == '.')
-		{
-			i++;
-			decimal = ft_atoi(&s[i]);
-			while (s[i] && ft_isdigit(s[i]))
-			{
-				len++;
-				i++;
-			}
-			return ((float)first + decimal / pow(10, len));
-		}
-	}
-	return ((float)first + decimal);
-}
-
-
-int main()
-{
-	printf("Atof = %.5f,  Charly = %.5f    Zaloa = %.5f\n", atof("100"), ft_atof("100", 10), ft_zaloa("100"));
-	printf("Atof = %.5f,  Charly = %.5f    Zaloa = %.5f\n", atof("1.5"), ft_atof("1.5", 10), ft_zaloa("1.5"));
-	printf("Atof = %.5f,  Charly = %.5f   Zaloa = %.5f\n", atof("+1.5"), ft_atof("+1.5", 10), ft_zaloa("+1.5"));
-	printf("Atof = %.5f,  Charly = %.5f   Zaloa = %.5f\n", atof("-1.5"), ft_atof("-1.5", 10), ft_zaloa("-1.5"));
-	printf("Atof = %.4f,  Charly = %.5f   Zaloa = %.5f\n", atof("104.3213"), ft_atof("104.3213", 10), ft_zaloa("104.3213"));
-	printf("Atof = %.5f,  Charly = %.5f   Zaloa = %.5f\n", atof("+104.3"), ft_atof("+104.3", 10), ft_zaloa("+104.3"));
-	printf("Atof = %.5f,  Charly = %.5f   Zaloa = %.5f\n", atof("-104.3"), ft_atof("-104.3", 10), ft_zaloa("-104.3"));
-	printf("Atof = %.5f,  Charly = %.5f   Zaloa = %.5f\n", atof("9007199254740991"), ft_atof("9007199254740991", 10), ft_zaloa("9007199254740991"));
-	printf("Atof = %.5f,  Charly = %.5f   Zaloa = %.5f\n", atof("-9007199254740991"), ft_atof("-9007199254740991", 10), ft_zaloa("-9007199254740991"));
-}
-
-*/

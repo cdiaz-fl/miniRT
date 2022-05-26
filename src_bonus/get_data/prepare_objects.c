@@ -26,7 +26,8 @@ static void	prepare_spheres_transformation(t_world *world)
 				translation_mtx(s->pos.x, s->pos.y, s->pos.z));
 		if (s->diameter != 1)
 			s->transform = set_transform_mtx(s->transform,
-					scaling_mtx(s->diameter, s->diameter, s->diameter));
+					scaling_mtx(s->diameter * 0.5, s->diameter * 0.5,
+						s->diameter * 0.5));
 		s->inverse = invert_mtx(&s->transform);
 		s->transpose = transpose_mtx(&s->inverse);
 		s = s->next;
@@ -96,7 +97,7 @@ static void	prepare_cylinder_trans(t_world *world, double a_x, double a_z)
 		c->transform
 			= set_transform_mtx(c->transform, z_rotatation_mtx(a_z));
 		c->transform = set_transform_mtx(c->transform, scaling_mtx(
-					c->diameter * 0.5, c->height * 0.5, c->diameter * 0.5));
+					c->diameter * 0.5, 1, c->diameter * 0.5));
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
 		c->min = c->pos.y - c->height / 2;

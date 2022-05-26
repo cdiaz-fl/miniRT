@@ -50,7 +50,6 @@ SRCS =	src/errors_and_frees/error_handling.c\
 		src/light/light.c\
 		src/light/shadows.c\
 		src/get_data/main_read.c\
-		src/debug/debug.c\
 
 SRCS_BONUS = src_bonus/errors_and_frees/error_handling.c\
 		src_bonus/errors_and_frees/free.c\
@@ -89,7 +88,6 @@ SRCS_BONUS = src_bonus/errors_and_frees/error_handling.c\
 		src_bonus/light/light_specular.c\
 		src_bonus/light/shadows.c\
 		src_bonus/get_data/main_read.c\
-		src_bonus/debug/debug.c\
 
 
 OBJS = $(SRCS:.c=.o)

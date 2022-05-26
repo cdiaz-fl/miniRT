@@ -145,7 +145,6 @@ int	main(int argc, char **argv)
 	mlx_event(&mlx);
 	ray_tracing(&all, &mlx);
 	mlx_loop(mlx.mlx);
-	print_values(&all);
 	free_structures(&all);
 	close(fd);
 	return (0);

@@ -97,7 +97,7 @@ static void	prepare_cylinder_trans(t_world *world, double a_x, double a_z)
 		c->transform
 			= set_transform_mtx(c->transform, z_rotatation_mtx(a_z));
 		c->transform = set_transform_mtx(c->transform, scaling_mtx(
-					c->diameter * 0.5, c->height * 0.5, c->diameter * 0.5));
+					c->diameter * 0.5, 1, c->diameter * 0.5));
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
 		c->min = c->pos.y - c->height / 2;

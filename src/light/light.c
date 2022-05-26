@@ -92,6 +92,5 @@ t_color	lighting(t_light light, t_color color, t_point world_point,
 		light.diffuse = scalar_mul_color(light.diffuse, 1);
 		reflected_vect = get_reflect_vect(neg_vect(light_vect), vect[0]);
 	}
-	return ((add_color_color(light.ambient,
-					light.diffuse)));
+	return ((add_color_color(light.ambient, light.diffuse)));
 }

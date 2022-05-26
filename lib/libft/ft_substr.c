@@ -14,36 +14,18 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    char    *s2;
-    size_t  i;
+	char	*s2;
+	size_t	i;
 
-    i = 0;
-    s2 = malloc((len + 1) * sizeof(char));
-    if (!s2)
-        return (NULL);
-    while (s[i + start] && i < len)
-    {
-        s2[i] = s[i + start];
-        i++;
-    }
-    s2[i] = '\0';
-    return (s2);
-}
-/*{	char			*s2;
-	unsigned int	malloc_len;
-	size_t			s_len;
-
-	if (!s)
-		return (NULL);
-	malloc_len = 0;
-	s_len = ft_strlen(s);
-	if (start < s_len)
-		malloc_len = s_len - start;
-	if (malloc_len > len)
-		malloc_len = len;
-	s2 = (char *)malloc(sizeof(char) * (malloc_len + 1));
+	i = 0;
+	s2 = malloc((len + 1) * sizeof(char));
 	if (!s2)
 		return (NULL);
-	ft_strlcpy(s2, s + start, malloc_len + 1);
+	while (s[i + start] && i < len)
+	{
+		s2[i] = s[i + start];
+		i++;
+	}
+	s2[i] = '\0';
 	return (s2);
-}*/
+}
