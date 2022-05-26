@@ -71,32 +71,32 @@ int	check_line_syntax(char *s)
 	return (0);
 }
 
-static void	get_values(char **line, t_world *all, int fd, int i)
+static void	get_values(char **line, t_world *all, int i[3])
 {
-	int		out;
 	char	*s;
 
-	out = 0;
 	s = ft_strtrim(*line, " ");
-	while (s[++i] && s[0] != '\n')
+	free(*line);
+	while (s[++i[0]] && s[0] != '\n')
 	{
 		if (check_line_syntax(s))
-			wrong_values_handling(&s, all, fd, 1);
-		if (s[i] == 'A' && ++out)
-			all->a_light = create_amblight(s, all, fd);
-		if (s[i] == 'C' && ++out)
-			all->cam = create_camera(s, all, fd);
-		else if (s[i] == 'L' && ++out)
-			all->light = create_light(s, all, fd);
-		else if (s[i] == 'p' && ++out)
-			create_planes(s, all, fd);
-		else if (s[i] == 's' && ++out)
-			create_spheres(s, all, fd);
-		else if (s[i] == 'c' && ++out)
-			create_cylinders(s, all, fd);
-		if (out)
+			wrong_values_handling(&s, all, i[2], 1);
+		if (s[i[0]] == 'A' && ++i[1])
+			all->a_light = create_amblight(s, all, i[2]);
+		if (s[i[0]] == 'C' && ++i[1])
+			all->cam = create_camera(s, all, i[2]);
+		else if (s[i[0]] == 'L' && ++i[1])
+			all->light = create_light(s, all, i[2]);
+		else if (s[i[0]] == 'p' && ++i[1])
+			create_planes(s, all, i[2]);
+		else if (s[i[0]] == 's' && ++i[1])
+			create_spheres(s, all, i[2]);
+		else if (s[i[0]] == 'c' && ++i[1])
+			create_cylinders(s, all, i[2]);
+		if (i[1])
 			break ;
 	}
+	free(s);
 }
 
 void	ray_tracing(t_world *world, t_mlx *mlx)
@@ -124,21 +124,21 @@ void	ray_tracing(t_world *world, t_mlx *mlx)
 
 int	main(int argc, char **argv)
 {
-	int		fd;
+	int		ar_int[3];
 	char	*line;
 	t_world	all;
 	t_mlx	mlx;
 
-	ft_memset(&all, 0, sizeof(t_world));
 	all = (t_world){.sphs = NULL, .plns = NULL, .cyls = NULL};
-	fd = basic_error_handling(argc, argv);
+	ar_int[2] = basic_error_handling(argc, argv);
 	while (1)
 	{
-		line = get_next_line(fd);
+		ar_int[0] = -1;
+		ar_int[1] = 0;
+		line = get_next_line(ar_int[2]);
 		if (line == NULL)
 			break ;
-		get_values(&line, &all, fd, -1);
-		free(line);
+		get_values(&line, &all, ar_int);
 	}
 	prepare_object_transformations(&all);
 	mlx_utils_init(&mlx);
@@ -146,6 +146,6 @@ int	main(int argc, char **argv)
 	ray_tracing(&all, &mlx);
 	mlx_loop(mlx.mlx);
 	free_structures(&all);
-	close(fd);
+	close(ar_int[2]);
 	return (0);
 }

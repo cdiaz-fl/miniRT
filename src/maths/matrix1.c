@@ -100,7 +100,9 @@ void	free_mtx(t_mtx *mtx)
 	while (i < mtx->size)
 	{
 		free(mtx->data[i]);
+		mtx->data[i] = NULL;
 		i++;
 	}
 	free(mtx->data);
+	mtx->data = NULL;
 }

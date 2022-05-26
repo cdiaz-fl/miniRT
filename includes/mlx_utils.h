@@ -13,8 +13,8 @@
 #ifndef MLX_UTILS_H
 # define MLX_UTILS_H
 # include "../lib/mlx/mlx.h"
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 420
+# define HEIGHT 400
 
 typedef struct s_wall
 {

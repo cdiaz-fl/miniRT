@@ -61,8 +61,6 @@ int	check_ranges(void *tmp, char obj)
 		return (1);
 	if (obj == 'A' && check_range_color(((t_amb_light *)tmp)->rgb))
 		return (1);
-	if (obj == 'L' && check_range_color(((t_light *)tmp)->rgb))
-		return (1);
 	if (obj == 'p' && (check_range_vect(((t_plane *)tmp)->n_vec)
 			|| check_range_color(((t_plane *)tmp)->rgb)))
 		return (1);

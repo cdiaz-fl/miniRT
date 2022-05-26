@@ -53,6 +53,7 @@ t_mtx	set_transform_mtx(t_mtx before, t_mtx m)
 	t_mtx	tmp;
 
 	tmp = mul_mtx(&before, &m);
+	free_mtx(&m);
 	free_mtx(&before);
 	return (tmp);
 }

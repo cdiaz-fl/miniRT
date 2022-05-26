@@ -15,6 +15,9 @@
 		"unordered_map": "c",
 		"utility": "c",
 		"vector": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"__locale": "c",
+		"ios": "c",
+		"mlx.h": "c"
 	}
 }

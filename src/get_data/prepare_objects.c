@@ -21,13 +21,14 @@ static void	prepare_spheres_transformation(t_world *world)
 	s = *s_head;
 	while (s)
 	{
-		s->transform = identity_mtx(4);
 		s->transform = set_transform_mtx(s->transform,
 				translation_mtx(s->pos.x, s->pos.y, s->pos.z));
 		if (s->diameter != 1)
 			s->transform = set_transform_mtx(s->transform,
 					scaling_mtx(s->diameter * 0.5, s->diameter * 0.5,
 						s->diameter * 0.5));
+		free_mtx(&s->inverse);
+		free_mtx(&s->transpose);
 		s->inverse = invert_mtx(&s->transform);
 		s->transpose = transpose_mtx(&s->inverse);
 		s = s->next;
@@ -73,6 +74,8 @@ static void	prepare_planes_transformation(t_world *world)
 			= set_transform_mtx(p->transform, x_rotatation_mtx(angle_x));
 		p->transform
 			= set_transform_mtx(p->transform, z_rotatation_mtx(angle_z));
+		free_mtx(&p->inverse);
+		free_mtx(&p->transpose);
 		p->inverse = invert_mtx(&p->transform);
 		p->transpose = transpose_mtx(&p->inverse);
 		p = p->next;
@@ -98,10 +101,13 @@ static void	prepare_cylinder_trans(t_world *world, double a_x, double a_z)
 			= set_transform_mtx(c->transform, z_rotatation_mtx(a_z));
 		c->transform = set_transform_mtx(c->transform, scaling_mtx(
 					c->diameter * 0.5, 1, c->diameter * 0.5));
+		free_mtx(&c->inverse);
+		free_mtx(&c->transpose);
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
-		c->min = c->pos.y - c->height / 2;
-		c->max = c->pos.y + c->height / 2;
+		c->min = c->pos.y - (c->height / 2); //pos.y no se si es necesario, porque ya transaladamos el cilindro
+	//	c->min = c->height; 
+		c->max = c->pos.y + (c->height / 2);
 		c = c->next;
 	}
 }
