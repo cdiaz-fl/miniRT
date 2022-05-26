@@ -94,8 +94,7 @@ t_color	lighting(t_light light, t_color color, t_point world_point,
 		light.diffuse = scalar_mul_color(effective_color, angle_light_normal);
 		light.diffuse = scalar_mul_color(light.diffuse, 0.9);
 		reflected_vect = get_reflect_vect(neg_vect(light_vect), vect[0]);
-		light.specular = specular_bonus(reflected_vect, vect[1],
-				light.intensity);
+		light.specular = create_color(0, 0, 0);
 	}
 	return (add_color_color(light.specular, (add_color_color(light.ambient,
 					light.diffuse))));

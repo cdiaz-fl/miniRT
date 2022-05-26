@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_specular.c                                   :+:      :+:    :+:   */
+/*   color_operations2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 14:56:09 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 14:56:11 by zcanales         ###   ########.fr       */
+/*   Created: 2022/05/25 14:36:05 by zcanales          #+#    #+#             */
+/*   Updated: 2022/05/25 14:36:06 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-t_color	specular_bonus(t_vect reflected_vect, t_vect ray_vect, t_color intensity)
+void	check_max_color(t_color *c)
 {
-	double	angle_reflect_camera;
-	t_color	specular;
-
-	angle_reflect_camera = dot_product_vect(reflected_vect,
-			neg_vect(ray_vect));
-	if (angle_reflect_camera <= 0)
-		specular = create_color(0, 0, 0);
-	else
-		specular = scalar_mul_color(intensity,
-				(0.9 * pow(angle_reflect_camera, 200)));
-    check_max_color(&specular);
-	return (specular);
+	if (c->r > 1)
+		c->r = 1;
+	if (c->r < 0)
+		c->r = 0;
+	if (c->g > 1)
+		c->g = 1;
+	if (c->g < 0)
+		c->g = 0;
+	if (c->b > 1)
+		c->b = 1;
 }

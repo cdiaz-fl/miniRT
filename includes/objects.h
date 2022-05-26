@@ -113,11 +113,13 @@ typedef struct s_computations
 }t_comps;
 
 t_camera	create_camera(char *s, t_world *all, int fd);
-t_amb_light	create_amblight(char *s, t_world *all, int fd);
 t_light		create_light(char *s, t_world *all, int fd);
+t_amb_light	create_amblight(char *s, t_world *all, int fd);
 void		create_planes(char *s, t_world *all, int fd);
 void		create_spheres(char *s, t_world *all, int fd);
 void		create_cylinders(char *s, t_world *all, int fd);
+
+void		prepare_object_transformations(t_world *world);
 
 size_t		ft_get_2d_size(char **s);
 int			extract_values(char **val, double **data, char *type, int i);
@@ -127,9 +129,5 @@ int			check_range_color(t_color c);
 int			check_ranges(void *tmp, char obj);
 int			check_character(char *s, char c);
 int			is_float(char *s, int *i, int j, int nb);
-
-//Preparar las matrices de todos los objetos para hacer el cambio de mundo
-t_vect		ft_normalization(t_vect v);
-void		prepare_object_transformations(t_world *world);
 
 #endif

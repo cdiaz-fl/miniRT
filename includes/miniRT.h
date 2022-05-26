@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: zcanales <zcanales@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 09:52:36 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 17:20:23 by cdiaz-fl         ###   ########.fr       */
+/*   Created: 2022/05/26 09:28:00 by zcanales          #+#    #+#             */
+/*   Updated: 2022/05/26 09:28:08 by zcanales         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

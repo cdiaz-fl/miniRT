@@ -18,16 +18,6 @@
 # define BLACK 0x000000
 # define EPSILON 0.00001
 
-typedef struct s_light2
-{
-	t_color	diffuse;
-	t_color	ambient;
-	t_color	specular;
-	t_point	position;
-	t_color	intensity;
-	double	brightness;
-}t_light2;
-
 //COLOR.c -> Funciones con la estrucutra color.
 t_color	create_color(double red, double green, double blue);
 t_color	scalar_mul_color(t_color color, double scalar);
@@ -42,9 +32,7 @@ t_vect	get_normal_sphere(t_sphere s, t_point world_point);
 t_vect	get_normal_pl(t_plane pl);
 t_vect	get_normal_cy(t_cylinder cy, t_point world_point);
 t_vect	get_reflect_vect(t_vect light_vect, t_vect normal_vect);
-//t_color	lighting(t_light light, t_point world_point, t_vect normal_vect, t_vect ray_vect);
-//t_color  lighting(t_light light,t_color color, t_point world_point, t_vect normal_vect, t_vect ray_vect);
-t_color  lighting(t_light light,t_color color, t_point world_point,
+t_color	lighting(t_light light, t_color color, t_point world_point,
 			t_vect normal_vect[2]);
 
 //COLOR_AT -> Agrupar todas las funciones para calcular el color en un punto
@@ -54,8 +42,9 @@ t_color	color_at(t_world *world, t_ray ray);
 t_color	shade_hit(t_world world, t_comps comps);
 
 //SHADOWS.C 
-bool    is_shadowed(t_world *world, t_point point);
+bool	is_shadowed(t_world *world, t_point point);
 
 //SPECULAR
-t_color	specular_bonus(t_vect reflected_vect, t_vect ray_vect, t_color intensity);
+t_color	specular_bonus(t_vect reflected_vect,
+			t_vect ray_vect, t_color intensity);
 #endif

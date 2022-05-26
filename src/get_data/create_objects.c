@@ -72,7 +72,7 @@ t_light	create_light(char *s, t_world *all, int fd)
 	char		**dd;
 	char		**s_temp;
 
-	if ((++nbr_light != 1) || check_character(s, ',') != 5
+	if ((++nbr_light != 1) || check_character(s, ',') != 3
 		|| check_character(s, ' ') < 4)
 		wrong_values_handling(&s, all, fd, 5);
 	dd = ft_split(s, ',');
@@ -81,10 +81,10 @@ t_light	create_light(char *s, t_world *all, int fd)
 	new.position.z = ft_atof(dd[2], 10);
 	s_temp = ft_split(dd[2], ' ');
 	new.brightness = ft_atof(s_temp[1], 10);
-	new.rgb.r = (double)ft_atoi(s_temp[2]) / 255;
+	new.rgb.r = 1;
 	free_2d_array(s_temp);
-	new.rgb.g = (double)ft_atoi(dd[3]) / 255;
-	new.rgb.b = (double)ft_atoi(dd[4]) / 255;
+	new.rgb.g = 1;
+	new.rgb.b = 1;
 	new.intensity.r = 1 * new.brightness;
 	new.intensity.g = 1 * new.brightness;
 	new.intensity.b = 1 * new.brightness;

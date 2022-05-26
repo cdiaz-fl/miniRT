@@ -12,6 +12,8 @@
 
 NAME = miniRT
 
+NAME_BONUS = miniRT_bonus
+
 SRCS =	src/errors_and_frees/error_handling.c\
 		src/errors_and_frees/free.c\
 		src/errors_and_frees/free2.c\
@@ -43,15 +45,55 @@ SRCS =	src/errors_and_frees/error_handling.c\
 		src/mlx/mlx_utils.c\
 		src/mlx/mlx_event.c\
 		src/light/color_operations.c\
+		src/light/color_operations2.c\
 		src/light/color_at.c\
 		src/light/light.c\
 		src/light/shadows.c\
 		src/get_data/main_read.c\
 		src/debug/debug.c\
-	#	src/get_data/getters.c\
-#	   src/camera/main_camera.c\
+
+SRCS_BONUS = src_bonus/errors_and_frees/error_handling.c\
+		src_bonus/errors_and_frees/free.c\
+		src_bonus/errors_and_frees/free2.c\
+		src_bonus/camera/camera_transform.c\
+		src_bonus/camera/camera_set.c\
+		src_bonus/get_data/create_objects.c\
+		src_bonus/get_data/cylinders.c\
+		src_bonus/get_data/get_data_utils.c\
+		src_bonus/get_data/get_data_utils2.c\
+		src_bonus/get_data/get_next_line.c\
+		src_bonus/get_data/planes.c\
+		src_bonus/get_data/spheres.c\
+		src_bonus/get_data/prepare_objects.c\
+		src_bonus/get_data/normalization.c\
+		src_bonus/intersections/intersection_sphere_plane.c\
+		src_bonus/intersections/intersect_cylinder.c\
+		src_bonus/intersections/intersect_utils.c\
+		src_bonus/intersections/ray.c\
+		src_bonus/maths/matrix1.c\
+		src_bonus/maths/matrix2.c\
+		src_bonus/maths/mtx_operations.c\
+		src_bonus/maths/mtx_cofactor.c\
+		src_bonus/maths/mtx_transform.c\
+		src_bonus/maths/mtx_rotations.c\
+		src_bonus/maths/point_vect_operations.c\
+		src_bonus/maths/point_vect_create.c\
+		src_bonus/maths/vect_operations1.c\
+		src_bonus/maths/vect_operations2.c\
+		src_bonus/mlx/mlx_utils.c\
+		src_bonus/mlx/mlx_event.c\
+		src_bonus/light/color_operations.c\
+		src_bonus/light/color_operations2.c\
+		src_bonus/light/color_at.c\
+		src_bonus/light/light.c\
+		src_bonus/light/light_specular.c\
+		src_bonus/light/shadows.c\
+		src_bonus/get_data/main_read.c\
+		src_bonus/debug/debug.c\
+
 
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 INCLUDES = includes/
 
@@ -74,6 +116,12 @@ $(NAME): $(OBJS) $(LIB_A) $(MLX_A)
 	@$(CC) $(CFLAGS) -I$(INCLUDES) $(MLX_FLAGS) $^ -o $(NAME)
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
 
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJS_BONUS) $(LIB_A) $(MLX_A)
+	@$(CC) $(CFLAGS) -I$(INCLUDES) $(MLX_FLAGS) $^ -o $(NAME_BONUS)
+	@echo "$(NAME_BONUS): $(GREEN)$(NAME_BONUS) was created$(RESET)"
+
 %.o: %.c 
 	@$(CC) $(CFLAGS) $(SEG_FLAGS) -Imlx -c $< -o $@
 
@@ -88,6 +136,7 @@ $(MLX_A) :
 clean :
 	@make -C lib/libft/ clean
 	@rm -rf $(OBJS)
+	@rm -rf $(OBJS_BONUS)
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
 
 fclean : clean
@@ -95,9 +144,10 @@ fclean : clean
 	make -C lib/mlx/ clean
 	@echo "$(NAME): $(RED)$(LIB_A) was deleted$(RESET)"
 	@rm -rf $(NAME)
+	@rm -rf $(NAME_BONUS)
 	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
 
 re: fclean all
 
-.PHONY : re all fclean clean
+.PHONY : re all fclean clean bonus
 
