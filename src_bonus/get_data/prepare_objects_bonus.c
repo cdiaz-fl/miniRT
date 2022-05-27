@@ -6,7 +6,7 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:58:39 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 14:40:15 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/27 08:25:01 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ static void	prepare_cylinder_trans(t_world *world, double a_x, double a_z)
 		free_mtx(&c->transpose);
 		c->inverse = invert_mtx(&c->transform);
 		c->transpose = transpose_mtx(&c->inverse);
-		c->min = c->pos.y - c->height / 2;
-		c->max = c->pos.y + c->height / 2;
+		c->min = c->height * -0.5;
+		c->max = c->height * 0.5;
 		c = c->next;
 	}
 }

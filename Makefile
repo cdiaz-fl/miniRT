@@ -6,7 +6,7 @@
 #    By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/22 09:42:42 by zcanales          #+#    #+#              #
-#    Updated: 2022/05/25 17:41:56 by cdiaz-fl         ###   ########.fr        #
+#    Updated: 2022/05/27 08:34:25 by cdiaz-fl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,43 +51,43 @@ SRCS =	src/errors_and_frees/error_handling.c\
 		src/light/shadows.c\
 		src/get_data/main_read.c\
 
-SRCS_BONUS = src_bonus/errors_and_frees/error_handling.c\
-		src_bonus/errors_and_frees/free.c\
-		src_bonus/errors_and_frees/free2.c\
-		src_bonus/camera/camera_transform.c\
-		src_bonus/camera/camera_set.c\
-		src_bonus/get_data/create_objects.c\
-		src_bonus/get_data/cylinders.c\
-		src_bonus/get_data/get_data_utils.c\
-		src_bonus/get_data/get_data_utils2.c\
-		src_bonus/get_data/get_next_line.c\
-		src_bonus/get_data/planes.c\
-		src_bonus/get_data/spheres.c\
-		src_bonus/get_data/prepare_objects.c\
-		src_bonus/get_data/normalization.c\
-		src_bonus/intersections/intersection_sphere_plane.c\
-		src_bonus/intersections/intersect_cylinder.c\
-		src_bonus/intersections/intersect_utils.c\
-		src_bonus/intersections/ray.c\
-		src_bonus/maths/matrix1.c\
-		src_bonus/maths/matrix2.c\
-		src_bonus/maths/mtx_operations.c\
-		src_bonus/maths/mtx_cofactor.c\
-		src_bonus/maths/mtx_transform.c\
-		src_bonus/maths/mtx_rotations.c\
-		src_bonus/maths/point_vect_operations.c\
-		src_bonus/maths/point_vect_create.c\
-		src_bonus/maths/vect_operations1.c\
-		src_bonus/maths/vect_operations2.c\
-		src_bonus/mlx/mlx_utils.c\
-		src_bonus/mlx/mlx_event.c\
-		src_bonus/light/color_operations.c\
-		src_bonus/light/color_operations2.c\
-		src_bonus/light/color_at.c\
-		src_bonus/light/light.c\
-		src_bonus/light/light_specular.c\
-		src_bonus/light/shadows.c\
-		src_bonus/get_data/main_read.c\
+SRCS_BONUS = src_bonus/errors_and_frees/error_handling_bonus.c\
+		src_bonus/errors_and_frees/free_bonus.c\
+		src_bonus/errors_and_frees/free2_bonus.c\
+		src_bonus/camera/camera_transform_bonus.c\
+		src_bonus/camera/camera_set_bonus.c\
+		src_bonus/get_data/create_objects_bonus.c\
+		src_bonus/get_data/cylinders_bonus.c\
+		src_bonus/get_data/get_data_utils_bonus.c\
+		src_bonus/get_data/get_data_utils2_bonus.c\
+		src_bonus/get_data/get_next_line_bonus.c\
+		src_bonus/get_data/planes_bonus.c\
+		src_bonus/get_data/spheres_bonus.c\
+		src_bonus/get_data/prepare_objects_bonus.c\
+		src_bonus/get_data/normalization_bonus.c\
+		src_bonus/intersections/intersection_sphere_plane_bonus.c\
+		src_bonus/intersections/intersect_cylinder_bonus.c\
+		src_bonus/intersections/intersect_utils_bonus.c\
+		src_bonus/intersections/ray_bonus.c\
+		src_bonus/maths/matrix1_bonus.c\
+		src_bonus/maths/matrix2_bonus.c\
+		src_bonus/maths/mtx_operations_bonus.c\
+		src_bonus/maths/mtx_cofactor_bonus.c\
+		src_bonus/maths/mtx_transform_bonus.c\
+		src_bonus/maths/mtx_rotations_bonus.c\
+		src_bonus/maths/point_vect_operations_bonus.c\
+		src_bonus/maths/point_vect_create_bonus.c\
+		src_bonus/maths/vect_operations1_bonus.c\
+		src_bonus/maths/vect_operations2_bonus.c\
+		src_bonus/mlx/mlx_utils_bonus.c\
+		src_bonus/mlx/mlx_event_bonus.c\
+		src_bonus/light/color_operations_bonus.c\
+		src_bonus/light/color_operations2_bonus.c\
+		src_bonus/light/color_at_bonus.c\
+		src_bonus/light/light_bonus.c\
+		src_bonus/light/light_specular_bonus.c\
+		src_bonus/light/shadows_bonus.c\
+		src_bonus/get_data/main_read_bonus.c\
 
 
 OBJS = $(SRCS:.c=.o)
