@@ -6,15 +6,15 @@
 /*   By: cdiaz-fl <cdiaz-fl@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 08:24:22 by zcanales          #+#    #+#             */
-/*   Updated: 2022/05/25 17:19:42 by cdiaz-fl         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:15:54 by cdiaz-fl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_UTILS_H
 # define MLX_UTILS_H
 # include "../lib/mlx/mlx.h"
-# define WIDTH 420
-# define HEIGHT 400
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_wall
 {
