@@ -65,6 +65,8 @@ t_inter	*get_hit(t_inter *lst)
 		}
 		temp = temp->next;
 	}
+	if (min == DBL_MAX)
+		min_lst->count = 0;
 	return (min_lst);
 }
 
